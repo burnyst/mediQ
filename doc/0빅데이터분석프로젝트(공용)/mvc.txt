@@ -1,3 +1,47 @@
+메뉴
+- 의약품검색
+- 고객센터
+- 공지사항
+- 마이페이지
+
+
+의약품검색
+Q&A
+FAQ
+공지사항
+	뉴스
+	의약품 허가공고
+마이페이지
+	검색이력
+	회원정보
+관리자
+	의약품관리
+	회원관리
+인증
+	로그인
+	아이디 찾기
+	비밀번호 찾기
+
+index
+
+cs/qna
+cs/faq
+
+notice/news
+notice/permit
+
+member/history
+member/info
+
+manage/product
+manage/member
+
+auth/login
+auth/findid
+auth/findpw
+auth/join
+
+
 *DB
 -DB종류 / 버전
 - oracle 11g / ORCL, EX
@@ -64,12 +108,12 @@ view /view/product/searchDetail.jsp
 
 
 p5
-request /member/manage.do
+request /manage/member.do
 controller member.command.ManageHandler
 view /view/member/manage.jsp  
 
 p6
-request /member/join.do
+request /auth/join.do
 controller member.command.JoinHandler
 view view/member/join.jsp
 
