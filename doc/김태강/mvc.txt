@@ -1,0 +1,247 @@
+*DB
+-DB종류 / 버전
+- oracle 11g / ORCL, EX
+-MySQL 8.x / database명
+-공통 : user 명/비번
+
+
+------------------------------------
+*프로그램
+*dwproject명 : board
+
+*포트번호    :	80
+*컨텍스트패스: board
+*확장자      : .do
+http://localhost/board/index.jsp   (대문주소)
+http://localhost/board             ()
+
+*(선택)workspace
+
+
+회원가입 폼 요청
+요청 주소 : http://localhost/board/join.do     
+담당컨트롤러 : member.command.JoinHandler 
+파라미터 :
+뷰 : /view/member/joinForm.jsp
+
+회원가입 처리
+요청 주소 : http://localhost/board/login.do 
+담당컨트롤러 : auth.command.LoginHandler
+파라미터 :아이디
+	  이름
+	  암호
+뷰 : /view/member/joinSuccess.jsp
+
+
+
+
+
+/join.do=member.command.JoinHandler
+#/login.do=auth.command.LoginHandler
+#/logout.do=auth.command.LogoutHandler
+#/changePwd.do=member.command.ChangePasswordHandler
+
+#article
+#/article/write.do=article.command.WriteArticleHandler
+#/article/list.do=article.command.ListArticleHandler
+#/article/read.do=article.command.ReadArticleHandler
+#/article/modify.do=article.command.ModifyArticleHandler
+
+p1
+request /index.do
+controller 
+view /view/index.jsp
+
+p2
+request /product/search.do
+controller product.command.SearchHandler
+view /view/product/search.jsp
+
+p3
+request /product/searchDetail.do
+controller product.command.SearchDetailHandler
+view /view/product/searchDetail.jsp
+
+
+p5
+request /member/manage.do
+controller member.command.ManageHandler
+view /view/member/manage.jsp  
+
+p6
+request /member/join.do
+controller member.command.JoinHandler
+view view/member/join.jsp
+
+p7
+request /member/resultForm.do
+controller member.command.ResultFormHandler
+view /view/member/resultForm.jsp
+
+p8
+request /member/login.do
+controller member.command.LoginHandler
+view /view/member/login.jsp
+
+p9
+request /member/mypage/myinfo.do
+controller member.command.MyinfoHandler
+view /view/member/mypage/myinfo.jsp
+
+p10
+request /member/mypage/myinfoUpdate.do
+controller member.command.MyinfoUpdateHandler
+view /view/member/mypage/myinfoUpdate.jsp
+
+p11
+request /member/mypage/xmember.do
+controller member.command.XmemberHandler
+view /view/member/mypage/xmember.jsp
+
+p12
+request /member/mypage/xmemberResultForm.do
+controller member.command.XmemberResultFormHandler
+view /view/member/mypage/xmemberResultForm.jsp
+
+p13
+request /member/findId.do
+controller member.command.FindIdHandler
+view /view/member/findId.jsp
+
+p14
+request /member/findIdResultForm.do
+controller member.command.FindIdResultFormHandler
+view /view/member/findIdResult.jsp
+
+p15
+request /member/findPw.do
+controller member.command.FindPwHandler
+view /view/member/findPw.jsp
+
+p16
+request /member/findPwEmail.do
+controller member.command.FindPwEmailHandler
+view /view/member/findPwEmail.jsp
+
+p17
+request /member/changePw.do
+controller member.command.ChangePwHandler
+view /view/member/changePw.jsp
+
+p18
+request /member/findPwResultForm.do
+controller member.command.FindPwResultFormHandler
+view /view/member/findPwResult.jsp
+
+p19
+request /board/faq/faqList.do
+controller board.faq.command.FaqListHandler
+view /view/board/faq/faqList.jsp
+
+p20
+request /board/faq/faqDetail.do
+controller board.faq.command.FaqDetailHandler
+view /view/board/faq/faqDetail.jsp
+
+p21
+request /board/faq/faqCategory.do
+controller board.faq.command.FaqCategoryHandler
+view /view/board/faq/faqCategory.jsp
+
+p22
+request /board/faq/faqSearch.do
+controller board.faq.command.FaqSearchHandler
+view /view/board/faq/faqSearch.jsp
+
+p23
+request /board/faq/manage/faqList.do
+controller board.faq.manage.command.FaqListHandler
+view /view/board/faq/manage/faqList.jsp
+
+p24
+request /board/faq/manage/faqDetail.do
+controller board.faq.manage.command.FaqDetailHandler
+view /view/board/faq/manage/faqDetail.jsp
+
+p25
+request /board/faq/manage/faqDelete.do
+controller board.faq.manage.command.FaqDeleteHandler
+view /view/board/faq/manage/faqDelete.jsp
+
+p26
+request /board/faq/manage/faqUpdate.do
+controller board.faq.manage.command.FaqUpdateHandler
+view /view/board/faq/manage/faqUpdate.jsp
+
+p27
+request /board/faq/manage/faqCategory.do
+controller board.faq.manage.command.FaqCategoryHandler
+view /view/board/faq/manage/faqCategory.jsp
+
+p28
+request /board/faq/manage/faqSearch.do
+controller board.faq.manage.command.FaqSearchHandler
+view /view/board/faq/manage/faqSearch.jsp
+
+p29
+request /board/qna/qnaList.do
+controller board.qna.command.QnaListHandler
+view /view/board/qna/qnaList.jsp
+
+p30
+request /board/qna/qnaUpdate.do
+controller board.qna.command.QnaUpdateHandler
+view /view/board/qna/qnaUpdate.jsp
+
+p31
+request /board/qna/manage/qnaUpdate.do
+controller board.qna.manage.command.QnaUpdateHandler
+view /view/board/qna/manage/qnaUpdate.jsp
+
+p32
+request /board/qna/qnaDetail.do
+controller board.qna.command.QnaDetailHandler
+view /view/board/qna/qnaDetail.jsp
+
+request /board/qna/qnaDelete.do
+controller board.qna.command.QnaDeleteHandler
+view /view/board/qna/qnaDelete.jsp
+
+p33
+request /board/news/newsList.do
+controller board.news.command.NewsListHandler
+view /view/board/news/newsList.jsp
+
+p34
+request /board/news/manage/newsList.do
+controller board.news.manage.command.NewsListHandler
+view /view/board/news/manage/newsList.jsp
+
+p35
+request /board/news/newsResultForm.do
+controller board.news.command.NewsResultFormHandler
+view /view/board/news/newsResultForm.jsp
+
+p36
+request /board/news/newsDetail.do
+controller board.news.command.NewsDetailHandler
+view /view/board/news/newsDetail.jsp
+
+p37
+request /board/news/manage/newsDetail.do
+controller board.news.manage.command.NewsDetailHandler
+view /view/board/news/manage/newsDetail.jsp
+
+p38
+request /board/news/manage/newsInsert.do
+controller board.news.manage.NewsInsertHandler
+view /view/board/news/manage/newsInsert.jsp
+
+p39
+request /board/news/manage/newsUpdate.do
+controller board.news.manage.NewsUpdateHandler
+view /view/board/news/manage/newsUpdate.jsp
+
+request /board/news/manage/newsDelete.do
+controller board.news.manage.NewsDeleteHandler
+view /view/board/news/manage/newsDelete.jsp
