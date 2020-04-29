@@ -19,7 +19,7 @@ http://localhost/board             ()
 
 
 회원가입 폼 요청
-요청 주소 : http://localhost/board/join.do
+요청 주소 : http://localhost/board/join.do     
 담당컨트롤러 : member.command.JoinHandler 
 파라미터 :
 뷰 : /view/member/joinForm.jsp
