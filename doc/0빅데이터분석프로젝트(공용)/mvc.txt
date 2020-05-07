@@ -228,28 +228,28 @@ controller board.faq.manage.command.FaqSearchHandler
 view /view/board/faq/manage/faqSearch.jsp
 
 p29
-request /board/qna/qnaList.do
-controller board.qna.command.QnaListHandler
-view /view/board/qna/qnaList.jsp
+request /cs/qna/qnalist.do
+controller cs.qna.command.qnalistcontroller
+view /view/cs/qna/qnalist.jsp
 
 p30
-request /board/qna/qnaUpdate.do
-controller board.qna.command.QnaUpdateHandler
-view /view/board/qna/qnaUpdate.jsp
+request /cs/qna/qnaupdate.do
+controller cs.qna.command.qnaupdatecontroller
+view /view/cs/qna/qnaupdate.jsp
 
 p31
-request /board/qna/manage/qnaUpdate.do
-controller board.qna.manage.command.QnaUpdateHandler
-view /view/board/qna/manage/qnaUpdate.jsp
+request /cs/qna/manageqnaupdate.do
+controller cs.qna.command.manageqnaupdatecontroller
+view /view/cs/qna/manage/manageqnaupdate.jsp
 
 p32
-request /board/qna/qnaDetail.do
-controller board.qna.command.QnaDetailHandler
-view /view/board/qna/qnaDetail.jsp
+request /cs/qna/qnadetail.do
+controller cs.qna.command.qnadetailcontroller
+view /view/cs/qna/qnadetail.jsp
 
-request /board/qna/qnaDelete.do
-controller board.qna.command.QnaDeleteHandler
-view /view/board/qna/qnaDelete.jsp
+request /cs/qna/qnadelete.do
+controller cs.qna.command.Qnadeletecontroller
+view /view/cs/qna/qnadelete.jsp
 
 p33
 request /board/news/newsList.do
