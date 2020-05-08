@@ -82,9 +82,6 @@
 	<%-- if  (mlevel == [회원]){ --%>
 	<button type="button" onclick="location.href='qnaupdate.jsp' ">글쓰기</button>
 	<%-- } --%>
-	<%-- else if(mlevel == [관리자]) {--%>
-	<button type="button" onclick="location.href='manageqnaupdate.jsp' ">답변 쓰기</button>
-	<%-- }--%>
 	<%-- else { --%>
 		<button onclick="javascript:btn()">글쓰기</button>
 		<%	out.println

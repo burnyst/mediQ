@@ -48,7 +48,10 @@
 							<td></td>
 							<td></td>
 							<td><input  type="submit" value="삭제"  />
-							<input type="button" value="목록"  onclick="location.href='qnalist.jsp'"></td>
+							<input type="button" value="목록"  onclick="location.href='qnalist.jsp'">
+							<!-- {%if 관리자 해서 버튼 보이기%} -->
+							<button type="button" onclick="location.href='manageqnaupdate.jsp' ">답변 쓰기</button>
+							</td>
 							<!-- 경로/cs/qna/qnalist.do 로 바꿔야함 -->
 					</tr>
 					</table>
