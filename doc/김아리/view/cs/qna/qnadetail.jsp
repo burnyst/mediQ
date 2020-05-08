@@ -9,7 +9,7 @@
 <body>
 	<div class="divcss">
 					<form name="frmq" id="frmq" method="post"  action="deleteaction.jsp" accept-charset="utf-8">
-					<table class="tablecss"  border=1>
+					<table class="tablecss"  border=1 >
 						<tr>
 							<th>번호</th>
 							<td>n</td>
