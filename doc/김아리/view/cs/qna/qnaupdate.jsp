@@ -11,8 +11,7 @@
 		<h1>질문 등록</h1>
 	</div>
 	<div class="divcss">
-		<form name="frmq" id="frmq" method="post"  action="qnaAction.do" accept-charset="utf-8"> 
-		<!--  action=qupdateaction.jsp -->
+		<form name="frmq" id="frmq" method="post"  action="qupdateaction.jsp" accept-charset="utf-8">
 			<table class="tablecss">
 					<tr>
 							<th>제목:</th>
