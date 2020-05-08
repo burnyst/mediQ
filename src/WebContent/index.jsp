@@ -5,49 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>mediQ</title>
-    <style>
-    	body {
-    		margin: 0;
-    	}
-    	h1 {
-    		padding: 0px 40px;
-    	}
-        ul {
-            background-color: DodgerBlue;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        li {
-            color: White;
-            display: inline-block;
-            font-size: 20px;
-            padding: 0px 20px;
-        }
-        a {
-            color: white;
-            text-decoration: none;
-        }
-        .search {
-        	padding: 40px 0px;
-            text-align: center;
-        }
-        .search label {
-        	padding: 40px;
-        	font-weight: bold;
-        	font-size: 24px;
-        }
-        .search input[type="text"] {
-        	padding: 5px;
-        	font-size: 20px;
-        	margin: 0px;
-        }
-        .search input[type="submit"] {
-        	font-size: 20px;
-        	margin: 0px;
-        	padding: 4px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="./css/search.css" />
+    <script src="../js/search.js"></script>
 </head>
 <body>
 	<ul>
