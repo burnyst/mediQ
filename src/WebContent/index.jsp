@@ -7,9 +7,7 @@
 <meta charset="UTF-8">
 <title>mediQ</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
-    <c:if test="${page != null && page.totalCount > 0}">
-    	<script src="${pageContext.request.contextPath}/js/search.js"></script>
-    </c:if>
+    <script src="${pageContext.request.contextPath}/js/search.js"></script>
 </head>
 <body>
 	<jsp:include page="/view/header.jsp"></jsp:include>
@@ -20,7 +18,7 @@
 	        <input type="submit" value=" 조회 " />
 	    </form>
 	</div>
-	<c:if test="${page != null}">
+	<c:if test="${productName != null && !productName.isEmpty()}">
 		<div class="items">
 		    <h3>검색결과</h3>
 		    <table class="items">
@@ -34,12 +32,12 @@
 			        </tr>
 		        </thead>
 		        <tbody>
-			        <c:if test="${page.totalCount == 0}">
+			        <c:if test="${page == null || page.totalCount == 0}">
 						<tr>
 							<td colspan="5">조회된 결과가 없습니다</td>
 						</tr>
 					</c:if>
-					<c:if test="${page.totalCount > 0}">
+					<c:if test="${page != null && page.totalCount > 0}">
 						<c:forEach var="i" items="${page.content}">
 							<tr class="row">
 								<td><input type="checkbox" name="" value="${i.itemSeq}" /></td>
@@ -64,9 +62,9 @@
 					</c:if>
 				</tbody>
 				<tfoot>
-					<c:if test="${page.totalCount > 0}">
-						<tr>
-							<th colspan="5">
+					<tr>
+						<th colspan="5">
+							<c:if test="${page != null && page.totalCount > 0}">
 								<c:if test="${page.startPage > 5}">
 									<a href="search.do?productName=${productName}&pageNo=${page.startPage - 5}">[이전]</a>
 								</c:if>
@@ -81,9 +79,9 @@
 								<c:if test="${page.endPage < page.totalPages}">
 									<a href="search.do?productName=${productName}&pageNo=${page.startPage}">[다음]</a>
 								</c:if>
-							</th>
-						</tr>
-					</c:if>
+							</c:if>
+						</th>
+					</tr>
 				</tfoot>
 		    </table>
 		</div>
