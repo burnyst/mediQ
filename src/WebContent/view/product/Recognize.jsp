@@ -10,11 +10,26 @@ float:right */
 </style>
 <title>Insert title here</title>
 </head>
+<h2>header</h2><!-- header부분입니둥 -->	
 <body>
+<script type="text/javascript">
+
+function submit(str){ 
+
+	     if(str == 'Caution'){ 
+
+    	 Detail.action="Recognize_Detail.jsp"; 
+
+    Detail.submit(); 
+
+	  }
+}
+</script>
+<form name='Detail' method='post' action="#">		
 <br>의약품 승인 목록</br>
 <p>승인 의약품 검색
-<input type='text'>품목명을 입력하세요</input>
-<input type="button" value="검색"></input>
+<input type='text' id='MessageBox' class="text1" placeholder="품목명을 입력하세요."></input>
+<input type="button" id='Search' onclick='Search()' value="검색"></input>
 <hr>
 
 
@@ -34,14 +49,16 @@ float:right */
 		<td></td>
 		<td></td>
 		<td></td>
-		<td></td>
+		<td type="submit" value="복용시 주의사항" onclick="submit('Caution')" name="Caution"/><a href="#">복용시 주의사항</a></td>
 		<td></td>
 	</tr>
+	 
 		</table>
 			</hr>
 	<!-- 페이징처리 / 1 2 3 4 5 10-->
-	<c:forEach var="pageNum" begin="1"	end="${viewData.pageTotalCount}"> <%--end=수정해야함 p463 50--%>
-		<a href="list.jsp?page=${pageNum}">${pageNum}</a>
-	</c:forEach>
+<%-- 	<c:forEach var="pageNum" begin="1"	end="${viewData.pageTotalCount}"> end=수정해야함 p463 50
+		<a href="list.jsp?page=${pageNum}">${pageNum}</a> 
+	</c:forEach> --%>
 </body>
+<h2>footer</h2> <!-- Footer부분이 되어집니둥 -->
 </html>

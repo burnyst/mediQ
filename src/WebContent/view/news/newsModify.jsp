@@ -30,7 +30,7 @@ padding: 0 0 0 200px;
 </script>
 <body>
     <form action="newsMain.jsp">
-    <h2>뉴스게시판 등록</h2>
+    <h2>뉴스게시판 수정 및 삭제</h2>
     <span>제목</span>
     <input type="text" id="newsTitle" placeholder="제목을 입력해주세요" ><br/>
     <span>언론사명</span>
@@ -41,8 +41,9 @@ padding: 0 0 0 200px;
          </tr>
 
     </table>
-    <a href="./newsMain.jsp"><input type="submit" id="submit" value="등록"></a>
+    <a href="./newsMain.jsp"><input type="submit" id="submit" value="수정"></a>
     <input type="reset" id="reset" value="취소">
+    <input type="reset" id="reset" value="삭제">
     </form>
 </body>
 </html>
