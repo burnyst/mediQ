@@ -21,9 +21,9 @@
 	    </form>
 	</div>
 	<c:if test="${page != null}">
-		<div class="result">
+		<div class="items">
 		    <h3>검색결과</h3>
-		    <table class="result">
+		    <table class="items">
 		        <tr>
 		        	<th>선택</th>
 		            <th>업체명</th>
