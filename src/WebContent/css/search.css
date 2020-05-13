@@ -31,11 +31,19 @@ table.items, table.items th, table.items td {
 table.items tr[class="row"] td:hover {
     background-color: LightBlue;
 }
-table.items th {
+thead tr th {
     text-align: left;
+}
+table.items th {
     background: Gray;
     color: White;
     padding: 5px;
+}
+tfoot tr th {
+    text-align: center;
+}
+tfoot a {
+    color: White;
 }
 table.items td {
     padding: 5px;

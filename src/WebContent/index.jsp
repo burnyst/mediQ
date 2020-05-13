@@ -24,54 +24,67 @@
 		<div class="items">
 		    <h3>검색결과</h3>
 		    <table class="items">
-		        <tr>
-		        	<th>선택</th>
-		            <th>업체명</th>
-		            <th>품목명</th>
-		            <th>전문일반</th>
-		            <th>성상</th>
-		        </tr>
-		        <c:if test="${page.totalCount == 0}">
-					<tr>
-						<td colspan="5">조회된 결과가 없습니다</td>
-					</tr>
-				</c:if>
-				<c:forEach var="i" items="${page.content}">
-					<tr class="row">
-						<td><input type="checkbox" name="" value="${i.itemSeq}" /></td>
-						<td>${i.entpName}</td>
-						<td>${i.itemName}</td>
-						<td>${i.etcOtcCode}</td>
-						<td>${i.chart}</td>
-					</tr>
-			        <tr class="hidden">
-			            <td colspan="5">
-			            	<table>
-				                <h4>효능효과</h4>
-				                <p>${i.eeDocData}</p>
-				                <h4>용법용량</h4>
-				                <p>${i.udDocData}</p>
-				                <h4>주의사항(일반)</h4>
-				                <p>${i.nbDocData}</p>
-			                </table>
-			            </td>
+		    	<thead>
+			        <tr>
+			        	<th>선택</th>
+			            <th>업체명</th>
+			            <th>품목명</th>
+			            <th>전문일반</th>
+			            <th>성상</th>
 			        </tr>
-				</c:forEach>
-				<c:if test="${page.totalCount > 0}">
-					<tr>
-						<th colspan="5">
-							<c:if test="${page.startPage > 5}">
-								<a href="search.do?productName=${productName}&pageNo=${page.startPage - 5}">[이전]</a>
-							</c:if>
-							<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-								<a href="search.do?productName=${productName}&pageNo=${i}">[${i}]</a>
-							</c:forEach>
-							<c:if test="${page.endPage < page.totalPages}">
-								<a href="search.do?productName=${productName}&pageNo=${page.startPage}">[다음]</a>
-							</c:if>
-						</th>
-					</tr>
-				</c:if>
+		        </thead>
+		        <tbody>
+			        <c:if test="${page.totalCount == 0}">
+						<tr>
+							<td colspan="5">조회된 결과가 없습니다</td>
+						</tr>
+					</c:if>
+					<c:if test="${page.totalCount > 0}">
+						<c:forEach var="i" items="${page.content}">
+							<tr class="row">
+								<td><input type="checkbox" name="" value="${i.itemSeq}" /></td>
+								<td>${i.entpName}</td>
+								<td>${i.itemName}</td>
+								<td>${i.etcOtcCode}</td>
+								<td>${i.chart}</td>
+							</tr>
+					        <tr class="hidden">
+					            <td colspan="5">
+					            	<table>
+						                <h4>효능효과</h4>
+						                <p>${i.eeDocData}</p>
+						                <h4>용법용량</h4>
+						                <p>${i.udDocData}</p>
+						                <h4>주의사항(일반)</h4>
+						                <p>${i.nbDocData}</p>
+					                </table>
+					            </td>
+					        </tr>
+						</c:forEach>
+					</c:if>
+				</tbody>
+				<tfoot>
+					<c:if test="${page.totalCount > 0}">
+						<tr>
+							<th colspan="5">
+								<c:if test="${page.startPage > 5}">
+									<a href="search.do?productName=${productName}&pageNo=${page.startPage - 5}">[이전]</a>
+								</c:if>
+								<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+									<c:if test="${page.currentPage == i}">
+										${i}
+									</c:if>
+									<c:if test="${page.currentPage != i}">
+										<a href="search.do?productName=${productName}&pageNo=${i}">${i}</a>
+									</c:if>
+								</c:forEach>
+								<c:if test="${page.endPage < page.totalPages}">
+									<a href="search.do?productName=${productName}&pageNo=${page.startPage}">[다음]</a>
+								</c:if>
+							</th>
+						</tr>
+					</c:if>
+				</tfoot>
 		    </table>
 		</div>
 	</c:if>
