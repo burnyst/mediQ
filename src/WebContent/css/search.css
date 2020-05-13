@@ -1,25 +1,3 @@
-body {
-	margin: 0;
-}
-h1 {
-	padding: 0px 40px;
-}
-ul {
-    background-color: DodgerBlue;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-li {
-    color: White;
-    display: inline-block;
-    font-size: 20px;
-    padding: 0px 20px;
-}
-a {
-    color: white;
-    text-decoration: none;
-}
 .search {
 	padding: 40px 0px;
     text-align: center;
@@ -39,26 +17,27 @@ a {
 	margin: 0px;
 	padding: 4px;
 }
-div.result {
+
+div.items {
 	padding: 20px;
 }
-table.result {
+table.items {
     border-collapse: collapse;
     width: 100%;
 }
-table.result, table.result th, table.result td {
+table.items, table.items th, table.items td {
     border: 1px solid LightGray;
 }
-table.result tr[class="row"]:hover {
+table.items tr[class="row"] td:hover {
     background-color: LightBlue;
 }
-table.result th {
+table.items th {
     text-align: left;
     background: Gray;
     color: White;
     padding: 5px;
 }
-table.result td {
+table.items td {
     padding: 5px;
 }
 .hidden {
