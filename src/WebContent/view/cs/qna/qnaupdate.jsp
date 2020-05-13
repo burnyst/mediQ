@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-	<script  src="../../../js/qna.js"></script> 
+<script src="<%= request.getContextPath()%>/js/qna.js?v=<%=System.currentTimeMillis() %>"></script> 
 </head>
 <body>
 	<div class="divcss">
 		<h1>질문 등록</h1>
 	</div>
 	<div class="divcss">
-		<form name="frmq" id="frmq" method="post"  action="qupdateaction.jsp" accept-charset="utf-8">
+		<form name="frmq" id="frmq" method="post"  action="QnaAction.do" accept-charset="utf-8"> 
+		<!--  action=qupdateaction.jsp -->
 			<table class="tablecss">
 					<tr>
 							<th>제목:</th>
@@ -37,20 +39,18 @@
 					</tr>
 					<tr>
 							<th>파일 첨부:</th>
-							<td><input type="file"  name="image" id="image" ></td>
+							<td><input type="file"  name="image" id="image"  ></td>
 					</tr>
 					<tr>
-							<td><input type="hidden" name="vcount" value="0"/></td>
-							<td><input type="hidden" name="id" value="세션연결"/></td>
-							<td><input type="hidden" name="rdate" value="데이트연결"/></td>
-							<td><input type="hidden" name="qstate" value="0"/></td>
-							<td><input  type="button" value="취소"  onclick="resetf(this.form)"/>
+							<td><%-- <input type="hidden" name="vcount" value="0"/>--%></td>
+							<td><%--<input type="hidden" name="id" value="세션연결"/>--%></td>
+							<td><%--<input type="hidden" name="rdate" value="데이트연결"/>--%></td>
+							<td><%--<input type="hidden" name="qstate" value="0"/>--%></td>
+							<td><input  type="button"  id=button value="취소" onclick="resetf('this.form')"/>
 							<input type="submit" value="등록"></td>
 					</tr>
 				</table>
 		</form>
 	</div>
-	
-	
 </body>
 </html>
