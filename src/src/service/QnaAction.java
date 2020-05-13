@@ -1,12 +1,12 @@
-package cs.qnaservice;
+package cs.qna.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 
-import cs.qnacommand.QnaRequest;
-import cs.qnamodeldao.QnaDAO;
-import cs.qnamodeldao.Qnamodel;
+import cs.qna.command.QnaRequest;
+import cs.qna.modeldao.QnaDAO;
+import cs.qna.modeldao.Qnamodel;
 import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 
