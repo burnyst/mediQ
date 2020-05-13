@@ -54,7 +54,7 @@
 				<h4>총${qnaPAGE.total} 건</h4>
 			</div>
 			<div class="divcss">
-			    <table class="tablecss"  border="1"  style="width:1000px; ">
+			    <table class="tablecss"  border="1"  style="width:1000px; height:1000px ">
 			        <thead>
 			        <tr>
 			            <th >번호</th>
@@ -66,13 +66,13 @@
 			            <th>등록일자</th>
 			            <th>답변상태</th>
 			        </tr>
-			        </thead> 
+			        </thead> 			        
 			        <tbody>
-			        <c:if test="${qnaPAGE.hasNoQna()} ">
-										<tr>
-											<th colspan="8">게시글이 존재하지 않습니다.</th>
-										</tr>
-								</c:if> 
+			        	<c:if test="${qnaPAGE.hasNoQuestions()} ">
+									<tr>
+										<th colspan="4">게시글이 존재하지 않습니다.</th>
+									</tr>
+								</c:if>    
 			        	<c:forEach  var="aritcle" items="${qnaPAGE.question}">
 										<tr>
 										  <%-- ${qm.sn} 은 Qnamodel클래스의 getSn()메소드를 호출 --%>
@@ -89,7 +89,7 @@
 			        </tbody>		
 			    </table>
 			    <%-- 페이징 부분 --%>
-		<c:if test="${qnaPAGE.hasQna() }">
+		<c:if test="${qnaPAGE.hasQuestions() }">
 			<tr>
 				<th colspan="8">
 					<%-- [이전prev]출력 --%>

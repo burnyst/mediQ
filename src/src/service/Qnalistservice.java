@@ -1,12 +1,12 @@
-package cs.qnaservice;
+package cs.qna.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import cs.qnamodeldao.QnaDAO;
-import cs.qnamodeldao.QnaPage;
-import cs.qnamodeldao.Qnamodel;
+import cs.qna.modeldao.QnaDAO;
+import cs.qna.modeldao.QnaPage;
+import cs.qna.modeldao.Qnamodel;
 import jdbc.connection.ConnectionProvider;
 
 public class Qnalistservice {

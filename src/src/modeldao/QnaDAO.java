@@ -1,4 +1,4 @@
-package cs.qnamodeldao;
+package cs.qna.modeldao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import cs.qnamodeldao.Qnamodel;
+import cs.qna.modeldao.Qnamodel;
 import jdbc.JdbcUtil;
 
 	/*//질문 상세조회

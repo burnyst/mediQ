@@ -1,4 +1,4 @@
-package cs.qnacommand;
+package cs.qna.command;
 
 
 import java.util.HashMap;
@@ -7,10 +7,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cs.qnacommand.QnaRequest;
-import cs.qnamodeldao.QnaPage;
-import cs.qnaservice.QnaAction;
-import cs.qnaservice.Qnalistservice;
+import cs.qna.command.QnaRequest;
+import cs.qna.modeldao.QnaPage;
+import cs.qna.service.QnaAction;
+import cs.qna.service.Qnalistservice;
 import mvc.command.CommandHandler;
 
 public class Qnalistcontroller implements CommandHandler {

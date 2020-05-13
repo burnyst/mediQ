@@ -1,4 +1,4 @@
-package cs.qnacommand;
+package cs.qna.command;
 
 import java.util.Date;
 import java.util.Map;
