@@ -52,7 +52,14 @@ public class QnaPage {
 		public void setTotal(int total) {
 			this.total = total;
 		}
+		
+		public boolean hasNoQuestions() {
+			return total == 0;
+		}
 
+		public boolean hasQuestions() {
+			return total > 0;
+		}
 		public int getCurrentPage() {
 			return currentPage;
 		}
