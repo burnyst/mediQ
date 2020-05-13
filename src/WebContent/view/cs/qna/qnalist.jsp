@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,9 +48,10 @@
 					</td>
 				</tr>
 			</table>
+			<!--  qnaPAGE=${qnaPAGE}-->	 
 			</div>
 			<div class="divcss">
-				<h4>총 n 건</h4>
+				<h4>총${qnaPAGE.total} 건</h4>
 			</div>
 			<div class="divcss">
 			    <table class="tablecss"  border="1"  style="width:1000px; ">
@@ -56,31 +59,60 @@
 			        <tr>
 			            <th >번호</th>
 			            <th style="width:40%; ">제목</th>
-			            <th>유형</th>
+			            <th width="100">유형</th>
 			            <th>공개여부</th>
 			            <th>조회 건수</th>
 			            <th>작성자</th>
 			            <th>등록일자</th>
 			            <th>답변상태</th>
 			        </tr>
-			        </thead>
+			        </thead> 
 			        <tbody>
-			        		<tr>
-			        		<td>예시</td>
-			        		<td><a href="qnadetail.jsp"  style="text-decoration: none; color:black;">예시</a></td>
-			        		<td>예시</td>
-			        		<td>예시</td>
-			        		<td>예시</td>
-			        		<td>예시</td>
-			        		<td>예시</td>
-			        		<td>예시</td>
-			        		</tr>
-			        </tbody>
-			
+			        <c:if test="${qnaPAGE.hasNoQna()} ">
+										<tr>
+											<th colspan="8">게시글이 존재하지 않습니다.</th>
+										</tr>
+								</c:if> 
+			        	<c:forEach  var="aritcle" items="${qnaPAGE.question}">
+										<tr>
+										  <%-- ${qm.sn} 은 Qnamodel클래스의 getSn()메소드를 호출 --%>
+											<td >${qm.sn} </td>
+											<td style="width:40%; "><a href="qnadetal.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}">${qm.title}</a></td>
+											<td >${qm.category}</td>
+											<td >${qm.qpublic}</td>
+											<td>${qm.vcount}</td>
+					        		<td>${qm.mid}</td>
+					        		<td>${qm.rdate}</td>
+					        		<td>${qm.qstate}</td>
+									</tr>
+							</c:forEach> 
+			        </tbody>		
 			    </table>
+			    <%-- 페이징 부분 --%>
+		<c:if test="${qnaPAGE.hasQna() }">
+			<tr>
+				<th colspan="8">
+					<%-- [이전prev]출력 --%>
+					<c:if test="${qnaPAGE.startPage>10}">
+					<a href="list.do?pageNo=${qnaPAGE.startPage-10}">◁</a>
+					</c:if>
+					
+					<c:forEach var="pNo" 
+					           begin="${qnaPAGE.startPage}" 
+					           end="${qnaPAGE.endPage}">
+					<a href="qnalist.do?pageNo=${pNo}">[${pNo}]</a>
+					</c:forEach>
+					
+					<%-- [다음next]출력 --%>
+					<c:if test="${qnaPAGE.endPage<qnaPAGE.totalPages}">
+					<a href="qnalist.do?pageNo=${qnaPAGE.startPage+10}">▷</a>
+					</c:if>
+				</th>
+			</tr>
+		</c:if>
 	<!--  session 연결해서 해야함-->
 	<%-- if  (mlevel == [회원]){ --%>
-	<button type="button" onclick="location.href='qnaupdate.jsp' ">글쓰기</button>
+	<button type="button" onclick="location.href='qna.do' ">글쓰기</button>
 	<%-- } --%>
 	<%-- else { --%>
 		<button onclick="javascript:btn()">글쓰기</button>
