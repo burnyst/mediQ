@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴스게시판 상세페이지</title>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 
 h2{
@@ -51,13 +52,13 @@ float:right;
          		<td></td>
          </tr>
 				 </table>	
-				 <input type="button" id="update" value="수정"/><!-- 이영역은 관리자로 로그인할 경우만 보이는 버튼 -->
+				 <a href="./newsModify.jsp"><input type="button" id="update" value="수정"/></a><!-- 이영역은 관리자로 로그인할 경우만 보이는 버튼 -->
          <table border="1" id="contents" >
          <tr>
           <td><textarea name="contents" rows="20" cols="100" ></textarea></td>
          </tr>
          </table>
-         </form>
-         <input type=button  value="목록으로" action=""/>
+         <a href="./newsMain.jsp"><input type=button  value="목록으로"   /></a>
+					</form>
 </body>
 </html>
