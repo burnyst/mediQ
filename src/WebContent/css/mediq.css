@@ -1,0 +1,13 @@
+@import "common.css";
+body {
+	margin: 0 auto;
+	width: 1024px;
+}
+.button {
+    cursor: pointer;
+	background: Gray;
+    color: White;
+	border: 1px solid Gray;
+	padding: 8px;
+    font-size: 16px;
+}

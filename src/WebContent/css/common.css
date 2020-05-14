@@ -1,0 +1,44 @@
+.left {
+    text-align: left;
+}
+.center {
+	text-align: center;
+}
+.right {
+	text-align: right;
+}
+.top {
+	vertical-align: top;
+}
+.bottom {
+	vertical-align: bottom;
+}
+.inline {
+	display: inline-block;
+}
+.nomargin {
+	margin: 0;
+}
+.nopadding {
+	padding: 0;
+}
+.hidden {
+    display: none;
+}
+.floatLeft {
+    float: left;
+}
+.floatCenter {
+	float: center;
+}
+.floatRight {
+	float: right;
+}
+.clearfix {
+	overflow: auto;
+}
+.clearfix::after {
+	content: "";
+	clear: both;
+	display: table;
+}

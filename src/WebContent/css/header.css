@@ -1,22 +1,36 @@
-body {
-	margin: 0;
-}
 .header {
     background-color: DodgerBlue;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-.header h1 {
-	padding: 0px 40px;
-}
-.header li {
     color: White;
-    display: inline-block;
-    font-size: 20px;
-    padding: 0px 20px;
 }
 .header a {
     color: white;
     text-decoration: none;
+}
+.header ul {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    list-style-type: none;
+}
+.header li {
+    display: inline-block;
+}
+
+.header .logo {
+    padding: 0px 40px;
+    font-size: 40px;
+    display: inline-block;
+}
+
+.header .menu li {
+    font-size: 20px;
+    padding: 0px 20px;
+}
+
+.header .submenu {
+	vertical-align: top;
+}
+.header .submenu li {
+    font-size: 14px;
+    padding: 0px 10px;
 }

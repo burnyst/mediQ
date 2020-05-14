@@ -1,0 +1,26 @@
+div.items {
+	padding: 20px;
+}
+.items table {
+	width: 100%;
+    border-collapse: collapse;
+}
+.items th {
+    background: Gray;
+    color: White;
+}
+.items th, .items td {
+    border: 1px solid LightGray;
+    padding: 5px;
+}
+
+.items input[type="checkbox"] {
+	width: 15px;
+	height: 15px;
+}
+.items td[class="hasDetail"]:hover {
+    cursor: pointer;
+}
+.items tfoot a {
+    color: White;
+}

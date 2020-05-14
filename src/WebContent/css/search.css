@@ -1,3 +1,4 @@
+@import "items.css";
 .search {
 	padding: 40px 0px;
     text-align: center;
@@ -13,41 +14,5 @@
 	margin: 0px;
 }
 .search input[type="submit"] {
-	font-size: 20px;
-	margin: 0px;
-	padding: 4px;
-}
-
-div.items {
-	padding: 20px;
-}
-table.items {
-    border-collapse: collapse;
-    width: 100%;
-}
-table.items, table.items th, table.items td {
-    border: 1px solid LightGray;
-}
-table.items tr[class="row"] td:hover {
-    background-color: LightBlue;
-}
-thead tr th {
-    text-align: left;
-}
-table.items th {
-    background: Gray;
-    color: White;
-    padding: 5px;
-}
-tfoot tr th {
-    text-align: center;
-}
-tfoot a {
-    color: White;
-}
-table.items td {
-    padding: 5px;
-}
-.hidden {
-    display: none;
+	vertical-align: center;
 }

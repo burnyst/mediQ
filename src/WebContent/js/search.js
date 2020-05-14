@@ -1,32 +1,29 @@
 window.addEventListener("load", function() {
-	var form = document.querySelectorAll("div.search form");
-	if (form[0]["productName"].value == "") {
-		form[0]["productName"].focus();
-	}
-	form[0].addEventListener("submit", function() {
-		if (form[0]["productName"].value.trim() == "") {
-			form[0]["productName"].value = "";
-			return false;
-		} else {
-			return true;
+	var form = document.querySelectorAll(".search form");
+	form[0].addEventListener("submit", function(e) {
+		this["searchWord"].value = this["searchWord"].value.trim();
+		if (this["searchWord"].value == "") {
+			this["searchWord"].value = "";
+			e.preventDefault();
 		}
 	});
-    var table = document.querySelectorAll("table.items");
-    if (table.length > 0) {
-	    var len = table[0].rows.length;
-	    for (var i = 1; i < len; i+=2) {
-	        table[0].rows[i].addEventListener("click", function() {
-	            var desc = this.nextSibling.nextSibling;
-	            var className = desc.className;
-	            var table = document.querySelectorAll("table.items");
-	            var len = table[0].rows.length;
-	            for (var i = 2; i < len; i+=2) {
-	                table[0].rows[i].className = "hidden";
-	            }
-	            if ("hidden" === className) {
-	                desc.className = "";
-	            }
-	        });
-	    }
+	if (form[0]["searchWord"].value == "") {
+		form[0]["searchWord"].focus();
+	}
+    var hasDetail = document.querySelectorAll(".hasDetail");
+    var len = hasDetail.length;
+    for (var i = 0; i < len; i++) {
+    	hasDetail[i].addEventListener("click", function() {
+    		var detailRow = this.parentNode.nextSibling.nextSibling;
+    		var className = detailRow.className;
+    		var hasDetail = document.querySelectorAll(".hasDetail");
+    		var len = hasDetail.length;
+            for (var i = 0; i < len; i++) {
+            	hasDetail[i].parentNode.nextSibling.nextSibling.className = "hidden";
+            }
+    		if ("hidden" === className) {
+    			detailRow.className = "";
+    		}
+    	});
     }
 });
