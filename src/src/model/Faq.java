@@ -1,30 +1,45 @@
-package faq.model;
+package model;
 
 import java.util.Date;
+import java.util.Map;
 
 public class Faq {
 	
 	private int sn;
 	private String title;
-	private String writer;
 	private String mid;
 	private Date rdate;
 	private int vcount;
 	private String contents;
 	private String category;
 	
+	public Faq() {}
 	
-	public Faq(int sn, String title, String writer, String mid, Date rdate,
-			int vcount, String contents,String category) {
+	public Faq(int sn, String title, String mid, Date rdate,
+			 String category,int vcount,String contents) {
 		this.sn = sn;
 		this.title = title;
-		this.writer = writer;
 		this.mid = mid;
 		this.rdate = rdate;
 		this.vcount = vcount;
-		this.contents = contents;
 		this.category = category;
+		this.contents = contents;
+		
 	}
+	public Faq(Integer sn, String title, Date rdate, String category, int vcount) {
+		this.sn=sn;
+		this.title=title;
+		this.rdate=rdate;
+		this.category=category;
+		this.vcount=vcount;
+	}
+	public Faq(String category, String title, String contents) {
+		this.category=category;
+		this.title=title;
+		this.contents=contents;
+	}
+
+
 	public int getSn() {
 		return sn;
 	}
@@ -36,12 +51,6 @@ public class Faq {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
 	}
 	public String getMid() {
 		return mid;
@@ -75,14 +84,17 @@ public class Faq {
 	}
 	@Override
 	public String toString() {
-		return "FaqDAO [sn=" + sn + ", title=" + title + ", writer=" + writer + ", mid=" + mid + ", rdate=" + rdate
+		return "FaqDAO [sn=" + sn + ", title=" + title + ", mid=" + mid + ", rdate=" + rdate
 				+ ", vcount=" + vcount + ", contents=" + contents + ", category=" + category + "]";
 	}
 
+	public void validate(Map<String, Boolean> errors) {
+		if(title == null || title.trim().isEmpty()) {		//trim 좌우공백제거
+			errors.put("title",Boolean.TRUE);   //map에 대이터 넣을때 put
+		}
 	
 	
-	
-	
+	}
 	
 	
 }

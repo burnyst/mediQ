@@ -1,24 +1,27 @@
-package faq.service;
+package controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import faq.DAO.FaqDAO;
-import faq.model.Faq;
-import jdbc.connection.ConnectionProvider;
+import dao.FaqDAO;
+import dbcp.JdbcUtil;
+import model.Faq;
+import page.FaqPage;
+import page.Page;
 
 //전체목록보기 요청 담당 컨트롤러에서 호출하는 서비스클래스
 //p650
 //DAO와 연동
-public class ListFaqService {
+public class FaqListService {
 	
 	private FaqDAO faqDAO = new FaqDAO();
-	private int size = 5;
+	private int size = 10;		//한페이지당 출력할 게시글 수
 	
-	public FaqPage getArticlePage(int pageNo) {
+	public FaqPage getFaqPage(int pageNo) {
+		System.out.println("getFaqPage호출");
 		try {
-			Connection conn= ConnectionProvider.getConnection();
+			Connection conn= JdbcUtil.getConnection();
 			//전체 게시글수 조회
 			int total = faqDAO.selectCount(conn);
 			

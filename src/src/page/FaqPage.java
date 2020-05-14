@@ -1,7 +1,7 @@
-package faq.service;
+package page;
 
 import java.util.List;
-import faq.model.Faq;
+import model.Faq;
 
 //게시물 데이터   및       페이징처리에 필요한 데이터
 //P648
@@ -14,7 +14,7 @@ public class FaqPage {
 	private int startPage;					//시작 페이지번호		[1 2 3 4 5]	[6 7 8 9 10]
 	private int endPage;					//끝 페이지번호
 
-	//ArticlePage(전체게시물수, 보고싶은페이지,한페이지당 게시글수, List<Faq> content)
+	//FaqPage(전체게시물수, 보고싶은페이지,한페이지당 게시글수, List<Faq> content)
 	public FaqPage(int total, int currentPage, int size, List<Faq> content) {
 		this.total = total;
 		this.currentPage = currentPage;
@@ -31,11 +31,11 @@ public class FaqPage {
 			}
 			
 			//아래의 5값은 한번에 출력하고 싶은 페이지 개수를 뜻한다.
-			int modVal = currentPage % 5;		
-			startPage = currentPage /5* 3 + 1;
-			if (modVal == 0) startPage -= 5;		
+			int modVal = currentPage % 10;		
+			startPage = currentPage /10* 3 + 1;
+			if (modVal == 0) startPage -= 10;		
 			
-			endPage = startPage + 4;
+			endPage = startPage + 9;
 
 			if (endPage > totalPages) endPage = totalPages;
 		}
@@ -45,11 +45,11 @@ public class FaqPage {
 		return total;
 	}
 
-	public boolean hasNoArticles() {
+	public boolean hasNoFaq() {
 		return total == 0;
 	}
 
-	public boolean hasArticles() {
+	public boolean hasFaq() {
 		return total > 0;
 	}
 	
@@ -72,10 +72,35 @@ public class FaqPage {
 	public int getEndPage() {
 		return endPage;
 	}
+	
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public void setContent(List<Faq> content) {
+		this.content = content;
+	}
+
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
 
 	@Override
 	public String toString() {
-		return "ArticlePage [total=" + total + ", currentPage=" + currentPage + ", content=" + content + ", totalPages="
+		return "FaqPage [total=" + total + ", currentPage=" + currentPage + ", content=" + content + ", totalPages="
 				+ totalPages + ", startPage=" + startPage + ", endPage=" + endPage + "]";
 	}
 	

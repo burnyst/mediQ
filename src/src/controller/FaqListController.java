@@ -1,21 +1,21 @@
-package faq.command;
+package controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import faq.service.FaqPage;
-import faq.service.ListFaqService;
-import mvc.command.CommandHandler;
+import controller.CommandHandler;
+
+import page.FaqPage;
 
 //전체목록보기 요청 담당 컨트롤러
 //p652
-public class ListFaqHandler implements CommandHandler {
+public class FaqListController implements CommandHandler {
 
 	//Service
-	private ListFaqService listService = new ListFaqService();
+	private FaqListService listService = new FaqListService();
 	
-	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("FaqListController의 process()진입");
 		//할일
 		//1.파라미터 받기
 		String pageNoVal = request.getParameter("pageNo");//보고싶은페이지
@@ -24,13 +24,13 @@ public class ListFaqHandler implements CommandHandler {
 			pageNo=Integer.parseInt(pageNoVal);
 		}
 		//2.비즈니스로직 수행(<->Service<->DAO<->DB)(p652-22)
-		FaqPage faqPage = listService.getArticlePage(pageNo);
+		FaqPage faqPage = listService.getFaqPage(pageNo);
 		
 		//3.Model
 		request.setAttribute("faqPage", faqPage);
 		//4.View
 		
-		return "/view/cs/faq/faqList.jsp";
+		return "/view/cs/faq/faqlist.jsp";
 	}
 
 }
