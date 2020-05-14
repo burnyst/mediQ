@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Dispatcher extends HttpServlet {
 	private static final long serialVersionUID = -5460502380405758539L;
-	private Map<String, Controller> map = new HashMap<>();
+	private Map<String, Object> map = new HashMap<>();
 	@Override
 	public void init() throws ServletException {
 		Properties properties = new Properties();
@@ -31,15 +31,14 @@ public class Dispatcher extends HttpServlet {
             String request = (String)iter.next();
             String className = properties.getProperty(request);
             try {
-                Controller controller = (Controller)Class.forName(className).newInstance();
-                map.put(request, controller);
+                map.put(request, Class.forName(className).newInstance());
             } catch (ClassNotFoundException|InstantiationException|IllegalAccessException e) {
                 throw new ServletException(e);
             }
         }
 	}
-	private Controller getController(HttpServletRequest req) {
-		Controller rst = null;
+	private Object getController(HttpServletRequest req) {
+		Object rst = null;
 		String uri = req.getRequestURI();
 		if (uri != null && uri.indexOf(req.getContextPath()) == 0) {
 			uri = uri.substring(req.getContextPath().length());
@@ -47,44 +46,52 @@ public class Dispatcher extends HttpServlet {
 		}
         return rst;
 	}
-	private void forward(HttpServletRequest req, HttpServletResponse resp, String page) throws ServletException, IOException {
+	private void forward(HttpServletRequest req, HttpServletResponse res, String page) throws ServletException, IOException {
 		if (page != null) {
 	        RequestDispatcher dispatcher = req.getRequestDispatcher(page);
-	        dispatcher.forward(req, resp);
+	        dispatcher.forward(req, res);
         }
 	}
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Controller controller = getController(req);
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		Object controller = getController(req);
         if (controller == null) {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            res.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
         
         String viewPage = null;
         try {
-            viewPage = controller.doGet(req, resp);
+        	if (controller instanceof Controller) {
+        		viewPage = ((Controller)controller).doGet(req, res);
+        	} else {
+        		viewPage = ((CommandHandler)controller).process(req, res);
+        	}
         } catch (Throwable e) {
             throw new ServletException(e);
         }
         
-        forward(req, resp, viewPage);
+        forward(req, res, viewPage);
 	}
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Controller controller = getController(req);
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		Object controller = getController(req);
         if (controller == null) {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            res.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
         
         String viewPage = null;
         try {
-            viewPage = controller.doPost(req, resp);
+        	if (controller instanceof Controller) {
+        		viewPage = ((Controller)controller).doPost(req, res);
+        	} else {
+        		viewPage = ((CommandHandler)controller).process(req, res);
+        	}
         } catch (Throwable e) {
             throw new ServletException(e);
         }
         
-        forward(req, resp, viewPage);
+        forward(req, res, viewPage);
 	}
 }
