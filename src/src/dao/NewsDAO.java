@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import jdbc.JdbcUtil;
-import newsModel.News;
+import dbcp.JdbcUtil;
+import model.News;
 
 public class NewsDAO {
 
