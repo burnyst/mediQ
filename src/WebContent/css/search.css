@@ -1,18 +1,20 @@
 @import "items.css";
 .search {
-	padding: 40px 0px;
+	padding: 3rem 0;
     text-align: center;
+    font-size: 1rem;
 }
 .search label {
-	padding: 40px;
+	padding: 1em;
 	font-weight: bold;
-	font-size: 24px;
+	font-size: 1.3em;
 }
 .search input[type="text"] {
-	padding: 5px;
-	font-size: 20px;
-	margin: 0px;
+	padding: 0.3em;
+	font-size: 1.3em;
 }
 .search input[type="submit"] {
+	padding: 0.3em;
+	font-size: 1.3em;
 	vertical-align: center;
 }

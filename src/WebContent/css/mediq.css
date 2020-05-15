@@ -1,13 +1,28 @@
 @import "common.css";
-body {
-	margin: 0 auto;
-	width: 1024px;
+* {
+	box-sizing: border-box;
 }
-.button {
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0 auto;
+	max-width: 1024px;
+	font-size: 1rem;
+}
+button, input[type="submit"] {
     cursor: pointer;
 	background: Gray;
     color: White;
 	border: 1px solid Gray;
-	padding: 8px;
-    font-size: 16px;
+}
+.small {
+	font-size: 0.8rem;
+}
+.normal {
+	font-size: 1rem;
+}
+.large {
+	font-size: 1.5rem;
+}
+.xlarge {
+	font-size: 2rem;
 }

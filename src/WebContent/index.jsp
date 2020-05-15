@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>mediQ</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mediq.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
@@ -16,29 +17,36 @@
 	    <form method="get" action="search.do">
 	        <label>의약품 검색</label>
 	        <input type="text" name="searchWord" value="${searchWord}" />
-	        <input type="submit" class="button" value="검색" />
+	        <input type="submit" value="검색" />
 	    </form>
 	</div>
 	<c:if test="${searchWord != null && !searchWord.isEmpty()}">
 		<div class="items">
-		    <h3>검색결과</h3>
+		    <label>검색결과</label>
 		    <hr />
 		    <form method="post" action="#">
 			    <div class="clearfix">
-				    <span class="floatRight">
-					    <button class="button selectAll">전체 선택</button>
-					    <input type="submit" class="button" value="선택 저장" />
+				    <span class="float-right">
+					    <button class="selectAll">전체 선택</button>
+					    <input type="submit" value="선택 저장" />
 				    </span>
 			    </div>
 			    <hr />
 			    <table>
+			    	<colgroup>
+			    		<col class="col1" />
+			    		<col class="col2" />
+			    		<col class="col3" />
+			    		<col class="col4" />
+			    		<col class="col5" />
+			    	</colgroup>
 			    	<thead>
 				        <tr>
-				        	<th>선택</th>
-				            <th class="left">업체명</th>
-				            <th class="left">품목명</th>
-				            <th class="left">전문일반</th>
-				            <th class="left">성상</th>
+				        	<th></th>
+				            <th>업체명</th>
+				            <th>품목명</th>
+				            <th>전문일반</th>
+				            <th>성상</th>
 				        </tr>
 			        </thead>
 			        <c:if test="${page == null || page.totalCount == 0}">
@@ -65,14 +73,18 @@
 								</tr>
 						        <tr class="hidden">
 						            <td colspan="5">
-						            	<table>
-							                <h4>효능효과</h4>
-							                <pre>${i.eeDocData}</pre>
-							                <h4>용법용량</h4>
-							                <pre>${i.udDocData}</pre>
-							                <h4>주의사항(일반)</h4>
-							                <pre>${i.nbDocData}</pre>
-						                </table>
+						            	<div class="content">
+							            	<table>
+							            		<colgroup>
+							            		</colgroup>
+								                <h4>효능효과</h4>
+								                <pre>${i.eeDocData}</pre>
+								                <h4>용법용량</h4>
+								                <pre>${i.udDocData}</pre>
+								                <h4>주의사항(일반)</h4>
+								                <pre>${i.nbDocData}</pre>
+							                </table>
+						                </div>
 						            </td>
 						        </tr>
 							</c:forEach>
@@ -92,7 +104,7 @@
 										</c:if>
 									</c:forEach>
 									<c:if test="${page.endPage < page.totalPages}">
-										<a href="search.do?searchWord=${searchWord}&pageNo=${page.startPage}">[다음]</a>
+										<a href="search.do?searchWord=${searchWord}&pageNo=${page.startPage + 5}">[다음]</a>
 									</c:if>
 								</th>
 							</tr>
