@@ -19,22 +19,17 @@ public class SearchController extends Controller {
 	@Override
 	public String doGet(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ProductPage page = null;
-		String productName = req.getParameter("productName");
-		if (productName != null && !productName.isEmpty()) {
+		String searchWord = req.getParameter("searchWord");
+		if (searchWord != null && !searchWord.isEmpty()) {
 			int pageNo = getParameterInt(req, "pageNo", 1);
 			int numOfRows = getParameterInt(req, "numOfRows", 10);
 			Connection con = JdbcUtil.getConnection();
-			Integer count = ProductDao.getCount(con, productName);
-			JdbcUtil.close(con);
-			con = JdbcUtil.getConnection();
-			if (count > 0) {
-				page = new ProductPage(count, pageNo, numOfRows, ProductDao.getList(con, productName, pageNo, numOfRows));
-				
-			}
+			Integer count = ProductDao.getCount(con, searchWord);
+			page = new ProductPage(count, pageNo, numOfRows, ProductDao.getList(con, searchWord, pageNo, numOfRows));
 			JdbcUtil.close(con);
 		}
 		req.setAttribute("page", page);
-		req.setAttribute("productName", productName);
+		req.setAttribute("searchWord", searchWord);
 		return "/index.jsp";
 	}
 
