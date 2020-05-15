@@ -1,36 +1,54 @@
-.header {
-    background-color: DodgerBlue;
-    color: White;
+header {
+	background-color: DodgerBlue;
+	color: White;
+    font-size: 1.5rem;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-end;
 }
-.header a {
+nav {
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	font-size: 1.3rem;
+}
+header h1 {
+	-webkit-flex: 0 0 5em;
+	-ms-flex: 0 0 5em;
+	flex: 0 0 5em;
+    text-align: center;
+}
+@media (max-width: 800px) {
+	header {
+		-webkit-flex-direction: column;
+		flex-direction: column;
+		align-items: stretch;
+	}
+	header h1 {
+		-webkit-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+	}
+}
+nav ul {
+	padding: 0px;
+    list-style-type: none;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-around;
+	align-items: stretch;
+}
+nav a {
     color: white;
     text-decoration: none;
 }
-.header ul {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    list-style-type: none;
+nav li {
+	text-align: center;
 }
-.header li {
-    display: inline-block;
-}
-
-.header .logo {
-    padding: 0px 40px;
-    font-size: 40px;
-    display: inline-block;
-}
-
-.header .menu li {
-    font-size: 20px;
-    padding: 0px 20px;
-}
-
-.header .submenu {
-	vertical-align: top;
-}
-.header .submenu li {
-    font-size: 14px;
-    padding: 0px 10px;
+@media (max-width: 600px) {
+	nav ul {
+		-webkit-flex-direction: column;
+		flex-direction: column;
+	}
 }

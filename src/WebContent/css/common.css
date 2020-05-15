@@ -10,28 +10,22 @@
 .top {
 	vertical-align: top;
 }
+.middle {
+	vertical-align: middle;
+}
 .bottom {
 	vertical-align: bottom;
-}
-.inline {
-	display: inline-block;
-}
-.nomargin {
-	margin: 0;
-}
-.nopadding {
-	padding: 0;
 }
 .hidden {
     display: none;
 }
-.floatLeft {
+.float-left {
     float: left;
 }
-.floatCenter {
+.float-center {
 	float: center;
 }
-.floatRight {
+.float-right {
 	float: right;
 }
 .clearfix {

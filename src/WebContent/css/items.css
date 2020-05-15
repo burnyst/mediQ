@@ -1,9 +1,21 @@
-div.items {
-	padding: 20px;
+.items {
+	padding: 1rem;
+	font-size: 1rem;
+}
+.items label {
+	font-weight: bold;
+	font-size: 1.3em;
 }
 .items table {
 	width: 100%;
+	table-layout: fixed;
     border-collapse: collapse;
+}
+.items thead th {
+    text-align: left;
+}
+.items td {
+	/*word-break: break-all;*/
 }
 .items th {
     background: Gray;
@@ -11,16 +23,42 @@ div.items {
 }
 .items th, .items td {
     border: 1px solid LightGray;
-    padding: 5px;
+    padding: 0.3em;
 }
-
+.items button {
+	padding: 0.3em;
+	font-size: 1em;
+}
+.items input[type="submit"] {
+	padding: 0.3em;
+	font-size: 1em;
+}
 .items input[type="checkbox"] {
-	width: 15px;
-	height: 15px;
+	width: 1rem;
+	height: 1rem;
 }
 .items td[class="hasDetail"]:hover {
     cursor: pointer;
 }
 .items tfoot a {
     color: White;
+}
+.items .content {
+	height: 20em;
+	overflow: scroll;
+}
+.items .content table {
+	table-layout: auto;
+}
+.col1 {
+	width: 2rem;
+}
+.col2 {
+	width: 20%;
+}
+.col3 {
+	width: 35%;
+}
+.col4 {
+	width: 6em;
 }
