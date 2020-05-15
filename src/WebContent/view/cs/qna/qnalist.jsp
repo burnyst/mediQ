@@ -17,23 +17,27 @@
 				</td>
 			</tr>
 		</table>
+		<hr>
 		</div>
-		<form name="search" id="search" method="post"  action="Qnasearch.do" accept-charset="utf-8">
+		<form name="search" id="search" method="get"  action="qnasearch.do" accept-charset="utf-8">
 		<div class="divcss">
 			<table class="tablecss" >
 				<tr>
+					<th colspan="4">검색 유형 중 한 가지만 입력한 뒤 검색을 누르세요. </th>
+				</tr>
+				<tr>
 					<th>제목:</th>
-					<td><input type="text"  name="title" id="title"/></td>
+					<td><input type="text"  name="keyword1" /></td>
 					<th>등록일자:</th>
-					<td><input type="date" name="rdate" id="rdate"/></td>
+					<td><input type="text" name="keyword2"  placeholder="(예: YY/MM/DD -> 20/05/14)" /></td>
 				</tr>
 				<tr>
 					<th>작성자:</th>
-					<td><input type="text" name="mid" id="mid"/></td>
+					<td><input type="text" name="keyword3" /></td>
 					<th>유형:</th>
-					<td><select name="category" id="category" >
-					<option value="none">=질문 유형을 선택하세요=</option>
-					<option value="약물정보">약물 정보</option>
+					<td><select name="keyword4" >
+					<option value="">=질문 유형을 선택하세요=</option>
+					<option value="약물정보">약물정보</option>
 					<option value="데이터사용">데이터 사용</option>
 					<option value="사이트이용">사이트 이용</option>
 					</select>
@@ -48,7 +52,7 @@
 			</div>
 			</form>
 			<div class="divcss">
-				<h4>총${qnaPAGE.total} 건</h4>
+				<h4>총${qnaPAGE.total} ${qnaSearchPAGE.total }건</h4>
 			</div>
 			<div class="divcss">
 			    <table class="tablecss"  border="1"  style="width:1000px; height:700px ">
@@ -107,6 +111,30 @@
 				</th>
 			</tr>
 		</c:if>
+		<!-- SearchList------------------------------------------------------------------------------ -->
+					<div class="divcss">
+			    <table class="tablecss"  border="1"  style="width:1000px; height:700px ">	          
+			        <tbody>
+			        	<c:if test="${qnaSearchPAGE.hasNoQuestions()} ">
+									<tr>
+										<th colspan="4">게시글이 존재하지 않습니다.</th>
+									</tr>
+								</c:if>    
+			        	<c:forEach  var="qms" items="${qnaSearchPAGE.search}">
+										<tr>
+											<td >${qms.sn} </td>																	
+											<td style="width:40%;"><a  style="text-decoration:none; color:black;" href="qnadetail.do?no=${qms.sn}">${qms.title}</a></td>
+											<td >${qms.category}</td>
+											<td >${qms.qpublic}</td>
+											<td>${qms.vcount}</td>
+					        		<td>${qms.mid}</td>
+					        		<td>${qms.rdate}</td>
+					        		<td>${qms.qstate}</td>
+									</tr>
+							</c:forEach> 
+			        </tbody>		
+			    </table>
+	<button type="button" onclick="location.href='qnalist.do' ">전체 목록</button>
 	<!--  session 연결해서 해야함-->
 	<%-- if  (mlevel == [회원]){ --%>
 	<button type="button" onclick="location.href='qnaupdate.do' ">글쓰기</button>

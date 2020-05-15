@@ -18,11 +18,11 @@ import dbcp.JdbcUtil;
 import model.Qnamodel;
 
 	
-public  class Qna{
+public  class QnaDAO{
 	//연결
 	private DataSource ds;
 	
-	public Qna() {
+	public QnaDAO() {
 		
 		try {
 				Context ctx = new InitialContext();
@@ -31,6 +31,7 @@ public  class Qna{
 				e.printStackTrace();
 		}
 	}
+	
 	
 	//전체게시물수 구하기 
 	public static int selectCount(Connection conn) throws SQLException {
@@ -86,7 +87,7 @@ public  class Qna{
 			JdbcUtil.close(pstmt);
 		}	
 	}
-	//select쿼리문 결과를 받아서  Qnamodel클래스타입으로 묶어주는 함수 p647 36
+	//select쿼리문 결과를 받아서  Qnamodel클래스타입으로 묶어주는 함수
 		private static Qnamodel convertQuestion(ResultSet rs) 
 		    throws SQLException{
 			System.out.println("QnaDAO의  convertQuestion()");
@@ -103,10 +104,88 @@ public  class Qna{
 					
 		}
 
-		//Timestamp타입을 Date타입으로 변환 p648 47
+		//Timestamp타입을 Date타입으로 변환 
 		private static Date toDate(Timestamp timestamp) {
 			return new Date(timestamp.getTime());
 		}
+		
+		//전체게시물수 구하기 
+		public static int selectCountt(Connection conn,String keyword1,String keyword2,String keyword3,String keyword4  ) throws SQLException {
+			System.out.println("전체게시물수 구하기 QnaDAO-selectCountt()호출성공");
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				String sql = "select  count(*) "+
+							 "	from  qna "+
+							 " where title like '%' || ? || '%' and rdate like '%' || ? || '%' and mid like '%' || ? || '%' and category like  '%' || ? || '%' ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1,keyword1); 
+				pstmt.setString(2,keyword2);
+				pstmt.setString(3,keyword3); 
+				pstmt.setString(4,keyword4); 
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()) {//등록된 게시글이 존재하면
+					return rs.getInt(1); //전체 게시물수가 리턴
+				}
+				return 0; //등록된 게시글이 존재x하면  0을 리턴
+				
+		  }finally {
+			JdbcUtil.close(rs);  
+			JdbcUtil.close(pstmt);
+		  }
+		  
+		}//end of selectCount
+		
+		//검색 키워드 검색해서 list로 묶음
+		public static List<Qnamodel> selectByIdT(Connection conn, String keyword1,String keyword2,String keyword3,String keyword4 )throws SQLException {
+			System.out.println("검색 QnaDAO-selectByIdT()호출성공");
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				String sql = "select	rownum,sn,title,category,qpublic,vcount,mid,rdate,qstate  " + 
+						" from ( select  rownum rn,sn,title,category,qpublic,vcount,mid,rdate,qstate from qna order by sn desc)  " +
+						" where title like '%' || ? || '%' and rdate like '%' || ? || '%' and mid like '%' || ? || '%' and category like  '%' || ? || '%' ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1,keyword1); 
+				pstmt.setString(2,keyword2);
+				pstmt.setString(3,keyword3); 
+				pstmt.setString(4,keyword4); 	
+				System.out.println("pstmt 호출"+pstmt); //sql문이 나와야함
+				rs = pstmt.executeQuery();
+				System.out.println("rs 호출"+rs);
+				List<Qnamodel> resultt = new ArrayList<>();
+				while( rs.next() ) {
+					resultt.add(convertQuestiont(rs));
+				}
+				return resultt;
+				
+		  }finally {
+			JdbcUtil.close(rs);  
+			JdbcUtil.close(pstmt);
+		  }
+		}
+			//selectByIdT쿼리문 결과를 받아서  Search클래스타입으로 묶어주는 함수 p647 36
+			private static Qnamodel convertQuestiont(ResultSet rs) 
+			    throws SQLException{
+				System.out.println("QnaDAO의  convertQuestiont()");
+				return new Qnamodel(
+						rs.getInt("sn"),
+						rs.getString("title"),
+						rs.getString("category"),
+						rs.getInt("qpublic"),
+						rs.getInt("vcount"),
+						rs.getString("mid"),
+						toDatet(rs.getTimestamp("rdate")),
+						rs.getInt("qstate")
+						);
+						
+			}
+
+			//Timestamp타입을 Date타입으로 변환 p648 47
+			private static Date toDatet(Timestamp timestamp) {
+				return new Date(timestamp.getTime());
+			}
 
 		//질문 상세조회
 		public Qnamodel selectById(Connection conn, int no)throws SQLException{
@@ -200,6 +279,8 @@ private   Timestamp toTimestamp(Date date) {
 				
 		}
 	
+
+
 
 //답변등록
 
