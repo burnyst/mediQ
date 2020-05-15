@@ -1,30 +1,30 @@
-package cs.qna.service;
+package controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 
-import cs.qna.command.QnaRequest;
-import cs.qna.modeldao.QnaDAO;
-import cs.qna.modeldao.Qnamodel;
-import jdbc.JdbcUtil;
-import jdbc.connection.ConnectionProvider;
+import dao.Qna;
+import dbcp.JdbcUtil;
+import model.QnaRequest;
+import model.Qnamodel;
+import dbcp.JdbcUtil;
 
 //p596
 //JoinHandler에서  호출
 //회원가입기능을 제공 => DAO연동
-public class QnaAction {
+public class QnaUpdateService {
 
-	private QnaDAO qnaDao = new QnaDAO();
+	private Qna qnaDao = new Qna();
 	
 	
 	//회원가입처리요청 p596-16  m801-832-38
 	//qnaupdateconttoller에서  호출
 	public  int update(QnaRequest qnaReq) {
-		System.out.println("QnaAction-update()호출");
+		System.out.println("QnaUpdateService -update()호출");
 		Connection conn = null;
 		try {
-			conn = ConnectionProvider.getConnection();
+			conn = JdbcUtil.getConnection();
 			conn.setAutoCommit(false);//트랜잭션 시작
 			
 			//dao호출 

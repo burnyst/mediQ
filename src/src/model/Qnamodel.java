@@ -1,4 +1,4 @@
-package cs.qna.modeldao;
+package model;
 import java.sql.Connection;
 import java.util.Date;
 

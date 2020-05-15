@@ -12,7 +12,7 @@
 		<h1>질문 등록</h1>
 	</div>
 	<div class="divcss">
-		<form name="frmq" id="frmq" method="post"  action="QnaAction.do" accept-charset="utf-8"> 
+		<form name="frmq" id="frmq" method="post"  action="QnaUpdateServie.do" accept-charset="utf-8"> 
 		<!--  action=qupdateaction.jsp -->
 			<table class="tablecss">
 					<tr>

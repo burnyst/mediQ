@@ -1,8 +1,8 @@
-package cs.qna.modeldao;
+package page;
 
 import java.util.List;
 
-import cs.qna.modeldao.Qnamodel;;
+import model.Qnamodel;;
 
 public class QnaPage {
 	//게시물 데이터 및 페이징처리에 필요한 데이터

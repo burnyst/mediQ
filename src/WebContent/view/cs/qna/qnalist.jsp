@@ -18,8 +18,9 @@
 			</tr>
 		</table>
 		</div>
+		<form name="search" id="search" method="post"  action="Qnasearch.do" accept-charset="utf-8">
 		<div class="divcss">
-			<table class="tablecss">
+			<table class="tablecss" >
 				<tr>
 					<th>제목:</th>
 					<td><input type="text"  name="title" id="title"/></td>
@@ -39,22 +40,18 @@
 					</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>
-					<button type="button" onclick="location.href='#' ">검색</button>
+					<td colspan="4"  align="right">
+					<input type="submit"  value="검색" />
 					</td>
 				</tr>
-			</table>
-			<!--  qnaPAGE=${qnaPAGE}-->	 
+			</table>				 
 			</div>
+			</form>
 			<div class="divcss">
 				<h4>총${qnaPAGE.total} 건</h4>
 			</div>
 			<div class="divcss">
-			    <table class="tablecss"  border="1"  style="width:1000px; height:1000px ">
+			    <table class="tablecss"  border="1"  style="width:1000px; height:700px ">
 			        <thead>
 			        <tr>
 			            <th >번호</th>
@@ -73,11 +70,11 @@
 										<th colspan="4">게시글이 존재하지 않습니다.</th>
 									</tr>
 								</c:if>    
-			        	<c:forEach  var="aritcle" items="${qnaPAGE.question}">
+			        	<c:forEach  var="qm" items="${qnaPAGE.question}">
 										<tr>
 										  <%-- ${qm.sn} 은 Qnamodel클래스의 getSn()메소드를 호출 --%>
-											<td >${qm.sn} </td>
-											<td style="width:40%; "><a href="qnadetal.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}">${qm.title}</a></td>
+											<td >${qm.sn} </td>																	
+											<td style="width:40%;"><a  style="text-decoration:none; color:black;" href="qnadetail.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}">${qm.title}</a></td>
 											<td >${qm.category}</td>
 											<td >${qm.qpublic}</td>
 											<td>${qm.vcount}</td>
@@ -94,7 +91,7 @@
 				<th colspan="8">
 					<%-- [이전prev]출력 --%>
 					<c:if test="${qnaPAGE.startPage>10}">
-					<a href="list.do?pageNo=${qnaPAGE.startPage-10}">◁</a>
+					<a href="qnalist.do?pageNo=${qnaPAGE.startPage-10}">◁</a>
 					</c:if>
 					
 					<c:forEach var="pNo" 
@@ -112,7 +109,7 @@
 		</c:if>
 	<!--  session 연결해서 해야함-->
 	<%-- if  (mlevel == [회원]){ --%>
-	<button type="button" onclick="location.href='qna.do' ">글쓰기</button>
+	<button type="button" onclick="location.href='qnaupdate.do' ">글쓰기</button>
 	<%-- } --%>
 	<%-- else { --%>
 		<button onclick="javascript:btn()">글쓰기</button>

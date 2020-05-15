@@ -1,4 +1,4 @@
-package cs.qna.command;
+package controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,16 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import cs.qna.command.QnaRequest;
-import cs.qna.modeldao.Qnamodel;
-import cs.qna.service.QnaAction;
-import mvc.command.CommandHandler;
+import model.QnaRequest;
+import model.Qnamodel;
 
-public class Qnaupdatecontroller implements CommandHandler {
+public class QnaupdateController implements CommandHandler {
 
 	//View지정
 	private static final String FORM_VIEW = "/view/cs/qna/qnaupdate.jsp";
-	private QnaAction qnaaction = new QnaAction();
+	private QnaUpdateService qnaaction = new QnaUpdateService();
 	
 	@Override
 	public String process(HttpServletRequest request, 
@@ -74,8 +72,8 @@ public class Qnaupdatecontroller implements CommandHandler {
 		//3.Model(Request, session)
 				request.setAttribute("newSn", newSn);
 		//4.View
-		return "/view/cs/qna/qnalist.jsp";
-		   //return "qnalist.do";
+		//return "/view/cs/qna/qnalist.jsp";
+		  return "qnalist.do";
 }
 
 	private QnaRequest createQnaRequest(String title, String category, int qpublic, String question,String image) {

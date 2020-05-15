@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,51 +9,50 @@
 </head>
 <body>
 	<div class="divcss">
-					<form name="frmq" id="frmq" method="post"  action="deleteaction.jsp" accept-charset="utf-8">
+					<form name="frmq" id="frmq" method="post"  action="QnaDeleteService.do" accept-charset="utf-8">
 					<table class="tablecss"  border=1 >
 						<tr>
 							<th>번호</th>
-							<td>n</td>
+							<td>${qm.sn}</td>
 							<th>조회건수</th>
-							<td>n</td>
+							<td>${qm.vcount}</td>
 						</tr>
 						<tr>
 							<th>제목</th>
-							<td>n</td>
+							<td>${qm.title}</td>
 							<th>작성자</th>
-							<td>n</td>
+							<td>${qm.mid}</td>
 						</tr>
 						<tr>
 							<th>유형</th>
-							<td>n</td>
+							<td>${qm.category}</td>
 							<th>등록일자</th>
-							<td>n</td>
+							<td>${qm.rdate}</td>
 						</tr>
 						<tr>
 							<th>공개여부</th>
-							<td>n</td>
+							<td>${qm.qpublic}</td>
 							<th>답변상태</th>
-							<td>n</td>
+							<td>${qm.qstate}</td>
 						</tr>
 						<tr>
-							<th>내용</th>
+							<th >내용</th>
 						</tr>
 						<tr>
-							<td>n</td>
+							<td>${qm.question}</td>
 						</tr>
 						<tr>
 							<th>파일 첨부 목록:</th>
-							<td> n</td>
+							<td>${qm.image}</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td></td>
 							<td><input  type="submit" value="삭제"  />
-							<input type="button" value="목록"  onclick="location.href='qnalist.jsp'">
+							<input type="button" value="목록"  onclick="location.href='qnalist.do'">
 							<!-- {%if 관리자 해서 버튼 보이기%} -->
 							<button type="button" onclick="location.href='manageqnaupdate.jsp' ">답변 쓰기</button>
 							</td>
-							<!-- 경로/cs/qna/qnalist.do 로 바꿔야함 -->
 					</tr>
 					</table>
 			</form>

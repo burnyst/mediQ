@@ -1,4 +1,4 @@
-package cs.qna.modeldao;
+package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,51 +14,15 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import cs.qna.modeldao.Qnamodel;
-import jdbc.JdbcUtil;
+import dbcp.JdbcUtil;
+import model.Qnamodel;
 
-	/*//질문 상세조회
-	public Qnamodel selectById(Connection conn, String title)throws SQLException{
-		PreparedStatement pstmt=null;
-		ResultSet rs =null;
-		try {
-			String sql="select sn,title,category,qpublic,vcount,mid,rdate,questsion,image,qstate " + 
-					"from qna " + 
-					"where title=?";
-			pstmt =conn.prepareStatement(sql);
-			pstmt.setString(1, title);
-			rs = pstmt.executeQuery();
-			Qnamodel qnamodel =null;
-			if(rs.next()) {
-				qnamodel  = new Qnamodel(
-						rs.getInt("sn"),
-						rs.getString("title"),
-						rs.getString("category"),
-						rs.getInt("qpublic"),
-						rs.getInt("vcount"),
-						rs.getString("mid"),
-						toDate(rs.getTimestamp("rdate")),
-						rs.getString("question"),
-						rs.getString("image"),
-						rs.getInt("qstate")
-						);
-					
-			}return qnamodel;	
-		}finally {
-			JdbcUtill.close(rs);
-			JdbcUtill.close(pstmt);
-		}
-	}
-	private Date toDate(Timestamp date) {
-	return date == null? null: new Date(date.getTime()); 	
-	}
-	*/
 	
-public  class QnaDAO{
+public  class Qna{
 	//연결
 	private DataSource ds;
 	
-	public QnaDAO() {
+	public Qna() {
 		
 		try {
 				Context ctx = new InitialContext();
@@ -91,6 +55,7 @@ public  class QnaDAO{
 	  
 	}//end of selectCount
 	
+	//List 목록값 가져오기
 	public static List<Qnamodel> select(Connection conn,
 			int startRow,int size)  
 			throws SQLException {
@@ -101,9 +66,9 @@ public  class QnaDAO{
 		try {
 			String sql = 
 			"select	rownum,sn,title,category,qpublic,vcount,mid,rdate,qstate  " + 
-			" from ( select  rownum,sn,title,category,qpublic,vcount,mid,rdate,qstate from qna order by sn desc)  " +
-			" where rownum > ? and rownum <= ?+?"		;
-		//limit  0부터시작행번호, 읽어올레코드수
+			" from ( select  rownum rn,sn,title,category,qpublic,vcount,mid,rdate,qstate from qna order by sn desc)  " +
+			" where rn > ? and rn <= ?+?"		;
+		// rownum 0부터시작행번호, 읽어올레코드수
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,startRow); //시작행번호
 			pstmt.setInt(2,size); //읽어올레코드수
@@ -125,7 +90,6 @@ public  class QnaDAO{
 		private static Qnamodel convertQuestion(ResultSet rs) 
 		    throws SQLException{
 			System.out.println("QnaDAO의  convertQuestion()");
-			
 			return new Qnamodel(
 					rs.getInt("sn"),
 					rs.getString("title"),
@@ -142,6 +106,62 @@ public  class QnaDAO{
 		//Timestamp타입을 Date타입으로 변환 p648 47
 		private static Date toDate(Timestamp timestamp) {
 			return new Date(timestamp.getTime());
+		}
+
+		//질문 상세조회
+		public Qnamodel selectById(Connection conn, int no)throws SQLException{
+			System.out.println("QnaDAO의 selectByID(no)="
+	                +no);
+			PreparedStatement pstmt=null;
+			ResultSet rs =null;
+			try {
+				String sql="select sn,title,category,qpublic,vcount,mid,rdate,question,image,qstate " + 
+						"from qna " + 
+						"where sn=?";
+				pstmt =conn.prepareStatement(sql);
+				pstmt.setInt(1, no);
+				rs = pstmt.executeQuery();
+				Qnamodel qm =null;
+				if(rs.next()) {
+					qm = new Qnamodel(
+							rs.getInt("sn"),
+							rs.getString("title"),
+							rs.getString("category"),
+							rs.getInt("qpublic"),
+							rs.getInt("vcount"),
+							rs.getString("mid"),
+							toDate(rs.getTimestamp("rdate")),
+							rs.getString("question"),
+							rs.getString("image"),
+							rs.getInt("qstate")
+							);
+						
+				}return qm;	
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+		}
+		/*private Date toDate(Timestamp date) {
+		return date == null? null: new Date(date.getTime()); 	
+		}*/
+		
+		//list테이블의 특정글번호 조회수 증가
+		public void incrementVCount(Connection conn, 
+				int no) throws SQLException{
+			System.out.println("QnaDAO의 incrementVCount="
+	                +no);
+			try {
+				String sql = 
+					"update qna " + 
+					" set   vcount=vcount+1 " + 
+					" where sn=?";
+				PreparedStatement pstmt =
+					conn.prepareStatement(sql); 
+				pstmt.setInt(1, no);
+				pstmt.executeUpdate();
+			}finally {}
+			
 		}
 
 	//질문등록
@@ -184,6 +204,4 @@ private   Timestamp toTimestamp(Date date) {
 //답변등록
 
 //질문 삭제
-
-//
 

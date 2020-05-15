@@ -1,4 +1,4 @@
-package cs.qna.command;
+package controller;
 
 
 import java.util.HashMap;
@@ -7,16 +7,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cs.qna.command.QnaRequest;
-import cs.qna.modeldao.QnaPage;
-import cs.qna.service.QnaAction;
-import cs.qna.service.Qnalistservice;
-import mvc.command.CommandHandler;
+import model.QnaRequest;
+import page.QnaPage;
 
-public class Qnalistcontroller implements CommandHandler {
+public class QnalistController implements CommandHandler {
 
-	private Qnalistservice listService =
-			new Qnalistservice();
+	private QnaListService listService =
+			new QnaListService();
 	
 	@Override
 	public String process(HttpServletRequest request, 
