@@ -19,10 +19,13 @@ window.addEventListener("load", function() {
 
 function f1(){
 	if(confirm('정말로 삭제하시겠습니까?')){
+		 return "${pageContext.request.contextPath}/delete.do";
 	  }else{
-	 return ;
+
 	 }
 }
-
+function f2(){
+	location.href="count.do"
+}
 
 
