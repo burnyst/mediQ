@@ -8,6 +8,7 @@
 <script src="<%= request.getContextPath()%>/js/qna.js?v=<%=System.currentTimeMillis() %>"></script> 
 </head>
 <body>
+<jsp:include page="../../header.jsp"></jsp:include>
 	<div class="divcss">
 		<h1>질문 등록</h1>
 	</div>
@@ -52,5 +53,6 @@
 				</table>
 		</form>
 	</div>
+	<jsp:include page="../../footer.jsp"></jsp:include>
 </body>
 </html>

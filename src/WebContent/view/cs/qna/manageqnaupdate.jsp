@@ -11,6 +11,7 @@
 	<script  src="../../../js/qna.js"></script> 
 </head>
 <body>
+<jsp:include page="../../header.jsp"></jsp:include>
 	<div class="divcss">
 		<h1>답변 등록</h1>
 	</div>
@@ -44,5 +45,6 @@
 				</table>
 		</form>
 	</div>
+	<jsp:include page="../../footer.jsp"></jsp:include>
 </body>
 </html>

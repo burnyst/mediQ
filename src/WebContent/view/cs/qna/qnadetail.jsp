@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="../../header.jsp"></jsp:include>
 	<div class="divcss">
 					<form name="frmq" id="frmq" method="post"  action="QnaDeleteService.do" accept-charset="utf-8">
 					<table class="tablecss"  border=1 >
@@ -57,5 +58,6 @@
 					</table>
 			</form>
 	</div>
+	<jsp:include page="../../footer.jsp"></jsp:include>
 </body>
 </html>
