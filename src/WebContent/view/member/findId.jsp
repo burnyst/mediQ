@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>아이디 찾기</h2>
-<form action="#" method="post">
+<form action="findIdResult.jsp" method="post">
 	본인확인 이메일 인증<br/>
 	<p>
 		<label for="mname">이름:</label>
@@ -19,8 +19,8 @@
 		<input id="memail" type="email" name="memail">
 	</p>
 	<p>
-		<input type="reset" value="이전"/>
-		<input type="submit" value="완료"/>
+		<a href="login.jsp">이전</a>
+		<a href="findIdResult.jsp">다음</a>
 	</p>
 </form>
 </body>
