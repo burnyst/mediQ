@@ -1,15 +1,15 @@
 package controller;
 
 import java.sql.Connection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import dao.RecognizeDAO;
 import dbcp.JdbcUtil;
-import page.ProductPage;
+import page.RecognizePage;
 
-public class RecognizeController extends Controller {
+public class RecognizeSearchController  extends Controller {
 
 	@Override
 	public String doPost(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -19,24 +19,20 @@ public class RecognizeController extends Controller {
 
 	@Override
 	public String doGet(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		ProductPage page = null;
-		String productName = req.getParameter("productName");
-		if (productName != null && !productName.isEmpty()) {
+		RecognizePage page = null;
+		String productname = req.getParameter("productname");
+		if (productname != null && !productname.isEmpty()) {
 			int pageNo = getParameterInt(req, "pageNo", 1);
 			int numOfRows = getParameterInt(req, "numOfRows", 10);
-			
 			Connection con = JdbcUtil.getConnection();
-			Integer count = RecognizeDAO.getCount(con, productName);
-			if (count > 0) {
-				page = new ProductPage(count, pageNo, numOfRows, RecognizeDAO.getList(con, productName, pageNo, numOfRows));
-				
-			}
+			Integer count = RecognizeDAO.getCount(con, productname);
+			page = new RecognizePage(count, pageNo, numOfRows, RecognizeDAO.getList(con, productname, pageNo, numOfRows));
 			JdbcUtil.close(con);
-			
 		}
 		req.setAttribute("page", page);
-		req.setAttribute("productName", productName);
-		return "/Recognize.jsp";
+		req.setAttribute("productname", productname);
+		return "/view/product/Recognizelist.jsp";
+		}
+
 	}
 
-}
