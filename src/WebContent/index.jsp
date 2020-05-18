@@ -24,7 +24,7 @@
 		<div class="items">
 		    <label>검색결과</label>
 		    <hr />
-		    <form method="post" action="#">
+		    <form method="post" action="search.do">
 			    <div class="clearfix">
 				    <span class="float-right">
 					    <button class="selectAll">전체 선택</button>
@@ -34,11 +34,11 @@
 			    <hr />
 			    <table>
 			    	<colgroup>
-			    		<col class="col1" />
-			    		<col class="col2" />
-			    		<col class="col3" />
-			    		<col class="col4" />
-			    		<col class="col5" />
+			    		<col class="productListCol1" />
+			    		<col class="productListCol2" />
+			    		<col class="productListCol3" />
+			    		<col class="productListCol4" />
+			    		<col class="productListCol5" />
 			    	</colgroup>
 			    	<thead>
 				        <tr>
@@ -65,7 +65,7 @@
 			        	<tbody>
 							<c:forEach var="i" items="${page.content}">
 								<tr>
-									<td class="center"><input type="checkbox" name="key" value="${i.itemSeq}" size="20" /></td>
+									<td class="center"><input type="checkbox" name="itemSeq" value="${i.itemSeq}" size="20" /></td>
 									<td class="hasDetail">${i.entpName}</td>
 									<td class="hasDetail">${i.itemName}</td>
 									<td class="hasDetail">${i.etcOtcCode}</td>

@@ -34,19 +34,4 @@ window.addEventListener("load", function() {
     		e.preventDefault();
     	});
     }
-    
-	var form = document.querySelectorAll(".search form");
-	if (form.length > 0) {
-		form[0].addEventListener("submit", function(e) {
-			this["searchWord"].value = this["searchWord"].value.trim();
-			if (this["searchWord"].value == "") {
-				this["searchWord"].value = "";
-				e.preventDefault();
-			}
-		});
-		
-		if (form[0]["searchWord"].value == "") {
-			form[0]["searchWord"].focus();
-		}
-	}
 });

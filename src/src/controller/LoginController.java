@@ -1,6 +1,5 @@
 package controller;
 
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,24 +9,19 @@ import javax.servlet.http.HttpSession;
 
 import controller.LoginFailException;
 import model.User;
-import dao.MemberDAO;
 import controller.CommandHandler;
 import model.MemberRequest;
 
 public class LoginController implements CommandHandler {
 	
-	private static final String FORM_VIEW = "/view/member/loginSuccess.jsp";
+	private static final String FORM_VIEW = "/view/member/login.jsp";
 	private LoginService loginService = new LoginService();
 	
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("LoginController 진입성공");
-		
 		//GET방식으로  요청이 들어오면
 		if(request.getMethod().equalsIgnoreCase("GET")) {
-			System.out.println("login.jsp의 method방식="+request.getMethod());
 			return processForm(request,response);
 		}else if(request.getMethod().equalsIgnoreCase("POST")) {//post방식으로 요청이 들어오면
-			System.out.println("login.jsp의 method방식="+request.getMethod());
 			return processSubmit(request,response);
 		}else {
 			//405에러
@@ -38,20 +32,17 @@ public class LoginController implements CommandHandler {
 	
 	//GET방식으로 요청이 들어오면  폼(/view/member/login.jsp)을 보여주기
 	private String processForm(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("LoginController의 processFrom()호출");
 		return FORM_VIEW;
 	}
 	
 	//POST방식으로 요청이 들어오면 로그인 요청을 진행
 	private String processSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("LoginController의 processSubmit()호출");
 		//1. 요청파라미터 받기
 		//LoginController는 유저가 입력한 폼의 내용을 객체로 묶어서 처리
 		MemberRequest memberReq = new MemberRequest();
 		
 		String mid	= trim(request.getParameter("mid"));
-		String mpwd = request.getParameter("mpwd"); //비번
-		System.out.println("processSubmit() id/password="+mid+"/"+mpwd);
+		String mpwd = trim(request.getParameter("mpwd")); //비번
 		
 		//p.598 line 42~49까지 다 쓰기
 		//2.비즈니스로직수행(<->Service<->DAO<->DB)
@@ -90,7 +81,6 @@ public class LoginController implements CommandHandler {
 				return null;
 			} catch (LoginFailException e) {//로그인 실패시
 				errors.put("idOrPwNotMatch", Boolean.TRUE);
-				e.printStackTrace(); //에러관련내용 콘솔출력
 				return FORM_VIEW;    //  /view/member/loginForm.jsp를  View지정 
 			}
 		}

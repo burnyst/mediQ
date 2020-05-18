@@ -18,7 +18,7 @@ public class LoginService {
 		try {conn = JdbcUtil.getConnection();
 			
 			Member member = memberDao.selectById(conn, mid);
-			if(member != null) {
+			if(member == null) {
 				throw new LoginFailException();
 			}
 			

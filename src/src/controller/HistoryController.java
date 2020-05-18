@@ -1,19 +1,16 @@
 package controller;
 
 import java.sql.Connection;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.HistoryDao;
-import dao.ProductDao;
 import dbcp.JdbcUtil;
 import model.User;
-import page.ProductPage;
+import page.HistoryPage;
 
-public class SearchController extends Controller {
-
+public class HistoryController extends Controller {
 	@Override
 	public String doPost(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		try {
@@ -25,7 +22,7 @@ public class SearchController extends Controller {
 				try {
 					con = JdbcUtil.getConnection();
 					for (String i : itemsSeq) {
-						HistoryDao.Insert(con, mid, i, new Date());
+						HistoryDao.Delete(con, mid, i);
 					}
 				} finally {
 					JdbcUtil.close(con);
@@ -41,19 +38,25 @@ public class SearchController extends Controller {
 
 	@Override
 	public String doGet(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		ProductPage page = null;
-		String searchWord = req.getParameter("searchWord");
-		if (searchWord != null && !searchWord.isEmpty()) {
+		try {
+			User user = getAuthUser(req);
+			String mid = user.getMid();
 			int pageNo = getParameterInt(req, "pageNo", 1);
 			int numOfRows = getParameterInt(req, "numOfRows", 10);
-			Connection con = JdbcUtil.getConnection();
-			Integer count = ProductDao.getCount(con, searchWord);
-			page = new ProductPage(count, pageNo, numOfRows, ProductDao.getList(con, searchWord, pageNo, numOfRows));
-			JdbcUtil.close(con);
+			Connection con = null;
+			try {
+				con = JdbcUtil.getConnection();
+				Integer count = HistoryDao.getCount(con, mid);
+				HistoryPage page = new HistoryPage(count, pageNo, numOfRows, HistoryDao.getList(con, mid, pageNo, numOfRows));
+				req.setAttribute("page", page);
+			} finally {
+				JdbcUtil.close(con);
+			}
+			return "/view/history/history.jsp";
+		} catch (NotLoginException e) {
+			res.sendRedirect(req.getContextPath()+"/login.do");
+			return null;
 		}
-		req.setAttribute("page", page);
-		req.setAttribute("searchWord", searchWord);
-		return "/index.jsp";
 	}
 
 }

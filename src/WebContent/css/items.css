@@ -50,15 +50,15 @@
 .items .content table {
 	table-layout: auto;
 }
-.col1 {
+.productListCol1 {
 	width: 2rem;
 }
-.col2 {
+.productListCol2 {
 	width: 20%;
 }
-.col3 {
+.productListCol3 {
 	width: 35%;
 }
-.col4 {
+.productListCol4 {
 	width: 6em;
 }
