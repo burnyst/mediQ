@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dbcp.JdbcUtil;
-import model.RecognizeModel;
+import model.Recognize;
 
 public class RecognizeDAO {
 
-	//검색에서 사용되는 클래스입니다
+	//페이징처리
 		public static int getCount(Connection con, String itemname) throws SQLException {
 			int rst = 0;
 			PreparedStatement stmt = null;
@@ -34,57 +34,35 @@ public class RecognizeDAO {
 		//목록 상세 조회
 		
 		
-		
-		//검색 키워드 검색해서 list로 묶음
-		public static List<RecognizeModel> selectById(Connection conn, String itemName, int pageNo, int size)throws SQLException {
-			System.out.println("검색 RecognizeDAO-selectById()호출성공");
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			try {
-				String sql = "select itemname  " + 
-						" from ( select item from MdcinPrductItem )  " +
-						" where title like '%' || ? ||'";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1,itemName); 
-				
-				System.out.println("pstmt 호출"+pstmt); //sql문이 나와야함
-				rs = pstmt.executeQuery();
-				System.out.println("rs 호출"+rs);
-				List<RecognizeModel> resultt = new ArrayList<>();
-				while( rs.next() ) {
-					resultt.add(a(rs));
-				}
-				return resultt;
-				
-		  }finally {
-			JdbcUtil.close(rs);  
-			JdbcUtil.close(pstmt);
-		  }
-		}
-			//selectById쿼리문 결과를 받아서  Search클래스타입으로 묶어주는 함수 p647 36
-			private static RecognizeModel a(ResultSet rs) 
-			    throws SQLException{
-				System.out.println("RecognizeDAO의  a()");
-				return new RecognizeModel(
-						rs.getString("ITEM_SEQ"),
-						rs.getString("ITEM_NAME"),
-						rs.getString("ENTP_NAME"),
-						rs.getString("ITEM_PERMIT_DATE"),
-						rs.getString("NB_DOC_DATA"),
-						rs.getString("CANCEL_DATE"),
-						rs.getString("EE_DOC_DATA"),
-						rs.getString("ETC_OTC_CODE"),
-						rs.getString("UD_DOC_DATA"),
-						rs.getString("CHANGE_DATE"),
-						rs.getString("CLASS_NO"),
-						rs.getString("CHART"),
-						rs.getString("PACK_UNIT")
-					);
-			}
+		/*
+		 * public static List<Recognize> select(Connection conn, String name, int
+		 * pageNo, int size)throws SQLException {
+		 * 
+		 * System.out.println("검색 RecognizeDAO-selectById()호출성공"); PreparedStatement
+		 * pstmt = null; ResultSet rs = null; try { String sql = "select name  " +
+		 * " from ( select item from MdcinPrductItem )  " +
+		 * " where title like '%' || ? ||'"; pstmt = conn.prepareStatement(sql);
+		 * pstmt.setString(1,name);
+		 * 
+		 * System.out.println("pstmt 호출"+pstmt); //sql문이 나와야함 rs = pstmt.executeQuery();
+		 * System.out.println("rs 호출"+rs); List<Recognize> result = new ArrayList<>();
+		 * while( rs.next() ) { result.add convertsss(rs)); } return result;
+		 * 
+		 * }finally { JdbcUtil.close(rs); JdbcUtil.close(pstmt); } } //selectById쿼리문 결과를
+		 * 받아서 Recognize클래스타입으로 묶어주는 함수 p647 36 private model.Recognize (ResultSet rs)
+		 * throws SQLException{ System.out.println("RecognizeDAO의  a()"); return new
+		 * Recognize( rs.getString("ITEM_SEQ"), rs.getString("ITEM_NAME"),
+		 * rs.getString("ENTP_NAME"), rs.getString("ITEM_PERMIT_DATE"),
+		 * rs.getString("NB_DOC_DATA"), rs.getString("CANCEL_DATE"),
+		 * rs.getString("EE_DOC_DATA"), rs.getString("ETC_OTC_CODE"),
+		 * rs.getString("UD_DOC_DATA"), rs.getString("CHANGE_DATE"),
+		 * rs.getString("CLASS_NO"), rs.getString("CHART"), rs.getString("PACK_UNIT") );
+		 * }
+		 */
 				
 		
-	public static List<RecognizeModel> getList(Connection con, String name, int pageNo, int size) throws SQLException {
-		List<RecognizeModel> rst = new ArrayList<RecognizeModel>();
+	public static List<Recognize> getList(Connection con, String name, int pageNo, int size) throws SQLException {
+		List<Recognize> rst = new ArrayList<Recognize>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql = "select * from (select rownum rn, "
@@ -110,7 +88,7 @@ public class RecognizeDAO {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				rst.add(
-					new RecognizeModel(
+					new Recognize(
 						rs.getString("ITEM_SEQ"),
 						rs.getString("ITEM_NAME"),
 						rs.getString("ENTP_NAME"),
@@ -135,6 +113,5 @@ public class RecognizeDAO {
 	}
 
 
-	
 }
 		
