@@ -25,7 +25,7 @@ public class LoginService {
 			if (!member.matchPassword(mpwd)) {
 				throw new LoginFailException();
 			}
-			return new User(member.getMid(), member.getMname());
+			return new User(member.getMid(), member.getMname(), member.getMlevel());
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
 		}

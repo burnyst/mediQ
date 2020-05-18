@@ -9,22 +9,23 @@
 <body>
 <h1>회원가입</h1>
 <form action="join.do" method="post">
+			*은 필수입력 항목입니다.<br/>
 			<p>
-				<label for="mid">아이디:</label>
+				*<label for="mid">아이디:</label>
 				<input id="mid" type="text" name="mid" required>
 				<input type="button" name="id1" value="중복확인" onclick="check1()" class="btn btn-warning">최소 3글자 이상 입력하세요.
 				<input type="hidden" name="checked" value="0"> 
 			</p>
 			<p>
-				<label for="mpwd">비밀번호:</label>
+				*<label for="mpwd">비밀번호:</label>
 				<input id="mpwd" type="password" name="mpwd" required>
 			</p>
 			<p>
-				<label for="mpwd2">비밀번호 확인:</label>
+				*<label for="mpwd2">비밀번호 확인:</label>
 				<input id="mpwd2" type="password" name="mpwd1" required>
 			</p>
 			<p>
-				<label for="mname">이름:</label>
+				*<label for="mname">이름:</label>
 				<input id="mname" type="text" name="mname" required style="width:80px;height:15px;">
 			</p>
 			<p>
@@ -50,7 +51,7 @@
 				<label for="memail">이메일:</label>
 				<input type="email" id="memail" name="memail" style="width:80">@
 				<select name="domain" onchange="domainCheck();">
-		    <option value ="직접입력" selected="selected">직접입력</option>
+		    <option value ="선택하세요" selected="selected">선택하세요</option>
 		    <option value ="naver.com" >naver.com</option>
 		    <option value ="hanmail.net">hanmail.net</option>
 		    <option value ="nate.com">nate.com</option> 
@@ -71,8 +72,8 @@
 				<input id="mhp2" type="text" name="mhp" maxlength="4" style="width:50px;height:15px;">
 			</p>
 			<ul>
-       	<button type="button" onclick="location.href='index.jsp'" class="btn btn-danger">돌아가기</button>
-				<input type="submit" class="btn btn-success" onclick="location.href='joinSuccess.jsp'" value="가입하기"/>
+       	<button type="button" onclick="location.href='index.jsp'">돌아가기</button>
+				<input type="submit" onclick="location.href='joinSuccess.jsp'" value="가입하기"/>
 			</ul>
 </form>
 </body>

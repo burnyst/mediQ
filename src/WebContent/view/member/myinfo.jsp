@@ -15,6 +15,7 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 </head>
+<body>
 <div>
 	<h2>마이페이지</h2>
 		<form action="myinfo.do" method="post">
@@ -40,10 +41,10 @@
 					<td><%=mhp%></td>
 				</tr>
 			</table>
-				<tr>
+				<ul>
 					<a href="xmember.jsp">탈퇴하기</a>
 					<a href="myinfoUpdate.jsp">정보 변경하기</a>
-				</tr>
+				</ul>
 		</form>
 </div>
 </body>
