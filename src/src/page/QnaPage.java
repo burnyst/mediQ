@@ -13,7 +13,7 @@ public class QnaPage {
 	private int startPage;			//시작 페이지번호 
 	private int endPage;			//끝 페이지번호
 	
-	//ArticlePage(전체게시물수, 보고싶은페이지,한페이지당 게시글수, List<Qnamodel> question)
+	//QnaPage(전체게시물수, 보고싶은페이지,한페이지당 게시글수, List<Qnamodel> question)
 		public QnaPage(int total, int currentPage, int size, List<Qnamodel> question) {
 			this.total = total;
 			this.currentPage = currentPage;

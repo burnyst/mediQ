@@ -3,20 +3,20 @@ package controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import dao.Qna;
+import dao.QnaDAO;
 import dbcp.JdbcUtil;
 import model.Qnamodel;
 
 public class QnaDetailService {
 
-	private Qna qnaDao = new Qna();
+	private QnaDAO qnaDao = new QnaDAO();
 	public Qnamodel getQna(int  no, boolean  incrementVCount) {
-		System.out.println("Qnadetailcontroller getQna호출성공");
+		System.out.println("Qnadetailservice getQna호출성공");
 		try {
 			Connection conn  =
 				JdbcUtil.getConnection();
 			
-			//특정글번호 article조회
+			//특정글번호조회
 			Qnamodel qm = qnaDao.selectById(conn, no);
 			//조회수증가
 			if( incrementVCount==true ) {

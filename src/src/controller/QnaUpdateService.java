@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 
-import dao.Qna;
+import dao.QnaDAO;
 import dbcp.JdbcUtil;
 import model.QnaRequest;
 import model.Qnamodel;
@@ -15,7 +15,7 @@ import dbcp.JdbcUtil;
 //회원가입기능을 제공 => DAO연동
 public class QnaUpdateService {
 
-	private Qna qnaDao = new Qna();
+	private QnaDAO qnaDao = new QnaDAO();
 	
 	
 	//회원가입처리요청 p596-16  m801-832-38

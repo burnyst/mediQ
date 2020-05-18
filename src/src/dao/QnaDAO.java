@@ -276,13 +276,35 @@ public  class QnaDAO{
 private   Timestamp toTimestamp(Date date) {
 	return new  Timestamp(date.getTime());
 }
-				
+			
+//답변등록
+
+public int update(Connection conn, String answer,int no)
+		throws SQLException{
+	System.out.println("답변등록 QnaDAO-update()호출성공");
+	PreparedStatement pstmt = null;
+	try {
+		String sql=
+				"update qna "+
+				 " set   answer=?, qstate=1 "+
+				 " where sn=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, answer);
+		pstmt.setInt(2,no);
+		int cnt = pstmt.executeUpdate();
+		return cnt;
+	}finally {
+		JdbcUtil.close(pstmt);
+	}	
+}
+// 답변 조회 
+//질문 삭제
 		}
 	
 
 
 
-//답변등록
 
-//질문 삭제
+
+
 

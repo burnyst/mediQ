@@ -25,7 +25,15 @@ public class QnaRequest {
 		this.question = question;
 		this.image = image;
 	}
+	public QnaRequest(int sn, String answer) {
+		this.sn = sn;
+		this.answer = answer; }
 	
+	public QnaRequest(String title, int sn, String answer) {
+		this.title =title;
+		this.sn = sn;
+		this.answer = answer;
+	}
 	public int getSn() {
 		return sn;
 	}

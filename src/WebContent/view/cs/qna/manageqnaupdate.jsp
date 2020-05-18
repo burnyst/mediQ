@@ -15,8 +15,14 @@
 		<h1>답변 등록</h1>
 	</div>
 	<div class="divcss">
-		<form name="frmq" id="frmq" method="post"  action="mqupdateaction.jsp" accept-charset="utf-8">
+		<form name="frmq" id="frmq" method="post"  action="manageupdate.do?no=${qm.sn}" accept-charset="utf-8">
 			<table class="tablecss">
+			<tr>
+			<td>Question</td>
+			<td>번호:  ${qm.sn}</td>
+			<td>질문내용:  ${qm.question}</td>
+			</tr>
+			<tr><td colspan="3"><hr></td></tr>
 					<tr>
 							<th>제목:</th>
 							<td><input type="text"  name="title" id="title" value="답변입니다."/></td>						

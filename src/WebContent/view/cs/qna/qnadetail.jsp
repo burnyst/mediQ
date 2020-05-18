@@ -51,7 +51,7 @@
 							<td><input  type="submit" value="삭제"  />
 							<input type="button" value="목록"  onclick="location.href='qnalist.do'">
 							<!-- {%if 관리자 해서 버튼 보이기%} -->
-							<button type="button" onclick="location.href='manageqnaupdate.jsp' ">답변 쓰기</button>
+							<button type="button" onclick="location.href='manageupdate.do?no=${qm.sn}' ">답변 쓰기</button>
 							</td>
 					</tr>
 					</table>

@@ -7,7 +7,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Qna;
+import dao.QnaDAO;
 import dbcp.JdbcUtil;
 import model.Qnamodel;
 
