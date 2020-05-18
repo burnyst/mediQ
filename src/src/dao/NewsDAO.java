@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -169,8 +170,8 @@ public static List<News> select (Connection conn,int startRow, int size) throws 
 				PreparedStatement pstmt=null;
 				ResultSet rs =null;
 				try {
-					String sql="select 	sn,mid, title, press,summary,"+
-							 " rdate, nimage from news"+
+					String sql="select 	sn,mid, title, press,summary, "+
+							 " rdate, nimage from news "+
 							 " where title=?";
 					pstmt =conn.prepareStatement(sql);
 					pstmt.setNString(1, title);
@@ -187,7 +188,7 @@ public static List<News> select (Connection conn,int startRow, int size) throws 
 								rs.getString("nimage")
 								);
 							
-					}return newsd;	
+					} return newsd;	
 				}finally {
 					JdbcUtil.close(rs);
 					JdbcUtil.close(pstmt);
@@ -201,33 +202,77 @@ public static List<News> select (Connection conn,int startRow, int size) throws 
 private   Timestamp toTimestamp(Date date) {
 	return new  Timestamp(date.getTime());
 }
-public int update(Connection conn,String summary ,String title)throws SQLException {
+public int update(Connection conn,String summary ,String title,int sn)throws SQLException {
 	System.out.println("글 수정 NewsDAO-update");
 	PreparedStatement pstmt = null;
 	try {
-		String sql="update news set summary='?' ,rdate = NOW()" + 
-				"where title='?' ;";
+		String sql="update news set summary=? ,title = ? " + 
+				"where sn= ? ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1,summary );
 		pstmt.setString(2,title );
+		pstmt.setInt(3, sn);
 		int cnt =pstmt.executeUpdate();
 		//update성공적으로 실행되면 update된 레코드수가 리턴된다.
 		//여기에선느 특정글번호만 update되므로 성공시에는 1이 리턴.
-		
 		return cnt;
 	}finally {
 		JdbcUtil.close(pstmt);
 		
 	}
-	
-	
-	
-	
-	       
-	
-
+}
+	//delete
+			public int delete(Connection conn, int sn) throws SQLException {
+				System.out.println("NewsDAO의 delete() sn="+sn);
+				PreparedStatement pstmt = null;
+				Statement stmt = null;
+				ResultSet rs   = null;	
+				try {
+					String sql = "delete from news where sn=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1,sn);
+					pstmt.executeUpdate();
+					
+					return sn;
+					
+				}finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(stmt);
+					JdbcUtil.close(pstmt);
+				}
 
 }
+			//질문 상세조회
+			public News selectBySn(Connection conn, int sn)throws SQLException{
+				System.out.println("NewDAO의 selectBySn(sn)=sn"
+		                +sn);
+				PreparedStatement pstmt=null;
+				ResultSet rs =null;
+				try {
+					String sql="select 	sn,mid, title, press,summary, "+
+							 " rdate, nimage from news "+
+							 " where sn=?";
+					pstmt =conn.prepareStatement(sql);
+					pstmt.setInt(1, sn);
+					rs = pstmt.executeQuery();
+					News newsd =null;
+					if(rs.next()) {
+						newsd = new News(
+								rs.getInt("sn"),
+								rs.getString("mid"),
+								rs.getString("title"),
+								rs.getString("press"),
+								rs.getString("summary"),
+								toDate(rs.getTimestamp("rdate")),
+								rs.getString("nimage")
+								);
+							
+					} return newsd;	
+				}finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
+				}
+			}
 }
 
 
