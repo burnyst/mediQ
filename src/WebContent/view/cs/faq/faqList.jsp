@@ -59,7 +59,7 @@
 	   				</tr>
     			</c:if>
 				<c:forEach var="faq" items="${faqPage.content}">
-	    			<tr class="row">
+	    			<tr class="row" onclick="f2()">
 	    				<td>${faq.sn}</td>
 	    				<td>${faq.title}</td>
 	    				<td>${faq.mid}</td>
