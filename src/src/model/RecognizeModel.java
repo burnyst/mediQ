@@ -1,6 +1,6 @@
 package model;
 
-public class Recognize {
+public class RecognizeModel {
 	private String itemSeq;
 	private String itemName;
 	private String entpName;
@@ -14,7 +14,7 @@ public class Recognize {
 	private String classNo;
 	private String chart;
 	private String packUnit;
-	public Recognize(String itemSeq, String itemName, String entpName, String itemPermitDate, String nbDocData,
+	public RecognizeModel(String itemSeq, String itemName, String entpName, String itemPermitDate, String nbDocData,
 			String cancelDate, String eeDocData, String etcOtcCode, String udDocData, String changeDate, String classNo,
 			String chart, String packUnit) {
 		this.itemSeq = itemSeq;
