@@ -29,20 +29,27 @@ padding: 0 0 0 200px;
 
 </script>
 <body>
-    <form action="newsMain.jsp">
+    <form action="newswrite.do" method="POST">
     <h2>뉴스게시판 등록</h2>
     <span>제목</span>
-    <input type="text" id="newsTitle" placeholder="제목을 입력해주세요" ><br/>
+    <input type="text" name="title" id="title" placeholder="제목을 입력해주세요" ><br/>
     <span>언론사명</span>
-    <input type="text" id="newsMedia" placeholder="언론사를 입력해주세요" ><br/>
+    <input type="text" name="press"id="press" placeholder="언론사를 입력해주세요" ><br/>
     <table border="1" >
          <tr>
-          <td><textarea name="contents" rows="20" cols="100" ></textarea></td>
-         </tr>
-
+				<td>
+				<input type="file" name="nimage" id="nimage">
+				</td>
+				</tr>
+        <tr>
+         <td><textarea id="summary" name="summary" rows="20" cols="100" ></textarea></td>
+        </tr>
+					
+				
     </table>
-    <a href="./newsMain.jsp"><input type="submit" id="submit" value="등록"></a>
-    <input type="reset" id="reset" value="취소">
+    <input type="submit" id="submit" value="등록">
+    <input type="hidden" id="mid" name="mid" value="관리자">
+    <input type="reset" id="reset" value="취소" onclick="resetf('this.form')">
     </form>
 </body>
 </html>
