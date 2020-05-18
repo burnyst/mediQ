@@ -26,5 +26,5 @@ public class QnamanagedetailController implements CommandHandler {
 		response.sendError(HttpServletResponse.SC_NOT_FOUND);
 		return null;
 		}
-	}
+	}   
 }
