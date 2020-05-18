@@ -6,14 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
-    <c:if test="${page != null && page.totalCount > 0}">
-    	<script src="${pageContext.request.contextPath}/js/search.js"></script>
-    </c:if>
+    
+
 </head>
 <body>
 <div class="search">
 <form method='get' action="${pageContext.request.contextPath}/recognize.do">		
+
 </div>
 
 <br>의약품 승인 목록</br>
@@ -70,7 +69,9 @@
 						</th>
 					</tr>
 				</c:if>
+		
 		</table>
+		
 	</div>
 </form>	
 </c:if>
