@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>뉴스게시판 등록</title>
+    <title>뉴스게시판 수정 및 삭제</title>
 </head>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
@@ -29,21 +29,21 @@ padding: 0 0 0 200px;
 
 </script>
 <body>
-    <form action="newsMain.jsp">
+    <form action="./newsmodify.do?sn=${newd.sn}" >
     <h2>뉴스게시판 수정 및 삭제</h2>
     <span>제목</span>
-    <input type="text" id="newsTitle" placeholder="제목을 입력해주세요" ><br/>
+    <input type="text" id="newsTitle" placeholder="제목을 입력해주세요" >${newd.title}<br/>
     <span>언론사명</span>
-    <input type="text" id="newsMedia" placeholder="언론사를 입력해주세요" ><br/>
+    <%-- <input type="text" id="newsMedia" placeholder="언론사를 입력해주세요" >${modiReq.press}<br/> --%>
     <table border="1" >
          <tr>
-          <td><textarea name="contents" rows="20" cols="100" ></textarea></td>
+          <td><textarea name="contents" rows="20" cols="100" > ${newd.summary}</textarea></td>
          </tr>
 
     </table>
     <a href="./newsMain.jsp"><input type="submit" id="submit" value="수정"></a>
     <input type="reset" id="reset" value="취소">
-    <input type="reset" id="reset" value="삭제">
+    <input type="reset" id="reset" value="삭제" onclick="location.href='newsdelete.do'">>
     </form>
 </body>
 </html>
