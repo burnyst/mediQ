@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="model.User" %>
 <%@ page import="controller.Controller" %>
@@ -21,7 +21,7 @@
 		    <li><a href="${pageContext.request.contextPath}/history.do">마이페이지</a></li>
 		    <li><a href="/mediq/faqlist.do">FAQ</a></li>
 		    <li><a href="#">공지사항</a></li>
-		    <li><a href="#">Q&A</a></li>
+		    <li><a href="${pageContext.request.contextPath}/qnalist.do">Q&A</a></li>
 			<li class="small"><a href="#">회원가입</a></li>
 			<li class="small">
 				<c:if test="${authUser == null}"><a href="${pageContext.request.contextPath}/login.do">로그인</a></c:if>
