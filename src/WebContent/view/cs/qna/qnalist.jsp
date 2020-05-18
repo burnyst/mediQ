@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
     
 <!DOCTYPE html>
 <html>
@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
+<jsp:include page="../../header.jsp"></jsp:include>
 	<div class="qinfo">
 		<table class="tablecss" >
 			<tr>
@@ -52,7 +53,7 @@
 				<h4>총${qnaPAGE.total} ${qnaSearchPAGE.total }건</h4>
 			</div>
 			<div class="divcss">
-			    <table class="tablecss"  border="1"  style="width:1000px; height:700px ">
+			    <table class="tablecss"  border="1"  style="width:1024px; height:700px ">
 			        <thead>
 			        <tr>
 			            <th >번호</th>
@@ -82,15 +83,14 @@
 					        		<td>${qm.mid}</td>
 					        		<td>${qm.rdate}</td>
 					        		<td>${qm.qstate}</td>
-									</tr>
-							</c:forEach> 
-							<c:set var="qm"  value="${Qnamodel.qstate}"/>
-							<c:if test="${qm.qstate}==1">
-									<tr>
-											<td> ▼</td>
-											<td colspan="7">RE: 답변입니다.</td>
-									</tr>		
-								</c:if>	
+									</tr>	
+			        		<c:if test="${qm.qstate ==1}">
+											<tr>
+													<td> ▼</td>
+													<td colspan="7"  style="padding-left:10px"><a  style="text-decoration:none; color:black;" href="qnamanagedetail.do?no=${qm.sn}">RE: 답변입니다</a></td>
+											</tr>		
+										</c:if>												
+									</c:forEach> 
 			        </tbody>			       
 			    </table>
 			     <!-- SearchList------------------------------------------------------------------------------ -->
@@ -113,6 +113,12 @@
 					        		<td>${qms.rdate}</td>
 					        		<td>${qms.qstate}</td>
 									</tr>
+									<c:if test="${qms.qstate ==1}">
+											<tr>
+													<td> ▼</td>
+													<td colspan="7"  style="padding-left:10px"><a  style="text-decoration:none; color:black;" href="qnamanagedetail.do?no=${qms.sn}">RE: 답변입니다</a></td>
+											</tr>		
+										</c:if>		
 							</c:forEach> 		
 			        </tbody>		
 			    </table>
@@ -153,5 +159,6 @@
 	</div>
 	<script src="https:code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
+	<jsp:include page="../../footer.jsp"></jsp:include>
 </body>
 </html>
