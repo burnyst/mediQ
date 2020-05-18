@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <style>
+<style>
         .page_body{width:80%; margin:0px 10% 0px 10%;}
         #category{float:left;}
         #fsearch{float:right;}
@@ -19,16 +19,16 @@
         table{margin-top:30px;}
         #writeBtn{float:right;}
         .hidden{display:none;}
-        .page{clear:both; text-align:center;}
+        .page{clear:both;}
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/faq.js" charset='euc-kr'></script>
-
 </head>
 <body>
+
 <h1>FAQ</h1>
 <hr/><br/>
-<div class="page_body">
+ <div class="page_body">
     <div class="board_search">
         <select name="category" id="category" onchange="if(this.value) location.href=(this.value);">
             <option value="선택">선택</option>
@@ -41,7 +41,7 @@
             <input type="submit" value="검색" class="btn_submit">
         </form>
     </div>
-    <div id="fboard_list"><br/>
+	  <div id="fboard_list"><br/>
     	<table cellpadding="0" cellspacing="0" board="1" width="100%" class="result">
     		<thead>
     			<tr>
@@ -53,12 +53,12 @@
     				<th width="5%">조회</th>
     			</tr>
     		</thead>
-    			<c:if test="${ faqPage.hasNoFaq()}">
+    		<c:if test="${ faqCategoryPage.hasNoFaq()}">
 	    			<tr>
 	    				<td colspan="6">게시글이 존재하지 않습니다</td>
 	   				</tr>
     			</c:if>
-				<c:forEach var="faq" items="${faqPage.content}">
+				<c:forEach var="faq" items="${faqCategoryPage.categorylist}">
 	    			<tr class="row">
 	    				<td>${faq.sn}</td>
 	    				<td>${faq.title}</td>
@@ -79,38 +79,36 @@
 									<input type="hidden" name="mid" value="${faq.mid}"/>
 	    							<input type="submit" id="modifyBtn" name="modifyBtn" value="수정"/>
 	    						</form>
-	    						<a href="${pageContext.request.contextPath}/faqdelete.do?sn=${faq.sn}">
+	    						<a href="${pageContext.request.contextPath}/faqdelete.do">
 	    						<input type="button" id="deleteBtn"  name="deleteBtn" value="삭제" onclick="f1()"/>
 	    						</a>
 	    					<%-- </c:if> --%>
 	    				</td>
 	   				</tr>
 				</c:forEach>
-				<%-- <c:if test=""> --%>
+			<c:if test="${faqCategoryPage.hasFaq() }">
 				<tr>
 					<td colspan="6"><a href="${pageContext.request.contextPath}/faqinsert.do"><input type="button"  id="writeBtn" value="글쓰기"/></a></td>
 				</tr>
-			</table>
-			<%-- </c:if> --%>
-			<!--  페이징 처리 -->
-			<c:if test="${faqPage.hasFaq() }">
+				<%-- </c:if> --%>
+				<!--  페이징 처리 -->
 				<tr class="page">
 					<td colspan="6">
-						<c:if test="${faqPage.startPage>5 }">
-							<a href="${pageContext.request.contextPath}/faqlist.do?pageNo=${ faqPage.startpage-5 }">[이전]</a>
+						<c:if test="${faqCategoryPage.startPage>5 }">
+							<a href="${pageContext.request.contextPath}/faqcategory.do?pageNo=${ faqCategoryPage.startpage-5 }&category=${faqCategoryPage.category}">[이전]</a>
 						</c:if>
 					
-						<c:forEach var="pNo" begin="${ faqPage.startPage }" end="${ faqPage.endPage }">
-							<a href="${pageContext.request.contextPath}/faqlist.do?pageNo=${pNo }">[${pNo}]</a>
+						<c:forEach var="pNo" begin="${ faqCategoryPage.startPage }" end="${ faqCategoryPage.endPage }">
+							<a href="${pageContext.request.contextPath}/faqcategory.do?pageNo=${pNo }&category=${faqCategoryPage.category}">[${pNo}]</a>
 						</c:forEach>
 						
-						<c:if test="${faqPage.endPage<faqPage.totalPages }">
-							<a href="${pageContext.request.contextPath}faqlist.do?pageNo=${faqPage.startpage+5 }">[다음]</a>
+						<c:if test="${faqCategoryPage.endPage<faqCategoryPage.totalPages }">
+							<a href="${pageContext.request.contextPath}faqcategory.do?pageNo=${faqPage.startpage+5 }&category=${faqCategoryPage.category}">[다음]</a>
 						</c:if>
 					</td>
 				</tr>
 			</c:if>
+    	</table>
    	</div>
  </div>
-</body>
 </html>

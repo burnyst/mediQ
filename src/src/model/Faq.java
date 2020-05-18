@@ -15,7 +15,7 @@ public class Faq {
 	
 	public Faq() {}
 	
-	public Faq(int sn, String title, String mid, Date rdate,
+	public Faq(Integer sn, String title, String mid, Date rdate,
 			 String category,int vcount,String contents) {
 		this.sn = sn;
 		this.title = title;
@@ -26,9 +26,10 @@ public class Faq {
 		this.contents = contents;
 		
 	}
-	public Faq(Integer sn, String title, Date rdate, String category, int vcount) {
+	public Faq(int sn, String title, String mid, Date rdate, String category, int vcount) {
 		this.sn=sn;
 		this.title=title;
+		this.mid=mid;
 		this.rdate=rdate;
 		this.category=category;
 		this.vcount=vcount;

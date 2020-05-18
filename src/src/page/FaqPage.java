@@ -31,11 +31,11 @@ public class FaqPage {
 			}
 			
 			//아래의 5값은 한번에 출력하고 싶은 페이지 개수를 뜻한다.
-			int modVal = currentPage % 10;		
-			startPage = currentPage /10* 3 + 1;
-			if (modVal == 0) startPage -= 10;		
+			int modVal = currentPage % 5;		
+			startPage = currentPage /5* 5 + 1;
+			if (modVal == 0) startPage -= 5;		
 			
-			endPage = startPage + 9;
+			endPage = startPage + 4;
 
 			if (endPage > totalPages) endPage = totalPages;
 		}

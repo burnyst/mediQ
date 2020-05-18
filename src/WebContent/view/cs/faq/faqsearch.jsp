@@ -53,12 +53,12 @@
     				<th width="5%">조회</th>
     			</tr>
     		</thead>
-    			<c:if test="${ faqPage.hasNoFaq()}">
+    			<c:if test="${ faqSearchPage.hasNoFaq()}">
 	    			<tr>
 	    				<td colspan="6">게시글이 존재하지 않습니다</td>
 	   				</tr>
     			</c:if>
-				<c:forEach var="faq" items="${faqPage.content}">
+				<c:forEach var="faq" items="${faqSearchPage.searchlist}">
 	    			<tr class="row">
 	    				<td>${faq.sn}</td>
 	    				<td>${faq.title}</td>
@@ -79,7 +79,7 @@
 									<input type="hidden" name="mid" value="${faq.mid}"/>
 	    							<input type="submit" id="modifyBtn" name="modifyBtn" value="수정"/>
 	    						</form>
-	    						<a href="${pageContext.request.contextPath}/faqdelete.do?sn=${faq.sn}">
+	    						<a href="${pageContext.request.contextPath}/faqdelete.do">
 	    						<input type="button" id="deleteBtn"  name="deleteBtn" value="삭제" onclick="f1()"/>
 	    						</a>
 	    					<%-- </c:if> --%>
@@ -93,19 +93,19 @@
 			</table>
 			<%-- </c:if> --%>
 			<!--  페이징 처리 -->
-			<c:if test="${faqPage.hasFaq() }">
+			<c:if test="${faqSearchPage.hasFaq() }">
 				<tr class="page">
 					<td colspan="6">
-						<c:if test="${faqPage.startPage>5 }">
-							<a href="${pageContext.request.contextPath}/faqlist.do?pageNo=${ faqPage.startpage-5 }">[이전]</a>
+						<c:if test="${faqSearchPage.startPage>5 }">
+							<a href="${pageContext.request.contextPath}/faqsearch.do?pageNo=${ faqSearchPage.startpage-5 }&search=${faqSearchPage.search}">[이전]</a>
 						</c:if>
 					
-						<c:forEach var="pNo" begin="${ faqPage.startPage }" end="${ faqPage.endPage }">
-							<a href="${pageContext.request.contextPath}/faqlist.do?pageNo=${pNo }">[${pNo}]</a>
+						<c:forEach var="pNo" begin="${ faqSearchPage.startPage }" end="${ faqSearchPage.endPage }">
+							<a href="${pageContext.request.contextPath}/faqsearch.do?pageNo=${pNo }&search=${faqSearchPage.search}">[${pNo}]</a>
 						</c:forEach>
 						
-						<c:if test="${faqPage.endPage<faqPage.totalPages }">
-							<a href="${pageContext.request.contextPath}faqlist.do?pageNo=${faqPage.startpage+5 }">[다음]</a>
+						<c:if test="${faqSearchPage.endPage<faqSearchPage.totalPages }">
+							<a href="${pageContext.request.contextPath}faqsearch.do?pageNo=${faqSearchPage.startpage+5 }&search=${faqSearchPage.search}">[다음]</a>
 						</c:if>
 					</td>
 				</tr>

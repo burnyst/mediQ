@@ -16,6 +16,29 @@ import model.Faq;
 
 public class FaqDAO {
 
+	//update
+	public int update(Connection conn, String category, String title, String contents, int sn)
+		throws SQLException{
+		PreparedStatement pstmt = null;
+		try {
+			String sql="update faq set category=? , title=? , contents=? ,rdate=sysdate"
+					+ " where sn=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setString(2, title);
+			pstmt.setString(3, contents);
+			pstmt.setInt(4, sn);
+			int cnt = pstmt.executeUpdate();
+					
+			System.out.println("글 수정FaqDAO-update()호출성공 category="+category
+					+"title="+title+"/contents="+contents+"/sn="+sn);
+
+			return cnt;
+		}finally {
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
 	//전체게시물수 구하기
 	public int selectCount(Connection conn) throws SQLException{
 		System.out.println("전체게시물수 구하기 FaqDAO-selectCount()호출성공");
@@ -42,9 +65,9 @@ public class FaqDAO {
 			ResultSet rs = null;
 			try {
 				String sql=
-						"select	rownum,sn,title,mid,rdate,category,vcount  " + 
-						" from ( select	rownum,sn,title,mid,rdate,category,vcount from faq order by sn desc)  " +
-						" where sn > ? and sn <= ?+?"	;
+						"select	rownum,sn,title,mid,rdate,category,vcount,contents  " + 
+						" from ( select	rownum rn,sn,title,mid,rdate,category,vcount,contents from faq order by sn desc)  " +
+						" where rn > ? and rn <= ?+?"	;
 				
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setInt(1,startRow);		
@@ -70,29 +93,51 @@ public class FaqDAO {
 					rs.getInt("sn"),
 					rs.getString("title"),
 					rs.getString("mid"), 
-					toDate(rs.getTimestamp("rdate")),
-					rs.getString("catagory"),
+					rs.getDate("rdate"),
+					rs.getString("category"),
 					rs.getInt("vcount"),
 					rs.getString("contents")
 					);
 		}
-
-		private Date toDate(Timestamp timestamp) {
-			System.out.println("FAQDAO의 toDate()");
-			return new Date(timestamp.getTime());
-		}
 		
-		/*
-		//search select
-		public List<Faq> selectSearch(Connection conn, String search) throws SQLException{
-			System.out.println("검색 리스트FaqDAO-searchSelect()호출성공");
+		
+		//카테고리게시물수 구하기
+		public int selectCountC(Connection conn, String keyword) throws SQLException{
+			System.out.println("카테고리게시물수 구하기 FaqDAO-selectCountC()호출성공");
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
-				String sql="select * from FAQ where title like '%?%' ";
+				String sql = "select count(*) from FAQ where category=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, keyword);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+				return 0;
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+		}
+
+		//category select
+		public List<Faq> selectC(Connection conn,String category, int startRow, int size) throws SQLException{
+			System.out.println("FaqDAO의 select(startRow,size)="
+	                +startRow+"/"+size);
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				String sql=
+						"select	rownum,sn,title,mid,rdate,category,vcount,contents  " + 
+						" from ( select	rownum rn,sn,title,mid,rdate,category,vcount,contents from faq order by sn desc)  " +
+						" where category=? and rn > ? and rn <= ?+?"	;
 				
 				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1,search);		
+				pstmt.setString(1, category);
+				pstmt.setInt(2,startRow);		
+				pstmt.setInt(3,size);
+				pstmt.setInt(4,startRow);
 				rs = pstmt.executeQuery();
 				List<Faq> result = new ArrayList<>();
 				while(rs.next()) {
@@ -106,26 +151,57 @@ public class FaqDAO {
 			}
 		}
 		
-		//category select
-		public void selectCagegory(Connection conn, Faq faq) throws SQLException{
-			System.out.println("카테고리 리스트 구하기 FaqDAO-selectCategory()호출성공");
+		//search 게시물수 구하기
+		public int selectContS(Connection conn, String search) throws SQLException {
+			System.out.println("search게시물수 구하기 FaqDAO-selectCountS()호출성공");
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
-				String sql = "select * from FAQ where category=?";
+				String sql = "select count(*) from FAQ where title like '%' || ? || '%' ";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, faq.getCategory());
+				pstmt.setString(1, search);
 				rs=pstmt.executeQuery();
-				
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+				return 0;
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+		}
 
+		//search select
+		public List<Faq> selectS(Connection conn,String search, int startRow, int size) throws SQLException{
+			System.out.println("FaqDAO의 select(startRow,size)="
+	                +startRow+"/"+size);
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				String sql=
+						"select	rownum,sn,title,mid,rdate,category,vcount,contents  " + 
+						" from ( select	rownum rn,sn,title,mid,rdate,category,vcount,contents from faq order by sn desc)  " +
+						" where title like '%' || ? || '%' and rn > ? and rn <= ?+?"	;
+				
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, search);
+				pstmt.setInt(2,startRow);		
+				pstmt.setInt(3,size);
+				pstmt.setInt(4,startRow);
+				rs = pstmt.executeQuery();
+				List<Faq> result = new ArrayList<>();
+				while(rs.next()) {
+					result.add(convertFaq(rs));
+				}
+				return result;
+				
 			}finally {
 				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
 			}
 		}
 		
-		
-		
+
 		//insert
 		public Faq insert(Connection conn, Faq faq) throws SQLException{
 			System.out.println("FaqDAO의 insert() faq="+faq);
@@ -134,26 +210,16 @@ public class FaqDAO {
 			ResultSet rs   = null;	
 			try {
 				String sql = "insert into FAQ(title,mid,rdate,contents,category,vcount) "
-						+ " values (?,?,'관리자',?,?,?,0)";
+						+ " values (?,?,?,?,?,0)";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1,faq.getMid());
-				//pstmt.setString(3,faq.getMid());
-				pstmt.setTimestamp(2, toTimestamp(faq.getRdate()));
-				pstmt.setString(3, faq.getContents());
-				pstmt.setString(4,faq.getCategory());
-				int insertedCount = pstmt.executeUpdate();
+				pstmt.setString(1,faq.getTitle());
+				pstmt.setString(2,faq.getMid());
+				pstmt.setTimestamp(3, toTimestamp(faq.getRdate()));
+				pstmt.setString(4, faq.getContents());
+				pstmt.setString(5,faq.getCategory());
+				pstmt.executeUpdate();
 				
-				
-				if(insertedCount>0) {
-					stmt = conn.createStatement();
-					rs = stmt.executeQuery("select faq_seq.currval sn from dual");
-				
-				if(rs.next()) {
-					Integer newNum = rs.getInt(1);
-					return new Faq(newNum,faq.getMid(),faq.getRdate(),faq.getCategory(),0);
-				}
-			}
-				return null;
+				return faq;
 				
 			}finally {
 				JdbcUtil.close(rs);
@@ -171,7 +237,7 @@ public class FaqDAO {
 		public void incrementReadCount(Connection conn, int faqNum) throws SQLException{
 			System.out.println("조회수증가 FaqDAO-vcount()호출성공");
 			try {
-				String sql = "update article"+
+				String sql = "update faq"+
 										" set vcount=vcount+1"+
 										" where sn=?";
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -182,14 +248,51 @@ public class FaqDAO {
 				
 			}
 		}
-		*/
 		
-		//modify
-		
-		
-		
-		
+		//Faq테이블의 특정 글번호 조회
+		public Faq selectById(Connection conn, int faqNum) throws SQLException {
+			PreparedStatement pstmt = null;
+			ResultSet rs =null;
+			try {
+				String sql = "select * from faq where sn=?";
+				pstmt = conn.prepareStatement(sql);	
+				pstmt.setInt(1, faqNum);
+				rs = pstmt.executeQuery();
+				
+				Faq faq = null;
+				if(rs.next()) {
+					faq = convertFaq(rs);
+				}
+				return faq;
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+		}
+
 		//delete
+		public int delete(Connection conn, int sn) throws SQLException {
+			System.out.println("FaqDAO의 delete() sn="+sn);
+			PreparedStatement pstmt = null;
+			Statement stmt = null;
+			ResultSet rs   = null;	
+			try {
+				String sql = "delete from faq where sn=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1,sn);
+				pstmt.executeUpdate();
+				
+				return sn;
+				
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(stmt);
+				JdbcUtil.close(pstmt);
+			}
+		
+
+	}
+
 		
 		
 	
