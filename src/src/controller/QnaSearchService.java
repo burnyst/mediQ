@@ -14,9 +14,9 @@ public class QnaSearchService {
 	
 	public QnaSearchPage getKeywordt(String keyword1,String keyword2,String keyword3,String keyword4) {
 		System.out.println("Qnasearchservice getKeywordt호출성공");
+		Connection conn  = null;
 		try {
-			Connection conn  =
-				JdbcUtil.getConnection();
+			conn  =JdbcUtil.getConnection();
 			
 			int total = QnaDAO.selectCountt(conn,keyword1,keyword2,keyword3,keyword4);
 			
@@ -28,6 +28,8 @@ public class QnaSearchService {
 			
 	}catch(SQLException e) {
 		throw new RuntimeException(e);
+	}finally {
+		JdbcUtil.close(conn);
 	}
 }
 

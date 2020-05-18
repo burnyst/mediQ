@@ -12,9 +12,9 @@ public class QnaDetailService {
 	private QnaDAO qnaDao = new QnaDAO();
 	public Qnamodel getQna(int  no, boolean  incrementVCount) {
 		System.out.println("Qnadetailservice getQna호출성공");
+		Connection conn = null;
 		try {
-			Connection conn  =
-				JdbcUtil.getConnection();
+			conn  = JdbcUtil.getConnection();
 			
 			//특정글번호조회
 			Qnamodel qm = qnaDao.selectById(conn, no);
@@ -27,6 +27,8 @@ public class QnaDetailService {
 			
 	}catch(SQLException e) {
 		throw new RuntimeException(e);
+	}finally {
+		JdbcUtil.close(conn);
 	}
 }
 }

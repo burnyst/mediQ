@@ -69,6 +69,10 @@ public Qnamodel(int sn,String title,String category,int qpublic,int vcount,
 	this.rdate= rdate;
 	this.qstate=qstate;	
 }
+public Qnamodel(int sn, String answer) {
+	this.sn =sn;
+	this.answer =answer;
+}
 public int getSn() {
 	return sn;
 }

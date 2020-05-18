@@ -53,17 +53,17 @@
 				<h4>총${qnaPAGE.total} ${qnaSearchPAGE.total }건</h4>
 			</div>
 			<div class="divcss">
-			    <table class="tablecss"  border="1"  style="width:1024px; height:700px ">
+			    <table class="tablecss"  border="1"  style="width:1024px; ">
 			        <thead>
 			        <tr>
-			            <th >번호</th>
-			            <th style="width:40%; ">제목</th>
-			            <th width="100">유형</th>
-			            <th>공개여부</th>
-			            <th>조회 건수</th>
-			            <th>작성자</th>
-			            <th>등록일자</th>
-			            <th>답변상태</th>
+			            <th  style="width:5%;">번호</th>
+			            <th style="width:30%; ">제목</th>
+			            <th style="width:10%;">유형</th>
+			            <th style="width:10%;">공개여부</th>
+			            <th style="width:10%;">조회 건수</th>
+			            <th style="width:10%;">작성자</th>
+			            <th style="width:15%;">등록일자</th>
+			            <th style="width:10%;">답변상태</th>
 			        </tr>
 			        </thead> 			        
 			        <tbody>
@@ -75,27 +75,38 @@
 			        	<c:forEach  var="qm" items="${qnaPAGE.question}">
 										<tr>
 										  <%-- ${qm.sn} 은 Qnamodel클래스의 getSn()메소드를 호출 --%>
-											<td >${qm.sn} </td>																	
-											<td style="width:40%;"><a  style="text-decoration:none; color:black;" href="qnadetail.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}">${qm.title}</a></td>
-											<td >${qm.category}</td>
-											<td >${qm.qpublic}</td>
-											<td>${qm.vcount}</td>
-					        		<td>${qm.mid}</td>
-					        		<td>${qm.rdate}</td>
-					        		<td>${qm.qstate}</td>
+											<td style="width:5%;">${qm.sn} </td>																	
+											<td style="width:30%;"><a  style="text-decoration:none; color:black;" href="qnadetail.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}">${qm.title}</a></td>
+											<td style="width:10%;" >${qm.category}</td>
+											<c:if test="${qm.qpublic==1}">
+											<td  style="width:10%;">비공개</td>
+											</c:if>
+											<c:if test="${qm.qpublic==0}">
+											<td style="width:10%;">공개</td>
+											</c:if>
+											<td style="width:10%;">${qm.vcount}</td>
+					        		<td style="width:10%;">${qm.mid}</td>
+					        		<td style="width:15%;">${qm.rdate}</td>
+					        		<td style="width:10%;">${qm.qstate}</td>
 									</tr>	
 			        		<c:if test="${qm.qstate ==1}">
 											<tr>
 													<td> ▼</td>
-													<td colspan="7"  style="padding-left:10px"><a  style="text-decoration:none; color:black;" href="qnamanagedetail.do?no=${qm.sn}">RE: 답변입니다</a></td>
+													<td colspan="6"  style="padding-left:10px"><a  style="text-decoration:none; color:black;" href="qnamanagedetail.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}">RE: 답변입니다</a></td>
+													<td><input type=button  value="답변삭제" onclick="location.href='qnadelete.do?no=${qm.sn}'"></td>
 											</tr>		
-										</c:if>												
+										</c:if>		
+										<c:if test="${qm.sn==qma.sn}">
+											<tr>
+													<td colspan="8"  style="text-align:center;"><textarea cols="120" rows="5" >${qma.answer}</textarea></td>
+											</tr>
+										</c:if>											
 									</c:forEach> 
 			        </tbody>			       
 			    </table>
 			     <!-- SearchList------------------------------------------------------------------------------ -->
 					<div class="divcss">
-			    <table class="tablecss"  border="1"  style="width:1000px; height:700px ">	          
+			    <table class="tablecss"  border="1"  style="width:1024px; ">	          
 			        <tbody>
 			        	<c:if test="${qnaSearchPAGE.hasNoQuestions()} ">
 									<tr>
@@ -104,21 +115,32 @@
 								</c:if>    
 			        	<c:forEach  var="qms" items="${qnaSearchPAGE.search}">
 										<tr>
-											<td >${qms.sn} </td>																	
-											<td style="width:40%;"><a  style="text-decoration:none; color:black;" href="qnadetail.do?no=${qms.sn}">${qms.title}</a></td>
-											<td >${qms.category}</td>
-											<td >${qms.qpublic}</td>
-											<td>${qms.vcount}</td>
-					        		<td>${qms.mid}</td>
-					        		<td>${qms.rdate}</td>
-					        		<td>${qms.qstate}</td>
+											<td style="width:5%;">${qms.sn} </td>																	
+											<td style="width:30%;"><a  style="text-decoration:none; color:black;" href="qnadetail.do?no=${qms.sn}">${qms.title}</a></td>
+											<td style="width:10%;" >${qms.category}</td>
+											<c:if test="${qms.qpublic==1}">
+											<td style="width:10%;">비공개</td>
+											</c:if>
+											<c:if test="${qms.qpublic==0}">
+											<td style="width:10%;">공개</td>
+											</c:if>
+											<td style="width:10%;">${qms.vcount}</td>
+					        		<td style="width:10%;">${qms.mid}</td>
+					        		<td style="width:15%;">${qms.rdate}</td>
+					        		<td style="width:10%;">${qms.qstate}</td>
 									</tr>
-									<c:if test="${qms.qstate ==1}">
+								<c:if test="${qms.qstate ==1}">
 											<tr>
 													<td> ▼</td>
-													<td colspan="7"  style="padding-left:10px"><a  style="text-decoration:none; color:black;" href="qnamanagedetail.do?no=${qms.sn}">RE: 답변입니다</a></td>
+													<td colspan="6"  style="padding-left:10px"><a  style="text-decoration:none; color:black;" href="qnamanagedetail.do?no=${qms.sn}">RE: 답변입니다</a></td>
+													<td><input type=button  value="답변삭제" onclick="location.href='qnadelete.do?no=${qms.sn}'"></td>
 											</tr>		
 										</c:if>		
+										<c:if test="${qms.sn==qma.sn}">
+											<tr>
+													<td colspan="8"  style="text-align:center;"><textarea cols="120" rows="5" >${qma.answer}</textarea></td>
+											</tr>
+										</c:if>											
 							</c:forEach> 		
 			        </tbody>		
 			    </table>

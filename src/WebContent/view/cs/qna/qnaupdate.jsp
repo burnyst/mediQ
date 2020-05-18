@@ -13,7 +13,7 @@
 		<h1>질문 등록</h1>
 	</div>
 	<div class="divcss">
-		<form name="frmq" id="frmq" method="post"  action="QnaUpdateServie.do" accept-charset="utf-8"> 
+		<form name="frmq" id="frmq" method="post"  action="QnaUpdateServie.do" accept-charset="utf-8" > 
 		<!--  action=qupdateaction.jsp -->
 			<table class="tablecss">
 					<tr>
@@ -38,19 +38,15 @@
 							<td colspan="4" ><textarea type="text"  name="question" id="question" style="width:500px; height:500px;"
 							placeholder="내용을 입력해주세요"></textarea></td>
 					</tr>
-					<tr>
-							<th>파일 첨부:</th>
-							<td><input type="file"  name="image" id="image"  ></td>
-					</tr>
-					<tr>
-							<td><%-- <input type="hidden" name="vcount" value="0"/>--%></td>
-							<td><%--<input type="hidden" name="id" value="세션연결"/>--%></td>
-							<td><%--<input type="hidden" name="rdate" value="데이트연결"/>--%></td>
-							<td><%--<input type="hidden" name="qstate" value="0"/>--%></td>
-							<td><input  type="button"  id=button value="취소" onclick="resetf('this.form')"/>
+					<tr>	
+							<td colspan="4"  style="text-align:right;"><input  type="button"  id=button value="취소" onclick="resetf('this.form')"/>
 							<input type="submit" value="등록"></td>
 					</tr>
 				</table>
+		</form>		
+		<form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+				<input type="file" value="Image upload"/>
+				<input type="submit" value="이미지 등록" id="btnSubmit"/>
 		</form>
 	</div>
 	<jsp:include page="../../footer.jsp"></jsp:include>

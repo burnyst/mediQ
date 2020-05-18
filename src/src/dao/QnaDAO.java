@@ -109,7 +109,7 @@ public  class QnaDAO{
 			return new Date(timestamp.getTime());
 		}
 		
-		//전체게시물수 구하기 
+		//검색 결과 전체게시물수 구하기 
 		public static int selectCountt(Connection conn,String keyword1,String keyword2,String keyword3,String keyword4  ) throws SQLException {
 			System.out.println("전체게시물수 구하기 QnaDAO-selectCountt()호출성공");
 			PreparedStatement pstmt = null;
@@ -298,7 +298,64 @@ public int update(Connection conn, String answer,int no)
 	}	
 }
 // 답변 조회 
+public Qnamodel answerDetail(Connection conn, int no)throws SQLException{
+	System.out.println("QnaDAO의 answerDetail(no)=" +no);
+	PreparedStatement pstmt=null;
+	ResultSet rs =null;
+	try {
+		String sql="select sn,answer " + 
+				"from qna " + 
+				"where sn=?";
+		pstmt =conn.prepareStatement(sql);
+		pstmt.setInt(1, no);
+		rs = pstmt.executeQuery();
+		Qnamodel qma =null;
+		if(rs.next()) {
+			qma = new Qnamodel(
+					rs.getInt("sn"),
+					rs.getString("answer")
+					);				
+		}return qma;	
+	}finally {
+		JdbcUtil.close(rs);
+		JdbcUtil.close(pstmt);
+	}
+}
 //질문 삭제
+public int deleteQ(Connection conn,int no) throws SQLException{
+	System.out.println("답변등록 QnaDAO-deleteQ()호출성공");
+	PreparedStatement pstmt = null;
+	try {
+		String sql=
+				"delete from qna "+
+				 " where sn=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1,no);
+		int cnt = pstmt.executeUpdate();
+		return cnt;
+	}finally {
+		JdbcUtil.close(pstmt);
+	}	
+}
+//답변삭제
+public int deleteA(Connection conn,int no) throws SQLException{
+	System.out.println("답변등록 QnaDAO-deleteA()호출성공");
+	PreparedStatement pstmt = null;
+	try {
+		String sql=
+				"update qna "+
+						 " set   answer='', qstate=0 "+
+						 " where sn=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1,no);
+		int cnt = pstmt.executeUpdate();
+		System.out.println("QnaDAO deleteA 완료");
+		return cnt;
+	}finally {
+		JdbcUtil.close(pstmt);
+	}	
+}
+
 		}
 	
 

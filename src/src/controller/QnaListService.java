@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -9,13 +10,15 @@ import dbcp.JdbcUtil;
 import model.Qnamodel;
 import page.QnaPage;
 
+
 public class QnaListService {
 	private QnaDAO qnaDAO = new QnaDAO();
 	private int size = 10; //한 페이지당 출력할 게시글 수
 	//페이지정보
 	public QnaPage getQnaPage(int pageNo) {
+		Connection conn = null;
 		try {
-			Connection conn = JdbcUtil.getConnection();
+			conn = JdbcUtil.getConnection();
 			
 			//전체 게시글수 조회
 			int total = QnaDAO.selectCount(conn);
@@ -32,6 +35,8 @@ public class QnaListService {
 			
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
+		}finally {			
+			JdbcUtil.close(conn);
 		}
 	}
 	

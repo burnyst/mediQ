@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>
 	<div class="divcss">
-					<form name="frmq" id="frmq" method="post"  action="QnaDeleteService.do" accept-charset="utf-8">
+					<form name="frmq" id="frmq" method="post"  action="qnadelete.do?no=${qm.sn}" accept-charset="utf-8">
 					<table class="tablecss"  border=1 >
 						<tr>
 							<th>번호</th>
@@ -40,8 +40,9 @@
 							<th >내용</th>
 						</tr>
 						<tr>
-							<td>${qm.question}</td>
+							<td><textarea>${qm.question}</textarea></td>
 						</tr>
+						
 						<tr>
 							<th>파일 첨부 목록:</th>
 							<td>${qm.image}</td>
@@ -52,7 +53,7 @@
 							<td><input  type="submit" value="삭제"  />
 							<input type="button" value="목록"  onclick="location.href='qnalist.do'">
 							<!-- {%if 관리자 해서 버튼 보이기%} -->
-							<button type="button" onclick="location.href='manageupdate.do?no=${qm.sn}' ">답변 쓰기</button>
+							<button type="button" onclick="location.href='manageupdate.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}' ">답변 쓰기</button>
 							</td>
 					</tr>
 					</table>

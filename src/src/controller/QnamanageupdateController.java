@@ -52,8 +52,8 @@ public class QnamanageupdateController implements CommandHandler {
 			qnamanageaction.updateAnswer(qnareqa);
 			return  "qnalist.do";		
 		}
-		private QnaRequest createAnswerRequest(String title, int sn,String answer) {
-			return new QnaRequest(title,sn,answer);
+		private QnaRequest createAnswerRequest(int sn,String answer) {
+			return new QnaRequest(sn,answer);
 
 		}
 		//GET방식 폼 보여주기
