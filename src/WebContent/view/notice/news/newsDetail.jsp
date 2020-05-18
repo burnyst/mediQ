@@ -63,7 +63,7 @@ float:right;
           </textarea></td>
          </tr>
          </table>
-         <a href="/newslist.do"><input type=button  value="목록으로"   /></a>
+         <a href="${pageContext.request.contextPath}/newslist.do"><input type=button  value="목록으로"   /></a>
 	
 					</form>
 </body>
