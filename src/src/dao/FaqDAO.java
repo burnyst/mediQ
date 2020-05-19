@@ -152,12 +152,12 @@ public class FaqDAO {
 		}
 		
 		//search 게시물수 구하기
-		public int selectContS(Connection conn, String search) throws SQLException {
+		public int selectCountS(Connection conn, String category, String search) throws SQLException {
 			System.out.println("search게시물수 구하기 FaqDAO-selectCountS()호출성공");
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
-				String sql = "select count(*) from FAQ where title like '%' || ? || '%' ";
+				String sql = "select count(*) from faq  where title like '%' || ? || '%'  ";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, search);
 				rs=pstmt.executeQuery();
@@ -171,8 +171,31 @@ public class FaqDAO {
 			}
 		}
 
-		//search select
-		public List<Faq> selectS(Connection conn,String search, int startRow, int size) throws SQLException{
+		//search 게시물수 구하기 부분
+		public int selectCountSC(Connection conn, String category, String search) throws SQLException {
+			System.out.println("search게시물수 구하기 FaqDAO-selectCountSC()호출성공");
+			System.out.println("category="+category+"/search="+search);
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				String sql = "select count(*) from (select title from FAQ where category=?)  where title like '%' || ? || '%'  ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, category);
+				pstmt.setString(2, search);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+				return 0;
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+		}
+		
+		
+		//search select 전체
+		public List<Faq> selectSA(Connection conn, String search, int startRow, int size) throws SQLException{
 			System.out.println("FaqDAO의 select(startRow,size)="
 	                +startRow+"/"+size);
 			PreparedStatement pstmt = null;
@@ -200,6 +223,39 @@ public class FaqDAO {
 				JdbcUtil.close(pstmt);
 			}
 		}
+		
+		//select search 부분
+		public List<Faq> selectSC(Connection conn,String category, String search, int startRow, int size) throws SQLException{
+			System.out.println("FaqDAO의 select(startRow,size)="
+	                +startRow+"/"+size);
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				String sql=
+						"select	rownum,sn,title,mid,rdate,category,vcount,contents  " + 
+						" from ( select	rownum rn,sn,title,mid,rdate,category,vcount,contents from faq where category=? order by sn desc)  " +
+						" where title like '%' || ? || '%' and rn > ? and rn <= ?+?"	;
+				
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, category);
+				pstmt.setString(2, search);
+				pstmt.setInt(3,startRow);		
+				pstmt.setInt(4,size);
+				pstmt.setInt(5,startRow);
+				rs = pstmt.executeQuery();
+				List<Faq> result = new ArrayList<>();
+				while(rs.next()) {
+					result.add(convertFaq(rs));
+				}
+				return result;
+				
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+		}
+		
+		
 		
 
 		//insert
@@ -234,15 +290,15 @@ public class FaqDAO {
 		}
 		
 		//조회수 증가
-		public void incrementReadCount(Connection conn, int faqNum) throws SQLException{
+		public void vcount(Connection conn, int sn) throws SQLException{
 			System.out.println("조회수증가 FaqDAO-vcount()호출성공");
 			try {
-				String sql = "update faq"+
-										" set vcount=vcount+1"+
-										" where sn=?";
+				String sql = "update faq" + 
+						" set vcount=vcount+1" + 
+						" where sn=?";
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setInt(1, faqNum);
+				pstmt.setInt(1, sn);
 				pstmt.executeUpdate();
 			}finally {
 				
