@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,29 +21,34 @@
         #writeBtn{float:right;}
         .hidden{display:none;}
         .page{clear:both; text-align:center;}
+        #modify{display:inline;}
+        textarea{display:block; margin : 0px 0px 30px 0px; padding :50px 50px 50px 50px ;}
+        .row{border-bottom:10px; solid red;border-top:10px; solid red;}
+/*         .contentView{padding : 0px 0px 0px 350px; text-align:left;} */
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/faq.js" charset='euc-kr'></script>
-
+    <script src="${pageContext.request.contextPath}/js/faq.js?version=20200519" type="text/javascript" charset='euc-kr'></script>
 </head>
 <body>
+<jsp:include page="../../header.jsp"></jsp:include>
 <h1>FAQ</h1>
 <hr/><br/>
 <div class="page_body">
     <div class="board_search">
         <select name="category" id="category" onchange="if(this.value) location.href=(this.value);">
-            <option value="선택">선택</option>
+        	<option>선택</option>
+            <option value="${pageContext.request.contextPath}/faqlist.do">전체선택</option>
             <option value="${pageContext.request.contextPath}/faqcategory.do?category=로그인">로그인</option>
             <option value="${pageContext.request.contextPath}/faqcategory.do?category=약품 정보">약품 정보</option>
             <option value="${pageContext.request.contextPath}/faqcategory.do?category=기타">기타</option>
         </select>
-        <form name="fsearch" id="fsearch" method="get" action="faqsearch.do">
+        <form name="fsearch" id="fsearch" method="get" action="faqsearch.do?category=${faq.category}">
             <input type="text" name="search" id="search">
             <input type="submit" value="검색" class="btn_submit">
         </form>
     </div>
     <div id="fboard_list"><br/>
-    	<table cellpadding="0" cellspacing="0" board="1" width="100%" class="result">
+    	<table cellpadding="0" cellspacing="0"width="100%" class="result">
     		<thead>
     			<tr>
     				<th width="10%">번호</th>
@@ -53,25 +59,25 @@
     				<th width="5%">조회</th>
     			</tr>
     		</thead>
-    			<c:if test="${ faqPage.hasNoFaq()}">
+    			<c:if test="${faqPage.hasNoFaq()}">
 	    			<tr>
 	    				<td colspan="6">게시글이 존재하지 않습니다</td>
 	   				</tr>
     			</c:if>
-				<c:forEach var="faq" items="${faqPage.content}">
-	    			<tr class="row" onclick="f2()">
+   				<c:forEach var="faq" items="${faqPage.content}">
+	    			<tr class="row">
 	    				<td>${faq.sn}</td>
-	    				<td>${faq.title}</td>
+	    				<td><a href="faqvcount.do?sn=${faq.sn}&category=${faq.category}">${faq.title}</a></td>
 	    				<td>${faq.mid}</td>
 	    				<td>${faq.rdate}</td>
 	    				<td>${faq.category}</td>
 	    				<td>${faq.vcount}</td>
 	    			</tr>
 	    			<tr class="hidden">
-	    				<td colspan="6">
-	    					<p>${faq.contents}</p>
+	    				<td colspan="6" class="contentView">
+	    					<u:pre value="${faq.contents}"/><br/><br/>
 	    					<%-- <c:if test=""> --%>
-	    						<form action="${pageContext.request.contextPath}/faqupdate.do">
+	    						<form id="modify" name="modify" action="${pageContext.request.contextPath}/faqupdate.do">
 		    						<input type="hidden" name="sn" value="${faq.sn}"/>
 		    						<input type="hidden" name="title" value="${faq.title}"/>
 		    						<input type="hidden" name="contents" value="${faq.contents}"/>
@@ -85,15 +91,34 @@
 	    					<%-- </c:if> --%>
 	    				</td>
 	   				</tr>
+	   				<c:if test="${faq.sn== faqVcount.sn}">
+	    			<tr class="">
+	    				<td colspan="6" class="contentView">
+	    					<u:pre value="${faq.contents}"/><br/><br/>
+	    					<%-- <c:if test=""> --%>
+	    						<form id="modify" name="modify" action="${pageContext.request.contextPath}/faqupdate.do">
+		    						<input type="hidden" name="sn" value="${faq.sn}"/>
+		    						<input type="hidden" name="title" value="${faq.title}"/>
+		    						<input type="hidden" name="contents" value="${faq.contents}"/>
+									<input type="hidden" name="category" value="${faq.category}"/>
+									<input type="hidden" name="mid" value="${faq.mid}"/>
+	    							<input type="submit" id="modifyBtn" name="modifyBtn" value="수정"/>
+	    						</form>
+	    						<a href="${pageContext.request.contextPath}/faqdelete.do?sn=${faq.sn}">
+	    						<input type="button" id="deleteBtn"  name="deleteBtn" value="삭제" onclick="f1()"/>
+	    						</a>
+	    					<%-- </c:if> --%>
+	    				</td>
+	   				</tr>
+	   				</c:if>
 				</c:forEach>
 				<%-- <c:if test=""> --%>
 				<tr>
 					<td colspan="6"><a href="${pageContext.request.contextPath}/faqinsert.do"><input type="button"  id="writeBtn" value="글쓰기"/></a></td>
 				</tr>
-			</table>
-			<%-- </c:if> --%>
-			<!--  페이징 처리 -->
-			<c:if test="${faqPage.hasFaq() }">
+				<%-- </c:if> --%>
+				<!--  페이징 처리 -->
+				<c:if test="${faqPage.hasFaq() }">
 				<tr class="page">
 					<td colspan="6">
 						<c:if test="${faqPage.startPage>5 }">
@@ -109,7 +134,9 @@
 						</c:if>
 					</td>
 				</tr>
-			</c:if>
+				</c:if>
+				<jsp:include page="../../footer.jsp"></jsp:include>
+			</table>	
    	</div>
  </div>
 </body>

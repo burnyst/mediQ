@@ -10,17 +10,19 @@ public class FaqSearchPage {
 	private int searchtotal;
 	private int currentPage;				//보고싶은페이지
 	private List<Faq> searchlist;
+	private String category;
 	private String search;
 	private int totalPages;				//전체 페이지수
 	private int startPage;					//시작 페이지번호		[1 2 3 4 5]	[6 7 8 9 10]
 	private int endPage;					//끝 페이지번호
 	
 	
-	public FaqSearchPage(int searchtotal, List<Faq> searchlist, int currentPage, int size, String search) {
+	public FaqSearchPage(int searchtotal, List<Faq> searchlist, int currentPage, int size, String search, String category) {
 		this.searchtotal=searchtotal;
 		this.searchlist=searchlist;
 		this.currentPage=currentPage;
 		this.search=search;
+		this.category=category;
 		
 		if (searchtotal == 0) {	
 			totalPages = 0;
@@ -91,13 +93,23 @@ public class FaqSearchPage {
 	}
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
+		
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	@Override
 	public String toString() {
 		return "FaqSearchPage [searchtotal=" + searchtotal + ", currentPage=" + currentPage + ", searchlist="
-				+ searchlist + ", search=" + search + ", totalPages=" + totalPages + ", startPage=" + startPage
-				+ ", endPage=" + endPage + "]";
+				+ searchlist + ", category=" + category + ", search=" + search + ", totalPages=" + totalPages
+				+ ", startPage=" + startPage + ", endPage=" + endPage + "]";
 	}
+
+	
+	
 
 	
 	

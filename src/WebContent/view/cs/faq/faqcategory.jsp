@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,23 +21,50 @@
         #writeBtn{float:right;}
         .hidden{display:none;}
         .page{clear:both;}
+        #modify{display:inline;}
+        textarea{display:block; text-align:center;}
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/faq.js" charset='euc-kr'></script>
+   <script src="${pageContext.request.contextPath}/js/faq.js?version=20200519" type="text/javascript" charset='euc-kr'></script>
 </head>
 <body>
-
+<jsp:include page="../../header.jsp"></jsp:include>
+	FaqCategoryPage=${faqCategoryPage}<br/>
+	*총페이지수 ${faqCategoryPage.categorytotal}건<br/>
+	현재페이지 : ${faqCategoryPage.currentPage}/총페이지수 ${faqCategoryPage.totalPages }
 <h1>FAQ</h1>
 <hr/><br/>
  <div class="page_body">
     <div class="board_search">
         <select name="category" id="category" onchange="if(this.value) location.href=(this.value);">
-            <option value="선택">선택</option>
-            <option value="${pageContext.request.contextPath}/faqcategory.do?category=로그인">로그인</option>
-            <option value="${pageContext.request.contextPath}/faqcategory.do?category=약품 정보">약품 정보</option>
-            <option value="${pageContext.request.contextPath}/faqcategory.do?category=기타">기타</option>
+        	<option>선택</option>
+            <c:if test="${faqCategoryPage.category == null}">
+            	<option value="${pageContext.request.contextPath}/faqlist.do">전체선택</option>
+            	<option value="${pageContext.request.contextPath}/faqcategory.do?category=로그인">로그인</option>
+            	<option value="${pageContext.request.contextPath}/faqcategory.do?category=약품 정보">약품 정보</option>
+            	<option value="${pageContext.request.contextPath}/faqcategory.do?category=기타">기타</option>
+            </c:if>
+           <c:if test="${faqCategoryPage.category == '로그인'}">
+           	<option value="${pageContext.request.contextPath}/faqlist.do">전체선택</option>
+       		<option value="${pageContext.request.contextPath}/faqcategory.do?category=로그인" selected>로그인</option>
+       		<option value=" ${pageContext.request.contextPath}/faqcategory.do?category=약품 정보" >약품 정보</option>
+          	<option value="${pageContext.request.contextPath}/faqcategory.do?category=기타">기타</option>
+          </c:if>
+          <c:if test="${faqCategoryPage.category == '약품 정보'}">
+          	<option value="${pageContext.request.contextPath}/faqlist.do">전체선택</option>
+          	<option value="${pageContext.request.contextPath}/faqcategory.do?category=로그인" >로그인</option>
+  			<option value="${pageContext.request.contextPath}/faqcategory.do?category=약품 정보" selected>약품 정보</option>
+  			<option value="${pageContext.request.contextPath}/faqcategory.do?category=기타">기타</option>
+          </c:if>
+          <c:if test="${faqCategoryPage.category == '기타'}">
+          	<option value="${pageContext.request.contextPath}/faqlist.do">전체선택</option>
+          	<option value="${pageContext.request.contextPath}/faqcategory.do?category=로그인" >로그인</option>
+          	<option value=" ${pageContext.request.contextPath}/faqcategory.do?category=약품 정보" >약품 정보</option>
+          	<option value="${pageContext.request.contextPath}/faqcategory.do?category=기타" selected>기타</option>
+          </c:if>
         </select>
-        <form name="fsearch" id="fsearch" method="get" action="faqsearch.do">
+        <form name="fsearch" id="fsearch" method="get" action="faqsearch.do?">
+        	<input type="hidden" name="category" id="category" value="${faqCategoryPage.category}"/>
             <input type="text" name="search" id="search">
             <input type="submit" value="검색" class="btn_submit">
         </form>
@@ -61,7 +89,7 @@
 				<c:forEach var="faq" items="${faqCategoryPage.categorylist}">
 	    			<tr class="row">
 	    				<td>${faq.sn}</td>
-	    				<td>${faq.title}</td>
+	    				<td><a href="faqccount.do?sn=${faq.sn}&category=${faq.category}">${faq.title}</a></td>
 	    				<td>${faq.mid}</td>
 	    				<td>${faq.rdate}</td>
 	    				<td>${faq.category}</td>
@@ -69,9 +97,9 @@
 	    			</tr>
 	    			<tr class="hidden">
 	    				<td colspan="6">
-	    					<p>${faq.contents}</p>
+	    					<textarea cols="150" rows="10">${faq.contents}</textarea>
 	    					<%-- <c:if test=""> --%>
-	    						<form action="${pageContext.request.contextPath}/faqupdate.do">
+	    						<form id="modify" name="modify" action="${pageContext.request.contextPath}/faqupdate.do">
 		    						<input type="hidden" name="sn" value="${faq.sn}"/>
 		    						<input type="hidden" name="title" value="${faq.title}"/>
 		    						<input type="hidden" name="contents" value="${faq.contents}"/>
@@ -85,6 +113,26 @@
 	    					<%-- </c:if> --%>
 	    				</td>
 	   				</tr>
+	   				<c:if test="${faq.sn== faqVcount.sn}">
+	    			<tr class="">
+	    				<td colspan="6" class="contentView">
+	    					<u:pre value="${faq.contents}"/><br/><br/>
+	    					<%-- <c:if test=""> --%>
+	    						<form id="modify" name="modify" action="${pageContext.request.contextPath}/faqupdate.do">
+		    						<input type="hidden" name="sn" value="${faq.sn}"/>
+		    						<input type="hidden" name="title" value="${faq.title}"/>
+		    						<input type="hidden" name="contents" value="${faq.contents}"/>
+									<input type="hidden" name="category" value="${faq.category}"/>
+									<input type="hidden" name="mid" value="${faq.mid}"/>
+	    							<input type="submit" id="modifyBtn" name="modifyBtn" value="수정"/>
+	    						</form>
+	    						<a href="${pageContext.request.contextPath}/faqdelete.do?sn=${faq.sn}">
+	    						<input type="button" id="deleteBtn"  name="deleteBtn" value="삭제" onclick="f1()"/>
+	    						</a>
+	    					<%-- </c:if> --%>
+	    				</td>
+	   				</tr>
+	   				</c:if>
 				</c:forEach>
 			<c:if test="${faqCategoryPage.hasFaq() }">
 				<tr>
@@ -108,6 +156,7 @@
 					</td>
 				</tr>
 			</c:if>
+			<jsp:include page="../../footer.jsp"></jsp:include>
     	</table>
    	</div>
  </div>

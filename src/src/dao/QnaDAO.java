@@ -188,7 +188,7 @@ public  class QnaDAO{
 			}
 
 		//질문 상세조회
-		public Qnamodel selectById(Connection conn, int no)throws SQLException{
+		public static Qnamodel selectById(Connection conn, int no)throws SQLException{
 			System.out.println("QnaDAO의 selectByID(no)="
 	                +no);
 			PreparedStatement pstmt=null;
@@ -355,8 +355,8 @@ public int deleteA(Connection conn,int no) throws SQLException{
 		JdbcUtil.close(pstmt);
 	}	
 }
+}
 
-		}
 	
 
 

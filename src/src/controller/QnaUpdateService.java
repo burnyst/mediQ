@@ -42,6 +42,9 @@ public class QnaUpdateService {
 			throw new RuntimeException(e);
 		}catch(RuntimeException e) {
 			JdbcUtil.rollback(conn);
+			
+			
+			
 			throw e;
 		}finally {
 			JdbcUtil.close(conn);

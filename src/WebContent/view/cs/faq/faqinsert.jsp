@@ -15,6 +15,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="../../header.jsp"></jsp:include>
 	<h1>FAQ</h1>
 <hr/><br/>
     <form method="post" id="frm1" >
@@ -48,6 +49,7 @@
                         <input type="reset" id="resetBtn" name="resetBtn" value="취소"/>
                     </td>
                 </tr>
+                <jsp:include page="../../footer.jsp"></jsp:include>
             </table>
         </fieldset>
     </form>

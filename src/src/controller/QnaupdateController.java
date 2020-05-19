@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 
 import model.QnaRequest;
 import model.Qnamodel;
@@ -47,12 +50,36 @@ public class QnaupdateController implements CommandHandler {
 		Map<String,Boolean>errors = new HashMap<>();
 		request.setAttribute("errors",errors);
 		//할일
+		// 파일 업로드를 하기 위해서 cos.jar 추가 및 객체 생성
+        MultipartRequest multi = null;
+        // 업로드 될 파일의 최대 사이즈 (10메가)
+        int sizeLimit = 10 * 1024 * 1024;
+ 
+        // 파일이 업로드될 실제 tomcat 폴더의 경로 (WebContent 기준)
+        @SuppressWarnings("deprecation")
+		String savePath = request.getSession().getServletContext().getRealPath("/upload");
+
+        // 
+        try{
+            multi=new MultipartRequest(
+                    request
+                    , savePath
+                    , sizeLimit
+                    , "UTF-8"
+                    , new DefaultFileRenamePolicy()); 
+ 
+         }catch (Exception e) {
+                e.printStackTrace();
+         } 
+         
+        //파일 이름 저장
+        String image= multi.getFilesystemName("image");
+
 		//1.요청파라미터 받기
-		String title = request.getParameter("title");
-		String category = request.getParameter("category");
-		int qpublic =(Integer.parseInt(request.getParameter("qpublic")));
-		String question=request.getParameter("question");
-		String image=request.getParameter("image");
+		String title = multi.getParameter("title");
+		String category = multi.getParameter("category");
+		int qpublic =(Integer.parseInt(multi.getParameter("qpublic")));
+		String question=multi.getParameter("question");
 
 		//	HttpSession session = request.getSession();
 		//User user = (User)session.getAttribute("AUTHUSER");
@@ -72,7 +99,6 @@ public class QnaupdateController implements CommandHandler {
 		//3.Model(Request, session)
 				request.setAttribute("newSn", newSn);
 		//4.View
-		//return "/view/cs/qna/qnalist.jsp";
 		  return "qnalist.do";
 }
 

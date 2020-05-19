@@ -6,8 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="<%= request.getContextPath()%>/js/qna.js?v=<%=System.currentTimeMillis() %>"></script> 
 </head>
 <body>
+<iframe id="ifrm_filedown"  style="position:absolute; z-index:1;visibility : hidden;"></iframe>
 <jsp:include page="../../header.jsp"></jsp:include>
 	<div class="divcss">
 					<form name="frmq" id="frmq" method="post"  action="qnadelete.do?no=${qm.sn}" accept-charset="utf-8">
@@ -37,15 +39,15 @@
 							<td>${qm.qstate}</td>
 						</tr>
 						<tr>
-							<th >내용</th>
+							<th  colspan="4">내용</th>
 						</tr>
 						<tr>
-							<td><textarea>${qm.question}</textarea></td>
+							<td colspan="4"><textarea cols="120" rows="5" >${qm.question}</textarea></td>
 						</tr>
 						
 						<tr>
 							<th>파일 첨부 목록:</th>
-							<td>${qm.image}</td>
+							<td colspan="3">${qm.image}<a href="#"  onclick="onDownload(${qm.sn})" >  ▽다운로드</a></td>
 						</tr>
 						<tr>
 							<td></td>
