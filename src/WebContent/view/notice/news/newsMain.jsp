@@ -18,14 +18,14 @@ border:15px;
 }
 table {
 	border-collapse: collapse;
-	width: 1000px;
+	width: 70%;
 	margin: auto;
   text-align: center;
   
 	}
 
 </style>
-<jsp:include page="/header.jsp"></jsp:include>
+<jsp:include page="../../header.jsp"></jsp:include>
 </head>
 <body>
 		<h2>뉴스 게시판</h2><br/> 
@@ -108,5 +108,5 @@ table {
 		</form>
 						
 </body>
-<jsp:include page="/footer.jsp"></jsp:include>
+	<jsp:include page="../../footer.jsp"></jsp:include>
 </html>
