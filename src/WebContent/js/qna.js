@@ -6,3 +6,8 @@ function resetf(frmq){
 	  }else{
 	 return ; }
 	}
+
+function onDownload(sn) {
+	var o = document.getElementById("ifrm_filedown");
+	o.src = "download.do?sn=" + sn;
+	}

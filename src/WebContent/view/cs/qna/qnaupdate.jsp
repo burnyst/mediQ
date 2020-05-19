@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 		<h1>질문 등록</h1>
 	</div>
 	<div class="divcss">
-		<form name="frmq" id="frmq" method="post"  action="QnaUpdateServie.do" accept-charset="utf-8" > 
+		<form name="frmq" id="frmq" method="post"  action="QnaUpdateService.do" accept-charset="utf-8"  enctype="multipart/form-data" > 
 		<!--  action=qupdateaction.jsp -->
 			<table class="tablecss">
 					<tr>
@@ -39,15 +40,12 @@
 							placeholder="내용을 입력해주세요"></textarea></td>
 					</tr>
 					<tr>	
-							<td colspan="4"  style="text-align:right;"><input  type="button"  id=button value="취소" onclick="resetf('this.form')"/>
+							<td colspan="2"><input type="file"  name="image"/></td>
+							<td colspan="2"  style="text-align:right;"><input  type="button"  id=button value="취소" onclick="resetf('this.form')"/>
 							<input type="submit" value="등록"></td>
 					</tr>
 				</table>
 		</form>		
-		<form method="POST" enctype="multipart/form-data" id="fileUploadForm">
-				<input type="file" value="Image upload"/>
-				<input type="submit" value="이미지 등록" id="btnSubmit"/>
-		</form>
 	</div>
 	<jsp:include page="../../footer.jsp"></jsp:include>
 </body>
