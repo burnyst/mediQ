@@ -19,7 +19,7 @@
 				</div>
 				<div class="form-group">
 					<label>비밀번호</label>
-					<input type="text" class="form-control" name="mid" maxlength="20" required>
+					<input type="text" class="form-control" name="mpwd" maxlength="20" required>
 				</div>
 				<input type="submit" class="btn btn-primary form-control" value="로그인">
 		</form>
