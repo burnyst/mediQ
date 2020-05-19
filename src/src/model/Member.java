@@ -43,9 +43,15 @@ public class Member {
 		this.mbd	=	mbd;
 	}
 
+	//Faq에서 씁니다 ........
 	public Member(String mid, String mpwd) {
 		this.mid	=	mid;
 		this.mpwd	=	mpwd;
+	}
+
+	public Member(String mid, int mlevel) {
+		this.mid=mid;
+		this.mlevel=mlevel;
 	}
 
 	//getters&setters
@@ -149,4 +155,7 @@ public class Member {
 	public void setMhp2(String mhp2) {
 		this.mhp2 = mhp2;
 	}
+
+	
+	
 }
