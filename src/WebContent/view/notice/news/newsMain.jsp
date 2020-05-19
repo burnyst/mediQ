@@ -25,7 +25,7 @@ table {
 	}
 
 </style>
-<jsp:include page="/view/header.jsp"></jsp:include>
+<jsp:include page="/header.jsp"></jsp:include>
 </head>
 <body>
 		<h2>뉴스 게시판</h2><br/> 
@@ -59,9 +59,8 @@ table {
 				<tr>
 						<%-- ${news.sn} 은 News클래스의 get sn()메소드를 호출 --%>
 						<th>${news.sn }</th>
-						<th><a href="${pageContext.request.contextPath}/newsdetail.do?title=${news.title}&pageNo=${newsPAGE.currentPage}">${news.title}</a></th>
-						<th style="max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
-						>${news.summary }</th>
+						<th><a href="${pageContext.request.contextPath}/newsdetail.do?title=${news.title}&pageNo=${newsPAGE.currentPage}&sn=${news.sn}">${news.title}</a></th>
+						<th>${news.summary }</th>
 						<th>${news.press }</th>
 						<th>${news.mid }</th>
 						<th>${news.rdate }</th>
@@ -109,5 +108,5 @@ table {
 		</form>
 						
 </body>
-<jsp:include page="/view/footer.jsp"></jsp:include>
+<jsp:include page="/footer.jsp"></jsp:include>
 </html>

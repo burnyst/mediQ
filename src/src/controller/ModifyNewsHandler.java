@@ -27,13 +27,13 @@ public class ModifyNewsHandler implements controller.CommandHandler {
 //	News news = new News();
 //	
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("FaqUpdateHandler의 process()진입");
+		System.out.println("ModifyNewsHandler의 process()진입");
 
 		if(request.getMethod().equalsIgnoreCase("GET")) {
-			System.out.println("FaqUpdate의 method방식="+request.getMethod());
+			System.out.println("ModifyNewsUpdate의 method방식="+request.getMethod());
 			return processForm(request,response);
 		}else if(request.getMethod().equalsIgnoreCase("POST")) { //POST방식으로 요청이 들어오면
-			System.out.println("FaqUpdate의 method방식="+request.getMethod());
+			System.out.println("ModifyNewsUpdate의 method방식="+request.getMethod());
 			return processSubmit(request,response);
 		}else {
 			//405에러
@@ -50,10 +50,11 @@ public class ModifyNewsHandler implements controller.CommandHandler {
 		System.out.println("ModifyNewsHandler-수정처리processSubmit()");
 		
 		//1.파라미터받기
-		int sn = Integer.parseInt(request.getParameter("sn")); //글번호
-//		String mid = request.getParameter("mid");
-		String title   = request.getParameter("title");//글제목
+		int sn = Integer.parseInt(request.getParameter("sn"));//글번호
+		String title =request.getParameter("title");
 		String summary = request.getParameter("summary");//글내용
+		
+//		String mid = request.getParameter("mid");
 		
 		//System.out.println("processSubmit sn="+sn+",mid="+mid+",title="+title+",summary="+summary);
 		System.out.println("processSubmit sn="+sn+",title="+title+",summary="+summary);
@@ -70,13 +71,13 @@ public class ModifyNewsHandler implements controller.CommandHandler {
 	
 		
 		
-//		//에러정보 p677 77
-		Map<String,Boolean> errors = new HashMap<>();
-		request.setAttribute("errors",errors);
-		modiReq.validate(errors);
-		if(!errors.isEmpty()) { //에러가 존재하면 수정폼으로 이동.
-			return FORM_VIEW;
-		}
+////		//에러정보 p677 77
+//		Map<String,Boolean> errors = new HashMap<>();
+//		request.setAttribute("errors",errors);
+//		modiReq.validate(errors);
+//		if(!errors.isEmpty()) { //에러가 존재하면 수정폼으로 이동.
+//			return FORM_VIEW;
+//		}
 		
 		//3.Model P670 75
 		request.setAttribute("modiREQ", modiReq);
@@ -84,16 +85,17 @@ public class ModifyNewsHandler implements controller.CommandHandler {
 		modifynewsService.modify(modiReq);
 		
 		//4.View
-		return "newslist.do";
+		return "newsModify.jsp";
 	}
 	//p669 38
 	private String processForm(HttpServletRequest request, 
 			HttpServletResponse response) throws IOException {
 		System.out.println("NewsUpdateController-수정처리processForm()");
+		
 		//1.파라미터받기
 		int sn = Integer.parseInt(request.getParameter("sn")); //글번호
 //		String mid = request.getParameter("mid");
-		String title   = request.getParameter("title");//글제목
+		String title =request.getParameter("title");
 		String summary = request.getParameter("summary");//글내용
 		
 		System.out.println("processForm sn"+sn+"title"+title+"summary"+summary);
@@ -107,9 +109,7 @@ public class ModifyNewsHandler implements controller.CommandHandler {
 		
 //		//ModifyRequest는 p666
 		ModifyRequest modiReq = new ModifyRequest(
-				sn,
-				title,
-				summary
+				sn,title,summary
 			);
 		System.out.println("sn"+sn+"/title="+title);
 		

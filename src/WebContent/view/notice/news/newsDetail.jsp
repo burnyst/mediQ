@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,38 +34,88 @@ float:right;
 </style>
 </head>
 <body>
-         <form method="post" >
+		<%-- <form id="f" name="f" action="./newsmodify.do?sn=${newd.sn}" method="post">
+				 	<input type="submit" id="modify" value="수정"/>
+		</form> --%>
+
+        <form method="post" action="./newsmodify.do?sn=${newsd.sn}">
+        <%-- <form method="post" action="./newsmodify.do?sn=${newd.sn}&title=${newd.title}&summary=${newd.summary}">
+         --%>
+       <%--  <input type="hidden" name="press" id="press" value="${newd.press}"/> --%>
+       
          <h2>뉴스게시판</h2>
          <table id= info>
          <tr>
          		<td>번호</td>
-         		<td>${newd.sn}</td>
+         		<td>${newsd.sn}</td>
          </tr>
          <tr>
          		<td>제목</td>
-         		<td>${newd.title}</td>
+         		<td>${newsd.title}</td>
          </tr>
          
          <tr>
          		<td>언론사명</td>
-         		<td>${newd.press}</td>
+         		<td>${newsd.press}</td>
          		<td>아이디</td>
-         		<td>${newd.mid}</td>
+         		<td>${newsd.mid}</td>
          		<td>등록일자</td>
-         		<td>${newd.rdate}</td>
+         		<td>${newsd.rdate}</td>
          </tr>
 				 </table>	
-				 <input type="button" id="modify" value="수정" onclick="location.href='newsmodify.do?${news.mid}'"><!-- 이영역은 관리자로 로그인할 경우만 보이는 버튼 -->
+				 
          <table border="1" id="contents" >
          <tr>
-          <td><textarea name="contents" rows="20" cols="100"  >
-          	<img src=${newd.nimage}>	
-           ${newd.summary}
+          <td>
+           ${newsd.summary}
+         </tr>
+         </table>
+         <a href="./newslist.do"><input type=button  value="목록으로" /></a>
+					<input type="hidden" id="modify" value=""/>
+					</form>
+        <%-- <form method="post" action="./newsmodify.do?sn=${newd.sn}&title=${newd.title}&summary=${newd.summary}">
+         --%>
+       <%--  <input type="hidden" name="press" id="press" value="${newd.press}"/> --%>
+       <%----------------수정용-------------------------------------------------------------------------------- --%>
+        <%-- <c:if test=""> --%>
+					<form method="post" action="./newsmodify.do?sn=${newsd.sn}">
+         <h2>뉴스게시판  수정 및 삭제</h2>
+         <table id= info>
+         <tr>
+         		<td>번호</td>
+         		<td>${newsd.sn}</td>
+         </tr>
+         <tr>
+         		<td>제목</td>
+         		<td><input type="text" name="title" value="${newsd.title}"></td>
+         </tr>
+         
+         <tr>
+         		<td>언론사명</td>
+         		<td>${newsd.press}</td>
+         		<td>아이디</td>
+         		<td>${newsd.mid}</td>
+         		<td>등록일자</td>
+         		<td>${newsd.rdate}</td>
+         </tr>
+				 </table>	
+				 
+         <table border="1" id="contents" >
+         <tr>
+          <td><textarea name="summary" rows="20" cols="100"  >
+           ${newsd.summary}
           </textarea></td>
          </tr>
          </table>
-         <a href="${pageContext.request.contextPath}/newslist.do"><input type=button  value="목록으로"   /></a>
-	
+         <a href="./newslist.do"><input type=button  value="목록으로" /></a>
+					<input type="submit" id="modify" value="수정하기"/>
 					</form>
+					<a href ="${pageContext.request.contextPath}/newsdelete.do?sn=${newsd.sn}">
+					<input type="button" value="삭제"></a>
+					<%-- <a href="${pageContext.request.contextPath}/faqdelete.do?sn=${faq.sn}">
+	    						<input type="button" id="deleteBtn"  name="deleteBtn" value="삭제" onclick="f1()"/>
+	    						</a> --%>
+					
+					<%-- </c:if> --%>
 </body>
 </html>

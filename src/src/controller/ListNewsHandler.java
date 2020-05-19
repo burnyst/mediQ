@@ -30,7 +30,7 @@ public class ListNewsHandler implements CommandHandler {
 		//3.Model
 		request.setAttribute("newsPAGE", newsPage);
 		//4.View 지정
-		return"/view/notice/news/newsMain.jsp";
-	
+		return"newsMain.jsp";
+
 	}
 }

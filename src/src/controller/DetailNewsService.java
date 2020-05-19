@@ -13,14 +13,14 @@ public class DetailNewsService {
 	
 	//DAO테이블과 연동
 	private NewsDAO newsDao = new NewsDAO();
-	public News getNews (String title) {
+	public News getNews (int sn) {
 		System.out.println("DetailNewsHandler getNewsDao호출성공");
 		try {
 		Connection conn = 
 				JdbcUtil.getConnection();	
 		
 		//특정글번호 article조회
-		News newd =newsDao.selectById(conn,title);
+		News newd =newsDao.selectBySn(conn,sn);
 		
 		if(newd==null) { //특정글번호 title 조회 실패p659 20
 			try {

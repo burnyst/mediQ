@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.News;
 
-
 //p640
 //글등록 폼 및 글등록 요청 담당 컨트롤러
 /* 글등록 폼요청 /article/write.do	(GET방식)
@@ -19,7 +18,7 @@ import model.News;
  */
 public class WriteNewsHandler implements controller.CommandHandler {
 	//View
-	private static final String FORM_VIEW =	"/view/notice/news/newsInsert.jsp";
+	private static final String FORM_VIEW =	"/newsInsert.jsp";
 	//Service
 	private WriteNewsService writeNewsService = 
 			new WriteNewsService();
@@ -84,7 +83,7 @@ public class WriteNewsHandler implements controller.CommandHandler {
 		request.setAttribute("newSn", newSn);
 
 		//4.View
-		return "/newslist.do";
+		return "newslist.do";
 	}
 
 	//p641 53

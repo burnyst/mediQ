@@ -14,7 +14,6 @@ public class ModifyNewsService {
 	
 	public void modify(ModifyRequest modiReq) {
 		Connection conn =null;
-		System.out.println("ModifyNewsService");
 		try {
 			conn = JdbcUtil.getConnection();
 			conn.setAutoCommit(false);
@@ -32,10 +31,9 @@ public class ModifyNewsService {
 			newsDao.update(conn,modiReq.getSummary(),modiReq.getTitle(),modiReq.getSn());		
 			
 			conn.commit();
-			System.out.println("111");
+			
 		}catch(Exception e) {
 			JdbcUtil.rollback(conn);
-			
 			throw new RuntimeException();
 		}finally {
 			JdbcUtil.close(conn);

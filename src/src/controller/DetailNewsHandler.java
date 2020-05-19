@@ -15,20 +15,20 @@ public class DetailNewsHandler implements controller.CommandHandler {
 		System.out.println("DetailNewsHandler 호출 성공");
 		//1.파라미터 받기
 			String title= request.getParameter("title");//(게시글)제목
-			
+			int sn = Integer.parseInt(request.getParameter("sn"));
 			String pageNo = request.getParameter("pageNo");// 보고싶은 페이지(릴레이용)
 		//2.비즈니스로직 수행(<->Service <-> DAO <- >DB)
 		try {
 			//p660 22
 			//2-1조회수 증가 : 조회수 증가시 true 전달
 			//2-2 상세내용 조회
-			News newd =DetailnewsService.getNews(title);
+			News newsd =DetailnewsService.getNews(sn);
 			
 			//3.MODEL
-			request.setAttribute("newd",newd);
+			request.setAttribute("newsd",newsd);
 			
 			//4.VIEw
-			return "/view/notice/news/newsDetail.jsp";
+			return "newsDetail.jsp";
 			
 		}catch(Exception e) {
 			request.getServletContext().log("no article",e);
