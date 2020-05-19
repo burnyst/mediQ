@@ -7,7 +7,6 @@ import dbcp.JdbcUtil;
 import dao.MemberDAO;
 import model.Member;
 import controller.DuplicateIdException;
-import model.MemberRequest;
 
 public class JoinService {
 
@@ -41,5 +40,23 @@ public class JoinService {
 			JdbcUtil.close(conn);
 		}//try
 	}//end of join
+
+	
+	//회원가입시 id존재여부 체크
+	public String searchId(String mid) {
+		System.out.println("JoinService searchId(mid)="+mid);
+		Connection conn = null;
+		String result=null;
+		try {
+			conn = JdbcUtil.getConnection();
+			result=memberDao.searchId(conn,mid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			JdbcUtil.close(conn);
+		}
+		System.out.println("서비스의 리턴result="+result);
+		return result;
+	}
 	
 }

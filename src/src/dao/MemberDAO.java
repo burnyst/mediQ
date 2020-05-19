@@ -9,50 +9,6 @@ import dbcp.JdbcUtil;
 import model.Member;
 
 public class MemberDAO {
-	public static int getCount(Connection conn) throws SQLException {
-		int rst = 0;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		String sql = "select count(*) from Member";
-		try {
-			stmt = conn.prepareStatement(sql);
-//			stmt.setString(1, name);
-			rs = stmt.executeQuery();
-			if (rs.next()) {
-				rst = rs.getInt(1);
-			}
-		} finally {
-			JdbcUtil.close(rs);
-			JdbcUtil.close(stmt);
-		}
-		return rst;
-	}
-	
-	//임의로 아이디 비밀번호 체크 추가한거
-	public String checkMember(Connection conn, String mid, String mpwd) throws SQLException {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(
-					"select mid from member where mid=? and mpwd=?");
-			pstmt.setString(1, mid);;
-			pstmt.setString(2, mpwd);
-			rs=pstmt.executeQuery();
-				if(rs.next())
-					return (rs.getString("mid"));
-				else
-					return null;
-		}finally {
-			if(rs!=null)
-				try {
-					rs.close();
-				}catch(SQLException e) {}
-			if(pstmt!=null)
-				try {
-					pstmt.close();
-				}catch(SQLException e) {}
-		}
-	}
 	
 	public Member selectById(Connection conn, String mid) throws SQLException {
 		System.out.println("MemberDAO-selectById(mid)호출="+mid);
@@ -63,8 +19,7 @@ public class MemberDAO {
 		try {
 			pstmt = conn.prepareStatement(
 					" select mid, mname, mpwd, memail, mhp, mbd, mlevel " +
-					" from member" +
-					" where mid = ?");
+					" from member where mid = ?");
 			pstmt.setString(1, mid);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -78,6 +33,28 @@ public class MemberDAO {
 			}//if
 			return member;
 		}finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	public static boolean checkDuplicate(Connection conn, String mid) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean rst = false;
+		try {
+			pstmt = conn.prepareStatement(
+					" select count(*) " +
+					" from member where mid = ?");
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if (rs.getInt(1) > 0) {
+					rst = true;
+				}
+			}
+			return rst;
+		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 		}
@@ -96,4 +73,45 @@ public class MemberDAO {
 		pstmt.executeUpdate();
 	}
 	
+	//비밀번호변경을 위한 메서드
+	public void update(Connection conn, Member member) throws SQLException {
+			String sql="update member set memail=?,mpwd=? where mid=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemail());
+			pstmt.setString(2,member.getMpwd());
+			pstmt.setString(3, member.getMid());
+			pstmt.executeUpdate();
+	}
+
+	//회원가입시 id존재여부 체크
+	public String searchId(Connection conn,String mid) {
+		System.out.println("dao searchId(mid)="+mid);
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		//boolean rst = false;
+		String result = null;
+		try {
+			pstmt = conn.prepareStatement(
+					" select mid " +
+					" from member where mid = ?");
+			
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { //id사용중
+				result = "이미 사용중인 아이디입니다.";
+				//return result;
+			}else {
+				result = "사용할 수 있는 아이디입니다";
+			}
+			System.out.println("result0 = "+result);
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		System.out.println("result1 = "+result);
+		return result;
+	}
 }
