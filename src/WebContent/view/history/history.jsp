@@ -1,19 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
-<title>mediQ</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mediq.css" />
+<t:head title="메디큐">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
     <script src="${pageContext.request.contextPath}/js/history.js"></script>
-</head>
-<body>
-	<jsp:include page="/view/header.jsp"></jsp:include>
+</t:head>
+<t:body>
 	<div class="items">
 	    <label>검색이력</label>
 	    <hr />
@@ -109,6 +104,5 @@
 		    </table>
 	    </form>
 	</div>
-	<jsp:include page="/view/footer.jsp"></jsp:include>
-</body>
+</t:body>
 </html>

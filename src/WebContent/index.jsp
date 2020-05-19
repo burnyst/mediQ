@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>mediQ</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mediq.css" />
+<t:head title="메디큐">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
     <script src="${pageContext.request.contextPath}/js/search.js"></script>
-</head>
-<body>
-	<jsp:include page="/view/header.jsp"></jsp:include>
+</t:head>
+<t:body>
 	<div class="search">
 	    <form method="get" action="search.do">
 	        <label>의약품 검색</label>
@@ -114,6 +110,5 @@
 		    </form>
 		</div>
 	</c:if>
-	<jsp:include page="/view/footer.jsp"></jsp:include>
-</body>
+</t:body>
 </html>
