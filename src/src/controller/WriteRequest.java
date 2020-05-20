@@ -32,15 +32,28 @@ public class WriteRequest {
 	private	String nimage;		
 	
 	
+	 public WriteRequest(Integer sn,
+				String mid, String title, 
+				String press, String summary, 
+				Date rdate, String nimage, User user ) {
+				this.sn = sn;
+				this.mid = user.getMid();
+				this.title = title;
+				this.press = press;
+				this.summary = summary;
+				this.rdate = rdate;
+				this.nimage = nimage;
+				this.user = user;
+		}
 	 WriteRequest(User user, String title, String press, String summary, String nimage) {
-		
-		this.user = user;
-		this.title = title;
-		this.press = press;
-		this.summary = summary;
-		this.nimage = nimage;
-	}
-	
+		 
+		 this.user = user;
+		 this.mid=user.getMid();
+		 this.title = title;
+		 this.press = press;
+		 this.summary = summary;
+		 this.nimage = nimage;
+	 }
 	
 	 public int getSn() {
 		 return sn;

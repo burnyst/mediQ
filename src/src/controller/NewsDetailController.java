@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import model.News;
 import model.User;
-import newsService.NewsDetailService;
+
 
 public class NewsDetailController implements controller.CommandHandler {
 

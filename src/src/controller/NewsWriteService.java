@@ -47,7 +47,7 @@ public class NewsWriteService {
 
 	private News toNews(WriteRequest req) {
 		Date now = new Date();
-		return new News(req.getSn(),req.getMid(),req.getTitle()
+		return new News(req.getSn(),req.getUser(),req.getTitle()
 				,req.getPress(),req.getSummary(),now,req.getNimage());
 	}
 

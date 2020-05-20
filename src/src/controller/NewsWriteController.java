@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.News;
-import newsService.NewsWriteService;
 import model.User;
 
 //p640
@@ -61,7 +60,7 @@ public class NewsWriteController implements controller.CommandHandler {
 		request.setAttribute("errors", errors);
 		System.out.println("ERRORS"+errors);
 		//1.파라미터받기
-		String mid= request.getParameter("mid"); 
+		 
 		String title = request.getParameter("title");
 		String press = request.getParameter("press");
 		String summary = request.getParameter("summary");
@@ -70,6 +69,7 @@ public class NewsWriteController implements controller.CommandHandler {
 		//2.비즈니스로직(<->Service<->DAO<->DB) p640 39
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("AUTHUSER");
+		System.out.println("user"+user);
 		//글등록 p641 40
 		WriteRequest writeReq = createWriteRequest(user, title,press, summary,nimage);
 		writeReq.validate(errors);
