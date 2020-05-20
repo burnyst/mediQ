@@ -29,7 +29,8 @@ public class MemberDAO {
 						rs.getString("mpwd"),
 						rs.getString("memail"),
 						rs.getString("mhp"),
-						rs.getString("mbd"));
+						rs.getString("mbd"),
+						rs.getInt("mlevel"));
 			}//if
 			return member;
 		}finally {

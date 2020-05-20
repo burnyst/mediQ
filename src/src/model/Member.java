@@ -6,21 +6,14 @@ public class Member {
 	private String	mid;
 	private String	mname;
 	private String	mpwd;
-	private String	mpwd2;
 	private String	memail;
 	private String	mhp;
-	private String	mhp2;
 	private String	mbd;
 	private int		mlevel;
 	private char	xmember;
 	private String	xreason;
-	private String e_domain;
 	
 	//생성자
-	public Member() {
-		
-	}
-	
 	public Member(String mid, String mname, String mpwd, String memail,String mhp,
 			String mbd, int mlevel, char xmember, String xreason) {
 		this.mid	=	mid;
@@ -34,24 +27,14 @@ public class Member {
 		this.xreason=	xreason;
 	}
 	
-	public Member(String mid, String mname, String mpwd, String memail, String mhp, String mbd) {
+	public Member(String mid, String mname, String mpwd, String memail, String mhp, String mbd, int mlevel) {
 		this.mid	=	mid;
 		this.mname	=	mname;
 		this.mpwd	=	mpwd;
 		this.memail	=	memail;
 		this.mhp	=	mhp;
 		this.mbd	=	mbd;
-	}
-
-	//Faq에서 씁니다 ........
-	public Member(String mid, String mpwd) {
-		this.mid	=	mid;
-		this.mpwd	=	mpwd;
-	}
-
-	public Member(String mid, int mlevel) {
-		this.mid=mid;
-		this.mlevel=mlevel;
+		this.mlevel	=	mlevel;
 	}
 
 	//getters&setters
@@ -131,31 +114,9 @@ public class Member {
 	public boolean matchPassword(String mpwd2) {
 		return mpwd.contentEquals(mpwd2);
 	}
-
-	public String getE_domain() {
-		return e_domain;
-	}
-
-	public void setE_domain(String e_domain) {
-		this.e_domain = e_domain;
-	}
-
-	public String getMpwd2() {
-		return mpwd2;
-	}
-
-	public void setMpwd2(String mpwd2) {
-		this.mpwd2 = mpwd2;
-	}
-
-	public String getMhp2() {
-		return mhp2;
-	}
-
-	public void setMhp2(String mhp2) {
-		this.mhp2 = mhp2;
-	}
-
 	
-	
+	public void changePwd(String newPwd) {
+		this.mpwd = newPwd;
+	}
+
 }
