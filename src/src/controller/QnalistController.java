@@ -6,8 +6,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.QnaRequest;
+import model.User;
 import page.QnaPage;
 
 public class QnalistController implements CommandHandler {
@@ -28,12 +30,15 @@ public class QnalistController implements CommandHandler {
 					pageNo = Integer.parseInt(pageNoVal);
 				}
 				//2.비즈니스로직(<->Service<->DAO<->DB) p652 22
+				HttpSession session = request.getSession();
+				User user = (User)session.getAttribute("AUTHUSER");
+				
 				QnaPage qnaPage = 
 						listService.getQnaPage(pageNo);
 				
 				//3.Model
 				request.setAttribute("qnaPAGE", qnaPage);
-						
+				request.setAttribute("user", user);		
 				//4.View
 				return  "/view/cs/qna/qnalist.jsp";
 	}

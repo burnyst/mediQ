@@ -15,6 +15,15 @@ public class User {
 		this.mlevel = mlevel;
 	}
 
+	public User(String mid) {
+		this.mid   = mid;
+	}
+
+	public User(String mid, int mlevel) {
+		this.mid   = mid;
+		this.mlevel = mlevel;
+	}
+	
 	public String getMid() {
 		return mid;
 	}
@@ -29,8 +38,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [mid=" + mid + ", mname=" + mname + "]";
+		return "User [mid=" + mid + ", mname=" + mname + ", mlevel=" + mlevel + "]";
 	}
+
 
 	
 }

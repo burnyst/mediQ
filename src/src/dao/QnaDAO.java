@@ -19,20 +19,10 @@ import model.Qnamodel;
 
 	
 public  class QnaDAO{
-	//연결
-	private DataSource ds;
 	
-	public QnaDAO() {
+	public QnaDAO() {}
 		
-		try {
-				Context ctx = new InitialContext();
-				ds=(DataSource)ctx.lookup("java:comp/env/jdbc/orcl");
-		}catch(Exception e){
-				e.printStackTrace();
-		}
-	}
-	
-	
+
 	//전체게시물수 구하기 
 	public static int selectCount(Connection conn) throws SQLException {
 		System.out.println("전체게시물수 구하기 QnaDAO-selectCount()호출성공");

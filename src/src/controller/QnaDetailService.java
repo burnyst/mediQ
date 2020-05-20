@@ -3,9 +3,12 @@ package controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpSession;
+
 import dao.QnaDAO;
 import dbcp.JdbcUtil;
 import model.Qnamodel;
+import model.User;
 
 public class QnaDetailService {
 
@@ -15,7 +18,7 @@ public class QnaDetailService {
 		Connection conn = null;
 		try {
 			conn  = JdbcUtil.getConnection();
-			
+		
 			//특정글번호조회
 			Qnamodel qm = qnaDao.selectById(conn, no);
 			//조회수증가

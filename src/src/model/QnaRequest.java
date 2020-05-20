@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class QnaRequest {
 //변수
+	private User user;
 	private int sn;
 	private String title;
 	private String category;
@@ -18,6 +19,15 @@ public class QnaRequest {
 	private  int qstate; //0은 답변없음 1은 답변있음
 	
 	//anaupdatecontroller 연계
+	public QnaRequest(User user,String title, String category, int qpublic,  String question, String image) {
+		this.user =user;
+		this.title =title;
+		this.category = category;
+		this.qpublic = qpublic;
+		this.mid=user.getMid();
+		this.question = question;
+		this.image = image;
+	}
 	public QnaRequest(String title, String category, int qpublic,  String question, String image) {
 		this.title =title;
 		this.category = category;
@@ -31,6 +41,13 @@ public class QnaRequest {
 		this.answer = answer;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public int getSn() {
 		return sn;
@@ -104,6 +121,12 @@ public class QnaRequest {
 		if( title==null || title.trim().isEmpty() ) {
 			errors.put("title",Boolean.TRUE);
 		}
+	}
+	@Override
+	public String toString() {
+		return "QnaRequest [user=" + user + ", sn=" + sn + ", title=" + title + ", category=" + category + ", qpublic="
+				+ qpublic + ", vcount=" + vcount + ", mid=" + mid + ", rdate=" + rdate + ", question=" + question
+				+ ", answer=" + answer + ", image=" + image + ", qstate=" + qstate + "]";
 	}
 
 /*	public void setConfirmPassword(String confirmPassword) {

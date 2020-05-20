@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-
+import model.User;
 import model.QnaRequest;
 import model.Qnamodel;
 
@@ -80,30 +80,35 @@ public class QnaupdateController implements CommandHandler {
 		String category = multi.getParameter("category");
 		int qpublic =(Integer.parseInt(multi.getParameter("qpublic")));
 		String question=multi.getParameter("question");
-
-		//	HttpSession session = request.getSession();
-		//User user = (User)session.getAttribute("AUTHUSER");
 		
 		//2.비즈니스로직(<->Service<->DAO<->DB)
+		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("AUTHUSER");
+		/*로그인 정보
+		User(member.getMid(), member.getMname(), member.getMlevel());
+		session.setAttribute("AUTHUSER", user); */
+		
 		//글등록
-		QnaRequest qnaReq = createQnaRequest(title,category,qpublic,question,image);
+		QnaRequest qnaReq = createQnaRequest(user, title,category,qpublic,question,image);
 		qnaReq.validate(errors);
 		
 		//유효성검사를 불통하여 글등록폼으로 이동
 				if( !errors.isEmpty() ) {
 					return FORM_VIEW;
 				}
-		//★db에 insert성공시의  해당글번호가 newSn에 리턴 //나의 데이터 필드명은 sn이다.
+		
 		int newSn = 
 				qnaaction.update(qnaReq); 
 		//3.Model(Request, session)
 				request.setAttribute("newSn", newSn);
+				System.out.println("newSn==>"+newSn);
 		//4.View
 		  return "qnalist.do";
 }
 
-	private QnaRequest createQnaRequest(String title, String category, int qpublic, String question,String image) {
-		return new QnaRequest(title,category,qpublic,question,image);
+	private QnaRequest createQnaRequest(User user,String title, String category, int qpublic, String question,String image) {
+		return new QnaRequest(new User(user.getMid(),user.getMlevel()),title,category,qpublic,question,image);
 
 	}
 	}

@@ -47,15 +47,18 @@
 						
 						<tr>
 							<th>파일 첨부 목록:</th>
+							<c:if test="${qm.image !=null }">
 							<td colspan="3">${qm.image}<a href="#"  onclick="onDownload(${qm.sn})" >  ▽다운로드</a></td>
+							</c:if>
 						</tr>
 						<tr>
 							<td></td>
 							<td></td>
 							<td><input  type="submit" value="삭제"  />
 							<input type="button" value="목록"  onclick="location.href='qnalist.do'">
-							<!-- {%if 관리자 해서 버튼 보이기%} -->
+							<c:if test="${user.mlevel==2}">
 							<button type="button" onclick="location.href='manageupdate.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}' ">답변 쓰기</button>
+							</c:if>
 							</td>
 					</tr>
 					</table>

@@ -76,7 +76,7 @@
 										<tr>
 										  <%-- ${qm.sn} 은 Qnamodel클래스의 getSn()메소드를 호출 --%>
 											<td style="width:5%;">${qm.sn} </td>																	
-											<td style="width:30%;"><a  style="text-decoration:none; color:black;" href="qnadetail.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}">${qm.title}</a></td>
+											<td style="width:30%;"><a  style="text-decoration:none; color:black;" href="qnadetail.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}&id=${qm.mid}">${qm.title}</a></td>
 											<td style="width:10%;" >${qm.category}</td>
 											<c:if test="${qm.qpublic==1}">
 											<td  style="width:10%;">비공개</td>
@@ -92,7 +92,7 @@
 			        		<c:if test="${qm.qstate ==1}">
 											<tr>
 													<td> ▼</td>
-													<td colspan="6"  style="padding-left:10px"><a  style="text-decoration:none; color:black;" href="qnamanagedetail.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}">RE: 답변입니다</a></td>
+													<td colspan="6"  style="padding-left:10px"><a  style="text-decoration:none; color:black;" href="qnamanagedetail.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}&id=${qm.mid}">RE: 답변입니다</a></td>
 													<td><input type=button  value="답변삭제" onclick="location.href='qnadelete.do?no=${qm.sn}'"></td>
 											</tr>		
 										</c:if>		
@@ -169,15 +169,15 @@
 		</c:if>
 		
 	<button type="button" onclick="location.href='qnalist.do' ">전체 목록</button>
-	<!--  session 연결해서 해야함-->
-	<%-- if  (mlevel == [회원]){ --%>
+	<c:if test="${user.mid != null}">
 	<button type="button" onclick="location.href='qnaupdate.do' ">글쓰기</button>
-	<%-- } --%>
-	<%-- else { --%>
+	</c:if>
+	<c:if test="${user.mid==null}">
 		<button onclick="javascript:btn()">글쓰기</button>
 		<%	out.println
 		("<script>function btn(){alert('회원 전용 페이지입니다.  회원가입을 하신 뒤, 이용 부탁드립니다.');}</script>");
-		%> <%-- }--%>
+		%>
+		</c:if>
 	</div>
 	<script src="https:code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>

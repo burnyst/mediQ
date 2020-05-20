@@ -21,7 +21,7 @@ public class QnaUpdateService {
 	//회원가입처리요청 p596-16  m801-832-38
 	//qnaupdateconttoller에서  호출
 	public  int update(QnaRequest qnaReq) {
-		System.out.println("QnaUpdateService -update()호출");
+		System.out.println("QnaUpdateService -update()호출 QnaRequest qnaReq="+ qnaReq);
 		Connection conn = null;
 		try {
 			conn = JdbcUtil.getConnection();
@@ -29,7 +29,7 @@ public class QnaUpdateService {
 			
 			//dao호출 
 			Qnamodel qm = toqm(qnaReq);
-			Qnamodel  savedQm = qnaDao.insert(conn,qm);
+			Qnamodel  savedQm = qnaDao.insert(conn, qm);
 			
 			if(savedQm==null) {//insert실패하면 
 				 throw new RuntimeException("failt to insert qna");
@@ -56,8 +56,8 @@ public class QnaUpdateService {
 	//나머지 데이터를 채우는 함수 
 	private Qnamodel toqm(QnaRequest qnaReq) {
 		Date now = new Date();
-		return new Qnamodel(qnaReq.getSn(),qnaReq.getTitle(),qnaReq.getCategory(),qnaReq.getQpublic(),0,"testid",now,qnaReq.getQuestion(),
-				"answer",qnaReq.getImage(),0);
+		return new Qnamodel(qnaReq.getSn(),qnaReq.getTitle(),qnaReq.getCategory(),qnaReq.getQpublic(),0,qnaReq.getUser(),now,qnaReq.getQuestion(),
+				qnaReq.getImage(),0);
 	}
 	
 }//end of class

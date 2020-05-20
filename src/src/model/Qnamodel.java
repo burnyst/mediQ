@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Qnamodel {
 	
+	private User user;
 	private int sn;
 	private String title;
 	private String category;
@@ -17,6 +18,7 @@ public class Qnamodel {
 	private  int qstate; //0은 답변없음 1은 답변있음
 	
 public Qnamodel() {}
+
 public Qnamodel(int  sn,String title,String category,int qpublic,int vcount,
 		String mid,Date rdate,String question,String answer,String image,int qstate) {
 	this.sn =sn;
@@ -72,6 +74,29 @@ public Qnamodel(int sn,String title,String category,int qpublic,int vcount,
 public Qnamodel(int sn, String answer) {
 	this.sn =sn;
 	this.answer =answer;
+}
+
+public Qnamodel(int sn, String title, String category, int qpublic, int vcount, User user, Date rdate, String question,
+		String image, int qstate) {
+	this.sn =sn;
+	this.title =title;
+	this.category = category;
+	this.qpublic = qpublic;
+	this.vcount =  vcount;
+	this.user = user;
+	this.mid =user.getMid();
+	this.rdate= rdate;
+	this.question=question;
+	this.image=image;
+	this.qstate=qstate;	
+}
+
+public User getUser() {
+	return user;
+}
+
+public void setUser(User user) {
+	this.user = user;
 }
 public int getSn() {
 	return sn;
@@ -140,11 +165,12 @@ public void setQstate(int qstate) {
 	this.qstate = qstate;
 }
 
+
 @Override
 public String toString() {
-	return "Qnamodel [sn=" + sn + ", title=" + title + ", category=" + category + ", qpublic=" + qpublic + ", vcount="
-			+ vcount + ", mid=" + mid + ", rdate=" + rdate + ", question=" + question + ", answer=" + answer
-			+ ", image=" + image + ", qstate=" + qstate + "]";
+	return "Qnamodel [user=" + user + ", sn=" + sn + ", title=" + title + ", category=" + category + ", qpublic="
+			+ qpublic + ", vcount=" + vcount + ", mid=" + mid + ", rdate=" + rdate + ", question=" + question
+			+ ", answer=" + answer + ", image=" + image + ", qstate=" + qstate + "]";
 }
 //id 일치여부 체크, 관리자 등급 체크 여부
 public boolean matchId(String id) {
