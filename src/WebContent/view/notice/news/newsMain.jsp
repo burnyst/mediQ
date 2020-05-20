@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,25 +18,28 @@ border:15px;
 }
 table {
 	border-collapse: collapse;
-	width: 70%;
+	width: 80%;
 	margin: auto;
   text-align: center;
   
 	}
 
 </style>
-<jsp:include page="../../header.jsp"></jsp:include>
+
 </head>
 <body>
 		<h2>뉴스 게시판</h2><br/> 
-		<div>
+		<div class="search">
 		<form method="get" action="newssearch.do">
 		<label>제목을 검색하세요</label>	
 		<input type=text id="keyword1" name="keyword1"  />
 		<input type="submit" value="검색" > 
-		<input type="button" id="register" value="등록" onclick="location.href='${pageContext.request.contextPath}/newswrite.do'">
 		</form>
 		</div>
+		<div>
+		<input type="button" id="register" value="등록" onclick="location.href='${pageContext.request.contextPath}/newswrite.do'">
+		</div>
+		<div class="items">
 		<form>
 		<hr>
 		<h4> 총 ${newsPAGE.totalCount} ${newsSearchPAGE.total} 건</h4>
@@ -60,7 +63,8 @@ table {
 						<%-- ${news.sn} 은 News클래스의 get sn()메소드를 호출 --%>
 						<th>${news.sn }</th>
 						<th><a href="${pageContext.request.contextPath}/newsdetail.do?title=${news.title}&pageNo=${newsPAGE.currentPage}&sn=${news.sn}">${news.title}</a></th>
-						<th>${news.summary }</th>
+						<th style="border: 1px solid black; max-width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+						${news.summary }</th>
 						<th>${news.press }</th>
 						<th>${news.mid }</th>
 						<th>${news.rdate }</th>
@@ -94,8 +98,9 @@ table {
 				<tr>
 						<%-- ${news.sn} 은 News클래스의 get sn()메소드를 호출 --%>
 						<th>${news.sn }</th>
-						<th><a href="search.do?no=${news.sn}&pageNo=${newsPAGE.currentPage}">${news.title }</a></th>
-						<th>${news.summary }</th>
+						<th><a href="${pageContext.request.contextPath}./newsdetail.do?sn=${news.sn}">${news.title }</a></th>
+						<th style="border: 1px solid black; max-width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+								${news.summary}</th>
 						<th>${news.press }</th>
 						<th>${news.mid }</th>
 						<th>${news.rdate }</th>
@@ -106,7 +111,8 @@ table {
 
 		</table>
 		</form>
+		</div>
 						
 </body>
-	<jsp:include page="../../footer.jsp"></jsp:include>
+
 </html>
