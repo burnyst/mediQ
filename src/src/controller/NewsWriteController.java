@@ -5,7 +5,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import model.News;
+import model.User;
 
 //p640
 //글등록 폼 및 글등록 요청 담당 컨트롤러
@@ -16,12 +19,12 @@ import model.News;
  * 성공시		/view/article/newArticleAccess.jsp
  * 실패시		/view/article/newArticleForm.jsp
  */
-public class WriteNewsHandler implements controller.CommandHandler {
+public class NewsWriteController implements controller.CommandHandler {
 	//View
-	private static final String FORM_VIEW =	"/newsInsert.jsp";
+	private static final String FORM_VIEW =	"view/notice/news/newsInsert.jsp";   //view/notice/news/newsInsert.jsp..newsInsert.jsp
 	//Service
-	private WriteNewsService writeNewsService = 
-			new WriteNewsService();
+	private NewsWriteService writeNewsService = 
+			new NewsWriteService();
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -54,19 +57,21 @@ public class WriteNewsHandler implements controller.CommandHandler {
 		System.out.println("WriteNewsHandler의 processSubmit()호출");
 		
 		Map<String, Boolean> errors = new HashMap<>();
-		request.setAttribute("errors", errors);//3.Model(Request, session) 
+		request.setAttribute("errors", errors);
 		System.out.println("ERRORS"+errors);
 		//1.파라미터받기
-		String mid= request.getParameter("mid"); 
+		 
 		String title = request.getParameter("title");
 		String press = request.getParameter("press");
 		String summary = request.getParameter("summary");
 		String nimage = request.getParameter("nimage");		
 		
 		//2.비즈니스로직(<->Service<->DAO<->DB) p640 39
-		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("AUTHUSER");
+		System.out.println("user"+user);
 		//글등록 p641 40
-		WriteRequest writeReq = createWriteRequest(mid, title,press, summary,nimage);
+		WriteRequest writeReq = createWriteRequest(user, title,press, summary,nimage);
 		writeReq.validate(errors);
 		
 		//유효성검사를 불통하여 글등록폼으로 이동
@@ -87,19 +92,18 @@ public class WriteNewsHandler implements controller.CommandHandler {
 	}
 
 	//p641 53
-	private WriteRequest createWriteRequest(String mid, String title, String summary, String nimage,String press) {
+	private WriteRequest createWriteRequest(User user, String title, String summary, String nimage,String press) {
 		return new WriteRequest
-				(mid,title,summary,nimage,press);
+				(new User(user.getMid(),user.getMlevel()),title,summary,nimage,press);
 	}//createWriteRequest
 	//TimeStamp타입을 Date타입으로 변화 p648 47
 		
 }
 /*
-insert into article(writer_id,writer_name,title,regdate,moddate,read_cnt)
-values(writer_id?,writer_name?,title?,regdate?,moddate?,0);
+private QnaRequest createQnaRequest(User user,String title, String category, int qpublic, String question,String image) {
+		return new QnaRequest(new User(user.getMid(),user.getMlevel()),title,category,qpublic,question,image);
 
-insert into article_content(article_no,content)
-values(article_no?,content?);
+	}
  */
 
 

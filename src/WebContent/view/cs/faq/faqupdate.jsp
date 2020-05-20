@@ -59,6 +59,7 @@
                     </td>
                 <tr>
                     <td colspan="2" class="btn"><br/>
+                    	<input type="hidden" id="mid" name="mid" value="${authUser.mid}"/>
                         <input type="submit" id="submitBtn" name="submitBtn" value="확인"/>
                         <input type="reset" id="resetBtn" name="resetBtn" value="취소"/>
                     </td>

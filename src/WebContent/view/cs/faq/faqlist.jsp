@@ -77,7 +77,7 @@
    				<c:forEach var="faq" items="${faqPage.content}">
 	    			<tr class="row">
 	    				<td>${faq.sn}</td>
-	    				<td><a href="faqvcount.do?sn=${faq.sn}&category=${faq.category}">${faq.title}</a></td>
+	    				<td><a href="faqvcount.do?sn=${faq.sn}&category=${faq.category}&mid=${authUser.mid}">${faq.title}</a></td>
 	    				<td>${faq.mid}</td>
 	    				<td>${faq.rdate}</td>
 	    				<td>${faq.category}</td>

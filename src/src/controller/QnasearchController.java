@@ -2,7 +2,9 @@ package controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import model.User;
 import page.QnaSearchPage;
 
 public class QnasearchController implements CommandHandler{
@@ -20,11 +22,14 @@ public class QnasearchController implements CommandHandler{
 		System.out.println("keyword==>"+keyword1 +keyword2 +keyword3+keyword4);
 		
 		//2.비즈니스로직(<->Service<->DAO<->DB) 
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("AUTHUSER");
 		QnaSearchPage qnaSearchPage = 
 				qnasearchservice.getKeywordt(keyword1, keyword2, keyword3, keyword4);
 		
 		//3.Model
 		request.setAttribute("qnaSearchPAGE", qnaSearchPage);
+		request.setAttribute("user", user);		
 				
 		//4.View
 		return  "/view/cs/qna/qnalist.jsp";

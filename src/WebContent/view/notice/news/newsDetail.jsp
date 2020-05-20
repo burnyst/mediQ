@@ -1,39 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>뉴스게시판 상세페이지</title>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<style>
-
-h2{
-text-align: center;
-border:15px;
-}
-#contents {
-   border-collapse: collapse;
-   width: 500px;
-   margin: auto;
-   padding: 50px;
-  text-align: left;
-   }
-#info {
-   width: 1000px;
-   margin: auto;
-   padding: 40px 20px;
-  text-align: center;
-
-}
-input{
-float:right;
-}
-
-</style>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ page import="model.User" %>
+<%@ page import="controller.Controller" %>
+<%@ page import="controller.NotLoginException" %>       
+<t:head title="뉴스게시판 상세페이지">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
+    <script src="${pageContext.request.contextPath}/js/search.js"></script>
+		<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+		<meta charset="UTF-8">
+		<style>
+		
+		h2{
+		text-align: center;
+		border:15px;
+		}
+		#contents {
+		   border-collapse: collapse;
+		   width: 500px;
+		   margin: auto;
+		   padding: 50px;
+		  text-align: left;
+		   }
+		#info {
+		   width: 1000px;
+		   margin: auto;
+		   padding: 40px 20px;
+		  text-align: center;
+		}
+		input{
+		float:right;
+		}
+		</style>
+</t:head>
+<t:body>
 		<%-- <form id="f" name="f" action="./newsmodify.do?sn=${newd.sn}" method="post">
 				 	<input type="submit" id="modify" value="수정"/>
 		</form> --%>
@@ -73,11 +74,9 @@ float:right;
          <a href="./newslist.do"><input type=button  value="목록으로" /></a>
 					<input type="hidden" id="modify" value=""/>
 					</form>
-        <%-- <form method="post" action="./newsmodify.do?sn=${newd.sn}&title=${newd.title}&summary=${newd.summary}">
-         --%>
-       <%--  <input type="hidden" name="press" id="press" value="${newd.press}"/> --%>
+        
        <%----------------수정용-------------------------------------------------------------------------------- --%>
-        <%-- <c:if test=""> --%>
+			<c:if test="${user.mlevel==2}">
 					<form method="post" action="./newsmodify.do?sn=${newsd.sn}">
          <h2>뉴스게시판  수정 및 삭제</h2>
          <table id= info>
@@ -116,6 +115,6 @@ float:right;
 	    						<input type="button" id="deleteBtn"  name="deleteBtn" value="삭제" onclick="f1()"/>
 	    						</a> --%>
 					
-					<%-- </c:if> --%>
-</body>
+					 </c:if>
+</t:body>
 </html>

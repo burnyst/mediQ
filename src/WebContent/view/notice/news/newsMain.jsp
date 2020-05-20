@@ -1,42 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ page import="model.User" %>
+<%@ page import="controller.Controller" %>
+<%@ page import="controller.NotLoginException" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>뉴스게시판 메인페이지</title>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<style>
-h2{
-text-align: center;
-border:15px;
-}
-#register{
- float: right;
-}
-table {
-	border-collapse: collapse;
-	width: 70%;
-	margin: auto;
-  text-align: center;
-  
-	}
-
-</style>
-<jsp:include page="../../header.jsp"></jsp:include>
-</head>
-<body>
+<t:head title="뉴스게시판 메인페이지">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
+    <script src="${pageContext.request.contextPath}/js/search.js"></script>
+		<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+		<meta charset="UTF-8">
+		<style>
+		h2{
+		text-align: center;
+		border:15px;
+		}
+		#register{
+		 float: right;
+		}
+		table {
+			border-collapse: collapse;
+			width: 80%;
+			margin: auto;
+		  text-align: center;
+		  
+			}
+		
+		</style>
+</t:head>
+<t:body>
 		<h2>뉴스 게시판</h2><br/> 
-		<div>
+		<div class="search">
 		<form method="get" action="newssearch.do">
 		<label>제목을 검색하세요</label>	
 		<input type=text id="keyword1" name="keyword1"  />
 		<input type="submit" value="검색" > 
-		<input type="button" id="register" value="등록" onclick="location.href='${pageContext.request.contextPath}/newswrite.do'">
 		</form>
 		</div>
+		<c:if test="${user.mlevel==2}">
+		<div>
+		<input type="button" id="register" value="등록" onclick="location.href='${pageContext.request.contextPath}/newswrite.do'">
+		</div>
+		</c:if>
+		<div class="table">
 		<form>
 		<hr>
 		<h4> 총 ${newsPAGE.totalCount} ${newsSearchPAGE.total} 건</h4>
@@ -60,7 +68,8 @@ table {
 						<%-- ${news.sn} 은 News클래스의 get sn()메소드를 호출 --%>
 						<th>${news.sn }</th>
 						<th><a href="${pageContext.request.contextPath}/newsdetail.do?title=${news.title}&pageNo=${newsPAGE.currentPage}&sn=${news.sn}">${news.title}</a></th>
-						<th>${news.summary }</th>
+						<th style="border: 1px solid black; max-width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+						${news.summary }</th>
 						<th>${news.press }</th>
 						<th>${news.mid }</th>
 						<th>${news.rdate }</th>
@@ -85,7 +94,7 @@ table {
 				</tr>
 				</c:if> 
 <!--research 영역  -->
-			<c:if test="${newssearchPAGE.hasNoNews()}">
+			<c:if test="${newsSearchPAGE.hasNoNews()}">
 				<tr>
 					<td colspan="6">게시물이 존재하지 않습니다.</td>
 				</tr>
@@ -94,19 +103,16 @@ table {
 				<tr>
 						<%-- ${news.sn} 은 News클래스의 get sn()메소드를 호출 --%>
 						<th>${news.sn }</th>
-						<th><a href="search.do?no=${news.sn}&pageNo=${newsPAGE.currentPage}">${news.title }</a></th>
-						<th>${news.summary }</th>
+						<th><a href="${pageContext.request.contextPath}/newsdetail.do?sn=${news.sn}">${news.title }</a></th>
+						<th style="border: 1px solid black; max-width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+								${news.summary}</th>
 						<th>${news.press }</th>
 						<th>${news.mid }</th>
 						<th>${news.rdate }</th>
 				</tr>
 			</c:forEach> 
-
-
-
 		</table>
 		</form>
-						
-</body>
-	<jsp:include page="../../footer.jsp"></jsp:include>
+		</div>			
+</t:body>
 </html>
