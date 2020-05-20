@@ -3,12 +3,14 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Member;
 import page.FaqSearchPage;
 
 public class FaqSearchController  implements CommandHandler{
 
 	//Service
 	private FaqSearchService searchService = new FaqSearchService();
+
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -25,10 +27,12 @@ public class FaqSearchController  implements CommandHandler{
 		
 		//비즈니스로직 수행
 		FaqSearchPage faqSearchPage = searchService.getFaqPage(pageNo,search,category);
+
 		System.out.println("pageNo="+pageNo+"/search="+search+"/category="+category);
 		
 		//Model
 		request.setAttribute("faqSearchPage", faqSearchPage);
+
 		
 		//View
 		return "view/cs/faq/faqsearch.jsp";

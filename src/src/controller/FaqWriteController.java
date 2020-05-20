@@ -5,9 +5,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import model.Faq;
 import model.FaqRequest;
+import model.User;
 
 
 public class FaqWriteController implements CommandHandler {
@@ -54,16 +55,16 @@ public class FaqWriteController implements CommandHandler {
 		String contents = request.getParameter("contents");
 		String mid = request.getParameter("mid");
 		
-		System.out.println("category="+category+"/title="+title+"/contents="+contents +"/mid="+mid);
 		
-			//	HttpSession session = request.getSession();
-			//User user = (User)session.getAttribute("authUser");
+		System.out.println("category="+category+"/title="+title+"/contents="+contents);
+
 	
 		//회원 비지니스로직 수행 작성
-		//User user = (User)req.getSession(false).getAttribute("authUser");
-		FaqRequest writeFaq = createWriteRequest(category,title,contents,mid);
+		FaqRequest writeFaq = createWriteRequest(mid,category,title,contents);
 		writeFaq.validate(errors);
 	
+		
+		
 		if(!errors.isEmpty()) {
 			return FORM_VIEW; 
 	  }
@@ -79,9 +80,11 @@ public class FaqWriteController implements CommandHandler {
 	}	
 
 
-	private FaqRequest createWriteRequest(String category, String title, String contents, String mid) {
-		return new FaqRequest(category, title, contents,mid);
+	private FaqRequest createWriteRequest(String mid,String category, String title, String contents) {
+		return new FaqRequest(mid,category, title, contents);
 	}
+
+
 
 
 

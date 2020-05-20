@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
+<%@ page import="model.User" %>
+<%@ page import="controller.Controller" %>
+<%@ page import="controller.NotLoginException" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +31,14 @@
    <script src="${pageContext.request.contextPath}/js/faq.js?version=20200519" type="text/javascript" charset='euc-kr'></script>
 </head>
 <body>
+<%
+	User authUser = null;
+	try {
+		authUser = Controller.getAuthUser(request);
+		pageContext.setAttribute("authUser", authUser);
+	} catch (NotLoginException e) {
+	}
+%>
 <jsp:include page="../../header.jsp"></jsp:include>
 	FaqCategoryPage=${faqCategoryPage}<br/>
 	*총페이지수 ${faqCategoryPage.categorytotal}건<br/>
@@ -37,9 +48,8 @@
  <div class="page_body">
     <div class="board_search">
         <select name="category" id="category" onchange="if(this.value) location.href=(this.value);">
-        	<option>선택</option>
             <c:if test="${faqCategoryPage.category == null}">
-            	<option value="${pageContext.request.contextPath}/faqlist.do">전체선택</option>
+            	<option value="${pageContext.request.contextPath}/faqlist.do" selected>전체선택</option>
             	<option value="${pageContext.request.contextPath}/faqcategory.do?category=로그인">로그인</option>
             	<option value="${pageContext.request.contextPath}/faqcategory.do?category=약품 정보">약품 정보</option>
             	<option value="${pageContext.request.contextPath}/faqcategory.do?category=기타">기타</option>
@@ -89,7 +99,7 @@
 				<c:forEach var="faq" items="${faqCategoryPage.categorylist}">
 	    			<tr class="row">
 	    				<td>${faq.sn}</td>
-	    				<td><a href="faqccount.do?sn=${faq.sn}&category=${faq.category}">${faq.title}</a></td>
+	    				<td><a href="faqccount.do?sn=${faq.sn}&category=${faq.category}&mid=${member.mid}">${faq.title}</a></td>
 	    				<td>${faq.mid}</td>
 	    				<td>${faq.rdate}</td>
 	    				<td>${faq.category}</td>
@@ -97,49 +107,51 @@
 	    			</tr>
 	    			<tr class="hidden">
 	    				<td colspan="6">
-	    					<textarea cols="150" rows="10">${faq.contents}</textarea>
-	    					<%-- <c:if test=""> --%>
+	    					<u:pre value="${faq.contents}"/><br/><br/>
+	    					<c:if test="${authUser.mlevel>1}">
 	    						<form id="modify" name="modify" action="${pageContext.request.contextPath}/faqupdate.do">
 		    						<input type="hidden" name="sn" value="${faq.sn}"/>
 		    						<input type="hidden" name="title" value="${faq.title}"/>
 		    						<input type="hidden" name="contents" value="${faq.contents}"/>
 									<input type="hidden" name="category" value="${faq.category}"/>
-									<input type="hidden" name="mid" value="${faq.mid}"/>
+									<input type="hidden" name="mid" value="${authUser.mid}"/>
 	    							<input type="submit" id="modifyBtn" name="modifyBtn" value="수정"/>
 	    						</form>
 	    						<a href="${pageContext.request.contextPath}/faqdelete.do">
 	    						<input type="button" id="deleteBtn"  name="deleteBtn" value="삭제" onclick="f1()"/>
 	    						</a>
-	    					<%-- </c:if> --%>
+	    					</c:if>
 	    				</td>
 	   				</tr>
 	   				<c:if test="${faq.sn== faqVcount.sn}">
 	    			<tr class="">
 	    				<td colspan="6" class="contentView">
 	    					<u:pre value="${faq.contents}"/><br/><br/>
-	    					<%-- <c:if test=""> --%>
+	    					<c:if test="${authUser.mlevel>1}">
 	    						<form id="modify" name="modify" action="${pageContext.request.contextPath}/faqupdate.do">
 		    						<input type="hidden" name="sn" value="${faq.sn}"/>
 		    						<input type="hidden" name="title" value="${faq.title}"/>
 		    						<input type="hidden" name="contents" value="${faq.contents}"/>
 									<input type="hidden" name="category" value="${faq.category}"/>
-									<input type="hidden" name="mid" value="${faq.mid}"/>
+									<input type="hidden" name="mid" value="${authUser.mid}"/>
 	    							<input type="submit" id="modifyBtn" name="modifyBtn" value="수정"/>
 	    						</form>
 	    						<a href="${pageContext.request.contextPath}/faqdelete.do?sn=${faq.sn}">
 	    						<input type="button" id="deleteBtn"  name="deleteBtn" value="삭제" onclick="f1()"/>
 	    						</a>
-	    					<%-- </c:if> --%>
+	    					</c:if>
 	    				</td>
 	   				</tr>
 	   				</c:if>
 				</c:forEach>
-			<c:if test="${faqCategoryPage.hasFaq() }">
+				<c:if test="${authUser.mlevel>1}">
 				<tr>
-					<td colspan="6"><a href="${pageContext.request.contextPath}/faqinsert.do"><input type="button"  id="writeBtn" value="글쓰기"/></a></td>
+					<td colspan="6"><a href="${pageContext.request.contextPath}/faqinsert.do?mid=${authUser.mid}"><input type="button"  id="writeBtn" value="글쓰기"/></a></td>
 				</tr>
+				</c:if>
 				<%-- </c:if> --%>
 				<!--  페이징 처리 -->
+				<c:if test="${faqCategoryPage.hasFaq() }">
 				<tr class="page">
 					<td colspan="6">
 						<c:if test="${faqCategoryPage.startPage>5 }">

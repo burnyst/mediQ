@@ -12,22 +12,25 @@ import java.util.List;
 
 import dbcp.JdbcUtil;
 import model.Faq;
+import model.Member;
+import model.User;
 
 
 public class FaqDAO {
 
 	//update
-	public int update(Connection conn, String category, String title, String contents, int sn)
+	public int update(Connection conn, String category, String title, String contents, String mid, int sn)
 		throws SQLException{
 		PreparedStatement pstmt = null;
 		try {
-			String sql="update faq set category=? , title=? , contents=? ,rdate=sysdate"
+			String sql="update faq set category=? , title=? , contents=? ,mid=? rdate=sysdate "
 					+ " where sn=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, category);
 			pstmt.setString(2, title);
 			pstmt.setString(3, contents);
-			pstmt.setInt(4, sn);
+			pstmt.setString(4, mid);
+			pstmt.setInt(5, sn);
 			int cnt = pstmt.executeUpdate();
 					
 			System.out.println("글 수정FaqDAO-update()호출성공 category="+category
@@ -348,8 +351,5 @@ public class FaqDAO {
 		
 
 	}
-
-		
-		
-	
+			
 }

@@ -27,7 +27,7 @@ public class FaqUpdateService {
 			
 			//faq테이블에 해당게시글의 제목 수정
 			faqDAO.update(conn, updateReq.getCategory(), updateReq.getTitle(),
-					updateReq.getContents(), updateReq.getSn());
+					updateReq.getContents(), updateReq.getMid(),updateReq.getSn());
 			System.out.println("faqDao/////category="+updateReq.getCategory()
 											+"/title="+updateReq.getTitle()+
 											"/contents"+updateReq.getContents());

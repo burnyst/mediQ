@@ -3,11 +3,13 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Member;
 import page.FaqCategoryPage;
 
 public class FaqCategoryController  implements CommandHandler{
 
 	private FaqCategoryService categoryService = new FaqCategoryService();
+
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("FaqCategoryController의 process()진입");
@@ -22,9 +24,11 @@ public class FaqCategoryController  implements CommandHandler{
 		}
 		//2.비즈니스로직 수행(<->Service<->DAO<->DB)(p652-22)
 		FaqCategoryPage faqCategoryPage = categoryService.getFaqPage(pageNo, category);
+
 		
 		//Model
 		request.setAttribute("faqCategoryPage",faqCategoryPage);
+
 		
 		//View
 		return "view/cs/faq/faqcategory.jsp";

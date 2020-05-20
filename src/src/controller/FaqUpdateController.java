@@ -6,9 +6,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Faq;
 import model.FaqRequest;
+import model.User;
 
 
 public class FaqUpdateController implements CommandHandler{
@@ -22,7 +24,7 @@ public class FaqUpdateController implements CommandHandler{
 	Faq faq = new Faq();
 	
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("FaqUpdateHandler의 process()진입");
+		System.out.println("FaqUpdateController의 process()진입");
 
 		if(request.getMethod().equalsIgnoreCase("GET")) {
 			System.out.println("FaqUpdate의 method방식="+request.getMethod());
@@ -48,19 +50,19 @@ public class FaqUpdateController implements CommandHandler{
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
 		String mid = request.getParameter("mid");
-		
-		System.out.println("processSubmit sn="+sn+"category="+category+"title="+title+
-				"contents="+contents+"mid="+mid);
+		System.out.println("processSubmit sn="+sn+"/category="+category+"/title="+title+
+				"/contents="+contents+"/mid="+mid);
 		//비즈니스로직
-		//HttpSession session = request.getSesseion();
-		//User authUser=(User)session.getAttribute("authUser");
+		HttpSession session = request.getSession();
+		User authUser = (User)session.getAttribute("authUser");
+
 		
 		//나중에 아이디 추가
 		FaqRequest updateReq = new FaqRequest(
-				sn,category, title, contents,mid);
+				authUser.getMid(),sn,category, title, contents);
 		
 		System.out.println("updateReq sn="+sn+"category="+category+"title="+title+
-				"contents="+contents+"mid="+mid);
+				"contents="+contents+"mid="+authUser.getMid());
 		
 		//에러정보
 		Map<String,Boolean> errors = new HashMap<>();
@@ -117,9 +119,9 @@ public class FaqUpdateController implements CommandHandler{
 		
 		
 		FaqRequest updateReq = new FaqRequest(
-				sn,category, title, contents,mid);
-				System.out.println("processForm sn="+sn+"/category="+faq.getCategory()+"/title="+faq.getTitle()
-							+"/contents="+faq.getContents()+"/mid="+faq.getMid());
+				mid,sn,category, title, contents);
+				System.out.println("processForm sn="+sn+"/category="+category+"/title="+title
+							+"/contents="+contents+"/mid="+mid);
 				
 		
 		//Model

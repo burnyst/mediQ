@@ -18,9 +18,13 @@ public class FaqWriteService {
 		try {
 			conn=JdbcUtil.getConnection();
 			conn.setAutoCommit(false);
+			
 			Faq faq1 = toFaq(writeFaq);
 			System.out.println("faq1="+faq1);
 			Faq savedFaq = faqDAO.insert(conn,faq1);
+			
+			System.out.println("savedFaq="+savedFaq);
+			System.out.println("faq1="+faq1);
 			
 			if(savedFaq == null) {	//insert 실패시 null 리턴
 				throw new RuntimeException("fail to insert faq");

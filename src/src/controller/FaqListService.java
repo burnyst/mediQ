@@ -5,10 +5,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import dao.FaqDAO;
+import dao.MemberDAO;
 import dbcp.JdbcUtil;
 import model.Faq;
+import model.Member;
+import model.User;
 import page.FaqPage;
-import page.Page;
 
 //전체목록보기 요청 담당 컨트롤러에서 호출하는 서비스클래스
 //p650
@@ -16,6 +18,7 @@ import page.Page;
 public class FaqListService {
 	
 	private FaqDAO faqDAO = new FaqDAO();
+	private MemberDAO memberDAO = new MemberDAO();
 	private int size = 10;		//한페이지당 출력할 게시글 수
 	
 	public FaqPage getFaqPage(int pageNo) {
@@ -44,4 +47,5 @@ public class FaqListService {
 			throw new RuntimeException(e);
 		}
 	}
+
 }
