@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,81 +8,66 @@
 #Cancel {float:right;}
 #Add {float:right;}
 </style>
-<script type="text/javascript">
-
-function msg1() {
-	 if (confirm('저장하지 않고 이전페이지로 가시겠습니까?') == true){    //확인
-		 location.href="Search.jsp";
-	 }else{   //취소
-	     return false;
-	 }
-	}function msg2() {
-		 if (confirm('의약품 정보를 추가하시겠습니까?') == true){    //확인
-			 location.href="Search.jsp";
-		 }else{   //취소
-		     return false;
-		 }
-		}
-
-</script>
-
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mediQ</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mediq.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
+    <script src="${pageContext.request.contextPath}/js/search.js"></script>
 </head>
-<h2>header</h2><!-- header부분입니둥 -->
 <body>
-<form name='my_form' action="get">
+<jsp:include page="/view/header.jsp"></jsp:include>
+	
+<form action="plusinfo.do" method="post">
 <br>관리자페이지입니다</br>
 <hr>
 <br>의약품 정보 추가</br>
-<p></p>
-<tr><td>
-    <label class="catagory">분류    :</label>
+<hr>
+<p>
+
+</p>
 </td><td>
-    <select name="catagory">
-    <option selected="">선택하세요</option>
-    </select>
 </td></tr>
 </br>
 <p></p>
 <tr>
 		<td>품목기준코드 :</td>
-		<input type='text' id="ITEM_SEQ " name="ITEM_SEQ " placeholder="품목기준코드를 입력하세요"></input>
-		<td>업 체 명    :  </td>
-		<input type='text' id="ITEM_NAME " name="ITEM_NAME " placeholder="업체명을 입력하세요">  </input>
-		<td>품목명 :</td>
-		<input type='text' id="ENTP_NAME " name="ENTP_NAME " placeholder="품목명을 입력하세요"></input>
+		<input type='text' id="ITEM_SEQ " name="ITEM_SEQ" />
+		<td>품목명:</td>
+		<input type='text' id="ITEM_NAME " name="ITEM_NAME" />
+		<td>업체명 :</td>
+		<input type='text' id="ENTP_NAME " name="ENTP_NAME " />
 		<td>허가일자 :</td>
-		<input type='text' id="ITEM_PERMIT_DATE " name="ITEM_PERMIT_DATE " placeholder="허가일자를 입력하세요"></input>
+		<input type='text' id="ITEM_PERMIT_DATE " name="ITEM_PERMIT_DATE" />
 </tr></br></br>
 <tr>
 		<td>주의사항 :</td>
-		<input type='text' id="NB_DOC_DATA " name="NB_DOC_DATA " placeholder="주의사항을 입력하세요"></input>
+		<input type='text' id="NB_DOC_DATA " name="NB_DOC_DATA" />
 		<td>취소일자 :</td>
-		<input type='text' id="CANCEL_DATE " name="CANCEL_DATE " placeholder="취소일자를 입력하세요"></input>
+		<input type='text' id="CANCEL_DATE " name="CANCEL_DATE"/>
 		<td>전문일반 :</td>
-		<input type='text' id="EE_DOC_DATA " name="EE_DOC_DATA " placeholder="전문일반을 입력하세요"></input>
+		<input type='text' id="EE_DOC_DATA " name="EE_DOC_DATA"/>
 		<td>용법용량 :</td>
-		<input type='text' id="ETC_OTC_CODE " name="ETC_OTC_CODE " placeholder="용법용량을 입력하세요"></input>
+		<input type='text' id="ETC_OTC_CODE " name="ETC_OTC_CODE"/>
 </tr></br></br>
 <tr>
 		<td>변경일자 :</td>
-		<input type='text' id="UD_DOC_DATA " name="UD_DOC_DATA" placeholder="변경일자를 입력하세요"></input>
+		<input type='text' id="UD_DOC_DATA " name="UD_DOC_DATA"/>
 		<td>분류 :</td>
-		<input type='text' id="CLASS_NO " name="CLASS_NO" placeholder="분류를 입력하세요"></input>
+		<input type='text' id="CLASS_NO " name="CLASS_NO"/>
 		<td>성상 :</td>
-		<input type='text' id="CHART " name="CHART" placeholder="성상를 입력하세요"></input>
+		<input type='text' id="CHART " name="CHART"/>
 		<td>포장단위 :</td>
-		<input type='text' id="PACK_UNIT " name="PACK_UNIT" placeholder="포장단위를 입력하세요"></input>
+		<input type='text' id="PACK_UNIT " name="PACK_UNIT"/>
 </tr></br></br>
 <tr>
-		<td>상세정보 :</td>
-		<input type='text' id=" " name="" placeholder="상세정보를 입력하세요"></input>
+		<td>효능효과 :</td>
+		<input type="text" cols=30/>
 </tr>
 </br></br></br>
 <hr>
-<input type='button' id='Cancel' onclick="msg1()" value="취소"/>
-<input type='button' id='Add' onclick="msg2()" value="추가"/> 
+<input type='reset' id='Cancel'  value="취소"/>
+<input type='submit' id='Add'  value="추가"/> 
 </form>
 </body>
 <h2>footer</h2> <!-- Footer부분이 되어집니둥 -->
