@@ -9,7 +9,7 @@ import model.News;
 
 //p658
 //게시글 상세조회 요청 컨트롤러에서 호출하는 서비스클래스
-public class DetailNewsService {
+public class NewsDetailService {
 	
 	//DAO테이블과 연동
 	private NewsDAO newsDao = new NewsDAO();
@@ -24,8 +24,8 @@ public class DetailNewsService {
 		
 		if(newd==null) { //특정글번호 title 조회 실패p659 20
 			try {
-				throw new Exception();
-			} catch (Exception e) {
+				throw new newsNotFoundException();
+			} catch (newsNotFoundException e) {
 				e.printStackTrace();
 			}
 		}

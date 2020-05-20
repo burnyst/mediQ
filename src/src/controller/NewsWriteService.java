@@ -7,9 +7,10 @@ import dao.NewsDAO;
 import dbcp.JdbcUtil;
 import model.News;
 
+
 //p638
 //글등록과 관련한 DAO와 연동
-public class WriteNewsService {
+public class NewsWriteService {
 
 	//article테이블과 연동하는  DAO
 	private NewsDAO newsDao = new NewsDAO();

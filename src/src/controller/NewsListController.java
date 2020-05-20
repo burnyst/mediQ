@@ -2,16 +2,18 @@ package controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.CommandHandler;
+import model.User;
 import page.NewsPage;
 
 
 //전체목록보기 요청 담당 컨트롤러 
 //p652
-public class ListNewsController implements CommandHandler {
+public class NewsListController implements CommandHandler {
  
-	private ListNewsService listService= new ListNewsService();
+	private NewsListService listService= new NewsListService();
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -25,10 +27,13 @@ public class ListNewsController implements CommandHandler {
 		}
 		
 		//2.비즈니스로직(<->Service<->DAO<->DB) 수행
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("AUTHUSER");
 		 NewsPage newsPage =
 				 listService.getNewsPage(pageNo);
 		//3.Model
 		request.setAttribute("newsPAGE", newsPage);
+		request.setAttribute("user", user);	
 		//4.View 지정
 		return"view/notice/news/newsMain.jsp";
 		//view/notice/news/newsMain.jsp...newsMain.jsp

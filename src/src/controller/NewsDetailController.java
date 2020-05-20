@@ -2,13 +2,15 @@ package controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.News;
+import model.User;
+import newsService.NewsDetailService;
 
+public class NewsDetailController implements controller.CommandHandler {
 
-public class DetailNewsController implements CommandHandler {
-
-	private DetailNewsService DetailnewsService =	new DetailNewsService();
+	private NewsDetailService DetailnewsService =	new NewsDetailService();
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -24,9 +26,13 @@ public class DetailNewsController implements CommandHandler {
 			//2-1조회수 증가 : 조회수 증가시 true 전달
 			//2-2 상세내용 조회
 			News newsd =DetailnewsService.getNews(sn);
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute("AUTHUSER");
+			System.out.println("detail user =>"+user);
 			
 			//3.MODEL
 			request.setAttribute("newsd",newsd);
+			request.setAttribute("user", user);	
 			
 			//4.VIEw
 			return "view/notice/news/newsDetail.jsp";

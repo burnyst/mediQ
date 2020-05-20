@@ -8,18 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.News;
+import newsService.NewsDetailService;
 
 
-
-public class ModifyNewsController implements controller.CommandHandler {
+public class NewsModifyController implements controller.CommandHandler {
 
 	//View
 	private static final String FORM_VIEW ="view/notice/news/newsModify.jsp";//view/notice/news/newsModify.jsp....newsModify.jsp
 	
 	//Service
 	//수정처리용 서비스
-	private ModifyNewsService modifynewsService =
-			new ModifyNewsService();
+	private NewsModifyService modifynewsService =
+			new NewsModifyService();
 //	private DetailNewsService detailnewsService=
 //			new DetailNewsService();	
 //	상세내용조회 서비스
