@@ -98,7 +98,7 @@
 				<c:forEach var="faq" items="${faqSearchPage.searchlist}">
 	    			<tr class="row">
 	    				<td>${faq.sn}</td>
-	    				<td><a href="faqscount.do?sn=${faq.sn}&category=${faq.category}&mid=${member.mid}">${faq.title}</a></td>
+	    				<td><a href="faqscount.do?sn=${faq.sn}&category=${faq.category}&mid=${authUser.mid}">${faq.title}</a></td>
 	    				<td>${faq.mid}</td>
 	    				<td>${faq.rdate}</td>
 	    				<td>${faq.category}</td>

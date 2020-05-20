@@ -51,18 +51,17 @@ public class FaqUpdateController implements CommandHandler{
 		String contents = request.getParameter("contents");
 		String mid = request.getParameter("mid");
 		System.out.println("processSubmit sn="+sn+"/category="+category+"/title="+title+
-				"/contents="+contents+"/mid="+mid);
+				"/contents="+contents);
 		//비즈니스로직
-		HttpSession session = request.getSession();
-		User authUser = (User)session.getAttribute("authUser");
+//		HttpSession session = request.getSession();
+//		User authUser = (User)session.getAttribute("authUser");
 
 		
 		//나중에 아이디 추가
 		FaqRequest updateReq = new FaqRequest(
 				sn,category, title, contents,mid);
 		
-		System.out.println("updateReq sn="+sn+"category="+category+"title="+title+
-				"contents="+contents+"mid="+authUser.getMid());
+
 		
 		//에러정보
 		Map<String,Boolean> errors = new HashMap<>();
@@ -97,16 +96,16 @@ public class FaqUpdateController implements CommandHandler{
 		String category = request.getParameter("category");
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
-		String mid=request.getParameter("mid");
+		String mid = request.getParameter("mid");
 		
 		System.out.println("process form sn="+sn+"category="+category+"title="+title+
-				"contents="+contents+"mid="+mid);
+				"contents="+contents);
 
 		
 		//비즈니스로직
 		Faq faq = readService.getFaq(sn);
-//		HttpSession session = request.getSession();
-//		User authUser=(User)session.getAttribute("authUser");
+		HttpSession session = request.getSession();
+		User authUser=(User)session.getAttribute("authUser");
 
 	
 		
