@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import dao.QnaDAO;
@@ -56,7 +57,7 @@ public class QnaUpdateService {
 	//나머지 데이터를 채우는 함수 
 	private Qnamodel toqm(QnaRequest qnaReq) {
 		Date now = new Date();
-		return new Qnamodel(qnaReq.getSn(),qnaReq.getTitle(),qnaReq.getCategory(),qnaReq.getQpublic(),0,qnaReq.getUser(),now,qnaReq.getQuestion(),
+		return new Qnamodel(qnaReq.getSn(),qnaReq.getTitle(),qnaReq.getCategory(),qnaReq.getQpublic(),0,qnaReq.getUser(),now ,qnaReq.getQuestion(),
 				qnaReq.getImage(),0);
 	}
 	
