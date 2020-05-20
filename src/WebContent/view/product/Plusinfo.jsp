@@ -32,33 +32,33 @@
 <p></p>
 <tr>
 		<td>품목기준코드 :</td>
-		<input type='text' id="ITEM_SEQ " name="ITEM_SEQ" />
+		<input type='text' id="ITEM_SEQ" name="ITEM_SEQ" />
 		<td>품목명:</td>
-		<input type='text' id="ITEM_NAME " name="ITEM_NAME" />
+		<input type='text' id="ITEM_NAME" name="ITEM_NAME" />
 		<td>업체명 :</td>
-		<input type='text' id="ENTP_NAME " name="ENTP_NAME " />
+		<input type='text' id="ENTP_NAME" name="ENTP_NAME"/>
 		<td>허가일자 :</td>
-		<input type='text' id="ITEM_PERMIT_DATE " name="ITEM_PERMIT_DATE" />
+		<input type='text' id="ITEM_PERMIT_DATE" name="ITEM_PERMIT_DATE" />
 </tr></br></br>
 <tr>
 		<td>주의사항 :</td>
-		<input type='text' id="NB_DOC_DATA " name="NB_DOC_DATA" />
+		<input type='text' id="NB_DOC_DATA" name="NB_DOC_DATA" />
 		<td>취소일자 :</td>
-		<input type='text' id="CANCEL_DATE " name="CANCEL_DATE"/>
+		<input type='text' id="CANCEL_DATE" name="CANCEL_DATE"/>
 		<td>전문일반 :</td>
-		<input type='text' id="EE_DOC_DATA " name="EE_DOC_DATA"/>
+		<input type='text' id="EE_DOC_DATA" name="EE_DOC_DATA"/>
 		<td>용법용량 :</td>
-		<input type='text' id="ETC_OTC_CODE " name="ETC_OTC_CODE"/>
+		<input type='text' id="ETC_OTC_CODE" name="ETC_OTC_CODE"/>
 </tr></br></br>
 <tr>
 		<td>변경일자 :</td>
-		<input type='text' id="UD_DOC_DATA " name="UD_DOC_DATA"/>
+		<input type='text' id="UD_DOC_DATA" name="UD_DOC_DATA"/>
 		<td>분류 :</td>
-		<input type='text' id="CLASS_NO " name="CLASS_NO"/>
+		<input type='text' id="CLASS_NO"  name="CLASS_NO"/>
 		<td>성상 :</td>
-		<input type='text' id="CHART " name="CHART"/>
+		<input type='text' id="CHART" name="CHART"/>
 		<td>포장단위 :</td>
-		<input type='text' id="PACK_UNIT " name="PACK_UNIT"/>
+		<input type='text' id="PACK_UNIT" name="PACK_UNIT"/>
 </tr></br></br>
 <tr>
 		<td>효능효과 :</td>
