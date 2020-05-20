@@ -25,8 +25,8 @@
 		</form>
 	</section>
 			<a href="findId.do">아이디 찾기</a>
-			<a href="findPw.jsp">비밀번호 찾기</a>
-			<a href="join.jsp">회원가입</a>
+			<a href="findPw.do">비밀번호 찾기</a>
+			<a href="join.do">회원가입</a>
 </div>
 </body>
 </html> 

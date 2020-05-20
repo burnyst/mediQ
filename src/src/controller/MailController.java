@@ -9,9 +9,8 @@ public class MailController extends Controller {
 	public String doPost(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		String fromEmail = "mediqmaster@gmail.com";
-		String toEmail = req.getParameter("email");
-		service.sendMail(title, content, fromEmail, toEmail);
+		String email = req.getParameter("email");
+		service.sendMail(title, content, email);
 		req.setAttribute("sendMail", true);
 		return "/view/member/join.jsp";
 	}

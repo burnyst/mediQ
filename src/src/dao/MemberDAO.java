@@ -135,4 +135,37 @@ public class MemberDAO {
 			JdbcUtil.close(stmt);
 		}
 	}
+	
+	public static String findPw(Connection conn, String id, String email) throws SQLException {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String rst = null;
+		String sql = "select mid from member where mid = ? and memail = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			stmt.setString(2, email);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				rst = rs.getString("mid");
+			}
+			return rst;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+		}
+	}
+	
+	public static void changePw(Connection conn, String id, String pw) throws SQLException {
+		PreparedStatement stmt = null;
+		String sql="update member set mpwd=? where mid=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, pw);
+			stmt.setString(2, id);
+			stmt.executeUpdate();
+		} finally {
+			JdbcUtil.close(stmt);
+		}
+}
 }
