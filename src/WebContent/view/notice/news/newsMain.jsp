@@ -1,33 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ page import="model.User" %>
+<%@ page import="controller.Controller" %>
+<%@ page import="controller.NotLoginException" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>뉴스게시판 메인페이지</title>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<style>
-h2{
-text-align: center;
-border:15px;
-}
-#register{
- float: right;
-}
-table {
-	border-collapse: collapse;
-	width: 80%;
-	margin: auto;
-  text-align: center;
-  
-	}
-
-</style>
-
-</head>
-<body>
+<t:head title="뉴스게시판 메인페이지">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
+    <script src="${pageContext.request.contextPath}/js/search.js"></script>
+		<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+		<meta charset="UTF-8">
+		<style>
+		h2{
+		text-align: center;
+		border:15px;
+		}
+		#register{
+		 float: right;
+		}
+		table {
+			border-collapse: collapse;
+			width: 80%;
+			margin: auto;
+		  text-align: center;
+		  
+			}
+		
+		</style>
+</t:head>
+<t:body>
 		<h2>뉴스 게시판</h2><br/> 
 		<div class="search">
 		<form method="get" action="newssearch.do">
@@ -36,10 +39,12 @@ table {
 		<input type="submit" value="검색" > 
 		</form>
 		</div>
+		<c:if test="${user.mlevel==2}">
 		<div>
 		<input type="button" id="register" value="등록" onclick="location.href='${pageContext.request.contextPath}/newswrite.do'">
 		</div>
-		<div class="items">
+		</c:if>
+		<div class="table">
 		<form>
 		<hr>
 		<h4> 총 ${newsPAGE.totalCount} ${newsSearchPAGE.total} 건</h4>
@@ -89,7 +94,7 @@ table {
 				</tr>
 				</c:if> 
 <!--research 영역  -->
-			<c:if test="${newssearchPAGE.hasNoNews()}">
+			<c:if test="${newsSearchPAGE.hasNoNews()}">
 				<tr>
 					<td colspan="6">게시물이 존재하지 않습니다.</td>
 				</tr>
@@ -106,13 +111,8 @@ table {
 						<th>${news.rdate }</th>
 				</tr>
 			</c:forEach> 
-
-
-
 		</table>
 		</form>
-		</div>
-						
-</body>
-
+		</div>			
+</t:body>
 </html>

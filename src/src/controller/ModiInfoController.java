@@ -20,7 +20,6 @@ public class ModiInfoController implements CommandHandler {
 	private static final String FORM_VIEW = "/view/product/modiinfo.jsp";
 	
 	private	ModiInfoService modiService = new ModiInfoService();
-	private	InfodetailService readService = new InfodetailService();
 	
 		@Override
 		public String process(HttpServletRequest request,HttpServletResponse response) throws Exception {
@@ -28,10 +27,10 @@ public class ModiInfoController implements CommandHandler {
 
 			//GET방식으로  요청이 들어오면
 			if(request.getMethod().equalsIgnoreCase("GET")) {
-				System.out.println("FaqUpdate의 method방식="+request.getMethod());
+				System.out.println("ModiInfoController의 method방식="+request.getMethod());
 				return processForm(request,response);
 			}else if(request.getMethod().equalsIgnoreCase("POST")) { //POST방식으로 요청이 들어오면
-				System.out.println("FaqUpdate의 method방식="+request.getMethod());
+				System.out.println("ModiInfoController의 method방식="+request.getMethod());
 				return processSubmit(request,response);
 			}else {
 				//405에러
@@ -64,13 +63,17 @@ public class ModiInfoController implements CommandHandler {
 			String chart = request.getParameter("chart");
 			String packUnit = request.getParameter("packUnit");
 			
+			System.out.println("processSubmit sn="+itemName);
+
 			//	HttpSession session = request.getSession();
 			//User user = (User)session.getAttribute("AUTHUSER");
-			ModiRequest updateReq = new ModiRequest(
+			ModiRequest im = new ModiRequest(
 					itemSeq,itemName,entpName,itemPermitDate,nbDocData,
 					cancelDate,eeDocData,etcOtcCode,udDocData,changeDate,
 					classNo,chart,packUnit);
 			
+			System.out.println("updateREq="+im);
+
 			//HttpSession session = request.getSession();
 
 			
@@ -90,19 +93,13 @@ public class ModiInfoController implements CommandHandler {
 			//P670 84
 			//★db에 insert성공시의  해당글번호가 isq에 리턴 //나의 데이터 필드명은 item_Seq이다.
 
-			request.setAttribute("updateReq", updateReq);
+			request.setAttribute("updateReq", im);
 		
-			try {
-				modiService.update(updateReq);
-				return "/infolist.do";
-			}catch(FaqNotFoundException e) {
-				response.sendError(HttpServletResponse.SC_NOT_FOUND);
-				return null;
-			}catch(PermissionDeniedException e) {
-				response.sendError(HttpServletResponse.SC_FORBIDDEN);
-				return null;
-			}
+			modiService.modify(im); //Service와 맞추어 주어야함
 			
+		
+			return "infolist.do";
+
 	
 	}
 		
@@ -124,16 +121,16 @@ public class ModiInfoController implements CommandHandler {
 			String chart = request.getParameter("chart");
 			String packUnit = request.getParameter("packUnit");
 			
-			System.out.println("process form sn=");
+			System.out.println("processform 진행 여기까지 됨 ㅠㅠ");
 
 			/* InfoModel infomodel = readService.getInfo(); */
 			
-			ModiRequest updateReq = new ModiRequest(
+			ModiRequest im = new ModiRequest(
 					itemSeq,itemName,entpName,itemPermitDate,nbDocData,
 					cancelDate,eeDocData,etcOtcCode,udDocData,changeDate,
 					classNo,chart,packUnit);
 			
-			request.setAttribute("updateReq",updateReq);
+			request.setAttribute("updateReq",im);
 			return FORM_VIEW;
 
 			

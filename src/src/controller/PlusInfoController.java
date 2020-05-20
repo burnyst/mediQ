@@ -40,8 +40,10 @@ public class PlusInfoController implements CommandHandler{
 		req.setAttribute("errors",errors);
 		//할일
 		String itemSeq = req.getParameter("ITEM_SEQ");
-		String entpName = req.getParameter("ENTP_NAME");
 		String itemName = req.getParameter("ITEM_NAME");
+		
+		String entpName = req.getParameter("ENTP_NAME");
+		System.out.println("ENTP_NAME () ="+entpName);
 		String itemPermitDate = req.getParameter("ITEM_PERMIT_DATE");
 		String nbDocData = req.getParameter("NB_DOC_DATA");
 		String cancelDate = req.getParameter("CANCEL_DATE");
@@ -54,7 +56,7 @@ public class PlusInfoController implements CommandHandler{
 		String packUnit = req.getParameter("PACK_UNIT");
 		
 
-		InfoRequest plusReq = PlusRequest(itemSeq,entpName,itemName,itemPermitDate,
+		InfoRequest inforeq = PlusRequest(itemSeq,itemName,entpName,itemPermitDate,
 				nbDocData,cancelDate,eeDocData,etcOtcCode,udDocData,changeDate,classNo,chart
 				,packUnit);
 		
@@ -63,18 +65,25 @@ public class PlusInfoController implements CommandHandler{
 		return FORM_VIEW;
 	}
 	
-	String plusitemname = plusService.plus(plusReq);
-	req.setAttribute("plusitemname", plusitemname); //세션값 : plusitemname
+	String itemNamee = plusService.plus(inforeq);
+	System.out.println("2번째 itemName () ="+itemNamee);
+	req.setAttribute("itemName", itemNamee); 
+	//req.setAttribute("itemNAMEE", itemNamee); 
 	
-	return "infolist.do";
+	//return "infolist.do";
+	return "/view/product/infolist.jsp";
 }
 
+	
+	
+	
 	private model.InfoRequest PlusRequest(String itemSeq, String itemName, String entpName, String itemPermitDate,
 			String nbDocData, String cancelDate, String eeDocData, String etcOtcCode, String udDocData,
 			String changeDate, String classNo, String chart, String packUnit) {
-		
-		return new InfoRequest(itemSeq,itemName,entpName,itemPermitDate,nbDocData,
-				cancelDate,eeDocData,etcOtcCode,udDocData,changeDate,classNo,chart,packUnit);
+		 System.out.println("컨트롤러 PlusRequest다 ~~~~~~~~~~~ itemName="+itemName);
+		 InfoRequest ir =new InfoRequest(itemSeq,itemName,entpName,itemPermitDate,nbDocData,
+					cancelDate,eeDocData,etcOtcCode,udDocData,changeDate,classNo,chart,packUnit);
+		return ir;
 	}
 
 		

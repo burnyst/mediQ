@@ -24,7 +24,7 @@ public class MailService {
 		this.port = "465";
 	}
 	
-	public void sendMail(String title, String content, String fromEamil, String toEamil) throws UnsupportedEncodingException, MessagingException {
+	public void sendMail(String title, String content, String eamil) throws UnsupportedEncodingException, MessagingException {
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", this.host);
 		props.put("mail.smtp.user", this.user);
@@ -39,7 +39,7 @@ public class MailService {
 		MimeMessage msg = new MimeMessage(session);
 		msg.setSentDate(new Date());
 		msg.setFrom(new InternetAddress("mediqmaster@gmail.com"));
-		msg.setRecipient(Message.RecipientType.TO, new InternetAddress("burnyst@gmail.com"));
+		msg.setRecipient(Message.RecipientType.TO, new InternetAddress(eamil));
 		msg.setSubject(title, "UTF-8");
 		msg.setText(content, "UTF-8");
 		msg.setHeader("content-Type", "text/html");
