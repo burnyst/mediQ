@@ -12,7 +12,7 @@ import page.NewsPage;
 //전체목록보기 요청 담당 컨트롤러에서 호출하는 서비스클래스
 //p650
 //DAO와 연동
-public class ListNewsService {
+public class NewsListService {
 
 	private NewsDAO newsDao = new NewsDAO();
 	private int size = 10; //한 페이지당 출력할 게시글 수

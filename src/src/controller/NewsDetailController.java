@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import model.News;
 
 
-public class DetailNewsController implements CommandHandler {
+public class NewsDetailController implements controller.CommandHandler {
 
-	private DetailNewsService DetailnewsService =	new DetailNewsService();
+	private NewsDetailService DetailnewsService =	new NewsDetailService();
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {

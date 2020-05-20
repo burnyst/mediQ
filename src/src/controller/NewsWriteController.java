@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.News;
 
+
 //p640
 //글등록 폼 및 글등록 요청 담당 컨트롤러
 /* 글등록 폼요청 /article/write.do	(GET방식)
@@ -16,12 +17,12 @@ import model.News;
  * 성공시		/view/article/newArticleAccess.jsp
  * 실패시		/view/article/newArticleForm.jsp
  */
-public class WriteNewsController implements controller.CommandHandler {
+public class NewsWriteController implements controller.CommandHandler {
 	//View
 	private static final String FORM_VIEW =	"view/notice/news/newsInsert.jsp";   //view/notice/news/newsInsert.jsp..newsInsert.jsp
 	//Service
-	private WriteNewsService writeNewsService = 
-			new WriteNewsService();
+	private NewsWriteService writeNewsService = 
+			new NewsWriteService();
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {

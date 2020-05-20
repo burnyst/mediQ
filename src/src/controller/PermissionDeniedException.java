@@ -1,5 +1,5 @@
 package controller;
 
-public class PermissionDeniedException extends RuntimeException {
+public class PermissionDeniedException extends Exception {
 
 }

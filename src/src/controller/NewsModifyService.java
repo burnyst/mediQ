@@ -8,7 +8,7 @@ import model.News;
 
 //667
 //수정처리요청 컨트롤러에서 호출하는 서비스 클래스
-public class ModifyNewsService {
+public class NewsModifyService {
 	
 	private NewsDAO newsDao = new NewsDAO();
 	

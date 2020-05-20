@@ -98,7 +98,7 @@ table {
 				<tr>
 						<%-- ${news.sn} 은 News클래스의 get sn()메소드를 호출 --%>
 						<th>${news.sn }</th>
-						<th><a href="${pageContext.request.contextPath}./newsdetail.do?sn=${news.sn}">${news.title }</a></th>
+						<th><a href="${pageContext.request.contextPath}/newsdetail.do?sn=${news.sn}">${news.title }</a></th>
 						<th style="border: 1px solid black; max-width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 								${news.summary}</th>
 						<th>${news.press }</th>

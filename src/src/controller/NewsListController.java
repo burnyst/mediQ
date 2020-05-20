@@ -9,9 +9,9 @@ import page.NewsPage;
 
 //전체목록보기 요청 담당 컨트롤러 
 //p652
-public class ListNewsController implements CommandHandler {
+public class NewsListController implements CommandHandler {
  
-	private ListNewsService listService= new ListNewsService();
+	private NewsListService listService= new NewsListService();
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
