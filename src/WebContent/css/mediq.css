@@ -6,7 +6,9 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0 auto;
 	max-width: 1024px;
+	min-width: 400px;
 	font-size: 1rem;
+	position: relative;
 }
 button, input[type="submit"] {
     cursor: pointer;
@@ -14,6 +16,21 @@ button, input[type="submit"] {
     color: White;
 	border: 1px solid Gray;
 }
+
+.inline {
+	display: inline;
+}
+.flex{
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-around;
+}
+.inline-flex{
+	display: -webkit-inline-flex;
+	display: inline-flex;
+	justify-content: space-around;
+}
+
 .small {
 	font-size: 0.8rem;
 }
