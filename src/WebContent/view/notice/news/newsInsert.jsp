@@ -1,39 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page import="model.User" %>
 <%@ page import="controller.Controller" %>
 <%@ page import="controller.NotLoginException" %>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>뉴스게시판 등록</title>
-</head>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<style>
-h2{
-text-align: center;
-border:15px;
-}
-table {
-   border-collapse: collapse;
-   width: 500px;
-   margin: auto;
-   padding: 50px;
-  text-align: left;
-   }
-span{
-padding: 0 0 0 200px;
-}
-
-</style>
-<script>
-
-
-</script>
-<body>
+<html>
+<t:head title="뉴스게시판 등록">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
+    <script src="${pageContext.request.contextPath}/js/search.js"></script>
+		<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+		<meta charset="UTF-8">
+		<style>
+			h2{
+			text-align: center;
+			border:15px;
+			}
+			table {
+			   border-collapse: collapse;
+			   width: 500px;
+			   margin: auto;
+			   padding: 50px;
+			  text-align: left;
+			   }
+			span{
+			padding: 0 0 0 200px;
+			}
+			
+			</style>
+</t:head>
+<t:body>
     <form action="newswrite.do" method="POST">
     <h2>뉴스게시판 등록</h2>
     <span>제목</span>
@@ -53,8 +50,8 @@ padding: 0 0 0 200px;
 				
     </table>
     <input type="submit" id="submit" value="등록">
-    <input type="hidden" id="mid" name="mid" value="관리자">
+    <!-- <input type="hidden" id="mid" name="mid" value="관리자"> -->
     <input type="reset" id="reset" value="취소" onclick="resetf('this.form')">
     </form>
-</body>
+</t:body>
 </html>
