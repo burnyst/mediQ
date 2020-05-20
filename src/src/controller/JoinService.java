@@ -30,7 +30,7 @@ public class JoinService {
 			memberDao.insert(conn, new Member(
 									joinReq.getMid(), joinReq.getMname(),
 									joinReq.getMpwd(), joinReq.getMemail(),
-									joinReq.getMhp(), joinReq.getMbd()
+									joinReq.getMhp(), joinReq.getMbd(), joinReq.getMlevel()
 			));
 			conn.commit();//트랜잭션 반영
 		}catch(SQLException e) {

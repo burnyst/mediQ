@@ -1,10 +1,13 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.MemberRequest;
 import controller.JoinService;
+import dao.MemberDAO;
+import dbcp.JdbcUtil;
 import controller.CommandHandler;
 
 public class JoinController implements CommandHandler {
@@ -43,12 +46,24 @@ public class JoinController implements CommandHandler {
 		//할일
 		//1. 요청파라미터 받기
 		//JoinController는 유저가 입력한 폼의 내용을 객체로 묶어서 처리
+		String reqMethod = request.getParameter("reqMethod");
+		String mid = request.getParameter("mid");
+		System.out.println("duplicatedId:" + reqMethod + ", mid:" + mid);
+		if (reqMethod != null && !reqMethod.isEmpty()) {
+			try {
+				boolean rst = MemberDAO.checkDuplicate(JdbcUtil.getConnection(), mid);
+				request.setAttribute("duplicatedId", rst);
+			} catch (SQLException e) {
+			}
+			return "/view/member/join.jsp";
+		}
+		System.out.println("여기까지옴");
 		MemberRequest memberReq = new MemberRequest();
 		
 		memberReq.setMid(request.getParameter("mid"));
 		memberReq.setMname(request.getParameter("mname"));
 		memberReq.setMpwd(request.getParameter("mpwd"));
-//		memberReq.setMpwd2(request.getParameter("mpwd2"));
+		memberReq.setMpwd2(request.getParameter("mpwd2"));
 		memberReq.setMemail(request.getParameter("memail"));
 		memberReq.setMhp(request.getParameter("mhp"));
 		memberReq.setMbd(request.getParameter("mbd"));
@@ -56,7 +71,7 @@ public class JoinController implements CommandHandler {
 		System.out.println("mid: "+memberReq.getMid());
 		System.out.println("mname: "+memberReq.getMname());
 		System.out.println("mpwd: "+memberReq.getMpwd());
-//		System.out.println("mpwd2: "+memberReq.getMpwd2());
+		System.out.println("mpwd2: "+memberReq.getMpwd2());
 		System.out.println("memail: "+memberReq.getMemail());
 		System.out.println("mhp: "+memberReq.getMhp());
 		System.out.println("mbd: "+memberReq.getMbd());

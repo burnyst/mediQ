@@ -5,25 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <title>회원탈퇴페이지</title>
+<script>
+		
+</script>
 </head>
 <body>
 <h1>회원 탈퇴</h1>
-<form action="xmember.jsp" method="post">
+<form action="<%= request.getContextPath()%>/xmember.do" method="post" onsubmit="return confirm('정말 탈퇴하시겠습니까? 되돌릴 수 없습니다.')">
 	<p>
-		<label for="memail">이메일:</label>
-		<input type="email" id="memail" name="memail">
-	</p>
-	<p>
-		<label for="mpwd">비밀번호:</label>
+		*비밀번호 : &nbsp;
 		<input type="password" id="mpwd" name="mpwd">
 	</p>
 	<p>
-		<label for="xreason">탈퇴사유:</label>
+		*탈퇴사유 : &nbsp;
 		<textarea type="text" id="xreason" name="xreason" style="width:400px; height:100px;" placeholder="자유롭게 입력해 주세요"></textarea>
 	</p>
 	<p>
-		<a href="myinfo.jsp">이전</a>
-		<a href="xmemberSuccess.jsp">탈퇴하기</a>
+		<input type="reset" value="취소" onclick="history.back()"/>
+		<input type="submit" value="탈퇴하기"/>
+		
 	</p>
 </form>
 </body>

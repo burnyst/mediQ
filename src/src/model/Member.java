@@ -37,6 +37,15 @@ public class Member {
 		this.mlevel	=	mlevel;
 	}
 
+	//MyinfoService용
+	public Member(String mid, String mname, String mbd, String memail, String mhp) {
+		this.mid	=	mid;
+		this.mname	=	mname;
+		this.memail	=	memail;
+		this.mhp	=	mhp;
+		this.mbd	=	mbd;
+	}
+
 	//getters&setters
 	public String getMid() {
 		return mid;
