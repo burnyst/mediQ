@@ -5,7 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.News;
 
-public class DetailNewsHandler implements controller.CommandHandler {
+
+public class DetailNewsController implements CommandHandler {
 
 	private DetailNewsService DetailnewsService =	new DetailNewsService();
 
@@ -28,8 +29,8 @@ public class DetailNewsHandler implements controller.CommandHandler {
 			request.setAttribute("newsd",newsd);
 			
 			//4.VIEw
-			return "newsDetail.jsp";
-			
+			return "view/notice/news/newsDetail.jsp";
+			///view/notice/news/newsDetail.jsp....newsDetail.jsp
 		}catch(Exception e) {
 			request.getServletContext().log("no article",e);
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
