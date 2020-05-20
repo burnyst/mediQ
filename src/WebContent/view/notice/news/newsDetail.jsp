@@ -73,11 +73,9 @@ float:right;
          <a href="./newslist.do"><input type=button  value="목록으로" /></a>
 					<input type="hidden" id="modify" value=""/>
 					</form>
-        <%-- <form method="post" action="./newsmodify.do?sn=${newd.sn}&title=${newd.title}&summary=${newd.summary}">
-         --%>
-       <%--  <input type="hidden" name="press" id="press" value="${newd.press}"/> --%>
+        
        <%----------------수정용-------------------------------------------------------------------------------- --%>
-        <%-- <c:if test=""> --%>
+			<c:if test="${user.mlevel==2}">
 					<form method="post" action="./newsmodify.do?sn=${newsd.sn}">
          <h2>뉴스게시판  수정 및 삭제</h2>
          <table id= info>
@@ -116,6 +114,6 @@ float:right;
 	    						<input type="button" id="deleteBtn"  name="deleteBtn" value="삭제" onclick="f1()"/>
 	    						</a> --%>
 					
-					<%-- </c:if> --%>
+					 </c:if>
 </body>
 </html>

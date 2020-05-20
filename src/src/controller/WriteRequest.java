@@ -3,6 +3,8 @@ package controller;
 import java.util.Date;
 import java.util.Map;
 
+import model.User;
+
 
 //p637
 //글입력에 필요한 데이터를 제공
@@ -21,6 +23,7 @@ public class WriteRequest {
 	위의 2속성에 해당하는 부분을
 	Wrtier클래스 변수로 코드를 교재에서 작성하였다  p637 9*/
 	private int sn;
+	private	User user;
 	private String mid;
 	private String title;
 	private String press;
@@ -29,9 +32,9 @@ public class WriteRequest {
 	private	String nimage;		
 	
 	
-	 WriteRequest(String mid, String title, String press, String summary, String nimage) {
+	 WriteRequest(User user, String title, String press, String summary, String nimage) {
 		
-		this.mid = mid;
+		this.user = user;
 		this.title = title;
 		this.press = press;
 		this.summary = summary;
@@ -48,6 +51,17 @@ public class WriteRequest {
 	 public void setSn(int sn) {
 		 this.sn = sn;
 	 }
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 
 	public String getMid() {
 		return mid;
@@ -115,6 +129,13 @@ public class WriteRequest {
 
 
 
+
+
+	@Override
+	public String toString() {
+		return "WriteRequest [sn=" + sn + ", user=" + user + ", mid=" + mid + ", title=" + title + ", press=" + press
+				+ ", summary=" + summary + ", rdate=" + rdate + ", nimage=" + nimage + "]";
+	}
 
 
 	//p638 31

@@ -2,8 +2,10 @@ package controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.CommandHandler;
+import model.User;
 import page.NewsPage;
 
 
@@ -25,10 +27,13 @@ public class NewsListController implements CommandHandler {
 		}
 		
 		//2.비즈니스로직(<->Service<->DAO<->DB) 수행
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("AUTHUSER");
 		 NewsPage newsPage =
 				 listService.getNewsPage(pageNo);
 		//3.Model
 		request.setAttribute("newsPAGE", newsPage);
+		request.setAttribute("user", user);	
 		//4.View 지정
 		return"view/notice/news/newsMain.jsp";
 		//view/notice/news/newsMain.jsp...newsMain.jsp
