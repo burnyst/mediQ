@@ -10,7 +10,7 @@ import controller.CommandHandler;
 public class NewsDeleteController implements CommandHandler {
 
 	//View
-	private static final String FORM_VIEW = "/newslist.do";
+	private static final String FORM_VIEW = "/newslist.do";//
 	
 	//Service
 	private NewsDeleteService deleteService = new NewsDeleteService();

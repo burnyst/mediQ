@@ -25,7 +25,8 @@ public class NewsSearchController implements controller.CommandHandler {
 		request.setAttribute("newsSearchPAGE", newsSearchPage);
 				
 		//4.View
-		return  "newsMain.jsp";
+		return  "view/notice/news/newsMain.jsp";
+		//view/notice/news/newsMain.jsp...newsMain.jsp
 		
 	}
 }
