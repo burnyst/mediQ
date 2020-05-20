@@ -17,15 +17,17 @@ import model.InfoModel;
 					JdbcUtil.getConnection();
 				
 				//특정글번호 article조회
-				InfoModel Im = infodao.selectById(conn,itemName);
+				InfoModel infoModel = infodao.selectById(conn,itemName);
 				//조회수증가
-				if(Im==null) {	//특정글번호 faq조회 실패
-					throw new InfoNotFoundException();
+				if(infoModel==null) {	//특정글번호 faq조회 실패
+				try {
+					throw new Exception();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				
-				
-				System.out.println("Im==>"+Im);
-				return Im;
+			}
+		
+				return infoModel;
 				
 		}catch(SQLException e) {
 			throw new RuntimeException(e);

@@ -15,7 +15,7 @@ public class PlusInfoService {
 	private InfoDAO infoDao = new InfoDAO();
 	
 	public String plus(InfoRequest inforeq) {
-		System.out.println("PlusInfoService -update()호출");
+		System.out.println("PlusInfoService -update(inforeq)호출="+inforeq);
 
 		Connection conn = null;
 		try {
@@ -28,7 +28,7 @@ public class PlusInfoService {
 			if(savedinfo == null) { //insert실패
 				throw new RuntimeException("fail to insert info");
 			}
-			System.out.println("info.getItemName() 호출"+info.getItemName());
+			System.out.println("info호출="+info);
 			
 		conn.commit(); //트랜잭션 반영
 		return savedinfo.getItemName();

@@ -9,11 +9,12 @@ import dao.InfoDAO;
 import dbcp.JdbcUtil;
 import page.InfoPage;
 
+public class InfoSearchController  extends Controller {
 
-public class InfoSearchController extends Controller {
-	
 	@Override
 	public String doPost(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		System.out.println("1진입성공");
+
 		res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 		return null;
 	}
@@ -21,18 +22,21 @@ public class InfoSearchController extends Controller {
 	@Override
 	public String doGet(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		InfoPage page = null;
-		String indexWord = req.getParameter("indexWord");
-		if (indexWord != null && !indexWord.isEmpty()) {
+		System.out.println("2진입성공");
+		String itemname = req.getParameter("itemname");
+		if (itemname != null && !itemname.isEmpty()) {
 			int pageNo = getParameterInt(req, "pageNo", 1);
 			int numOfRows = getParameterInt(req, "numOfRows", 10);
 			Connection con = JdbcUtil.getConnection();
-			Integer count = InfoDAO.getCount(con, indexWord);
-			page = new InfoPage(count, pageNo, numOfRows, InfoDAO.getList(con, indexWord, pageNo, numOfRows));
+			Integer count = InfoDAO.getCount(con, itemname);
+			page = new InfoPage(count, pageNo, numOfRows, InfoDAO.getList(con, itemname, pageNo, numOfRows));
 			JdbcUtil.close(con);
+			System.out.println("3진입성공");
 		}
 		req.setAttribute("page", page);
-		req.setAttribute("searchWord", indexWord);
-		return "/infolist.jsp";
+		req.setAttribute("itemname", itemname);
+		return "/view/product/infolist.jsp";
+		}
+
 	}
 
-}

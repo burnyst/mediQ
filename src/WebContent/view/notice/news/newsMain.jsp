@@ -1,41 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page import="model.User" %>
 <%@ page import="controller.Controller" %>
 <%@ page import="controller.NotLoginException" %>
 <!DOCTYPE html>
 <html>
-
-<t:head title="메디큐">
+<t:head title="뉴스게시판 메인페이지">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
     <script src="${pageContext.request.contextPath}/js/search.js"></script>
+		<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+		<meta charset="UTF-8">
+		<style>
+		h2{
+		text-align: center;
+		border:15px;
+		}
+		#register{
+		 float: right;
+		}
+		table {
+			border-collapse: collapse;
+			width: 80%;
+			margin: auto;
+		  text-align: center;
+		  
+			}
+		
+		</style>
 </t:head>
-<head>
-<meta charset="UTF-8">
-<title>뉴스게시판 메인페이지</title>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<style>
-h2{
-text-align: center;
-border:15px;
-}
-#register{
- float: right;
-}
-table {
-	border-collapse: collapse;
-	width: 80%;
-	margin: auto;
-  text-align: center;
-  
-	}
-
-</style>
-<jsp:include page="/view/header.jsp"></jsp:include>
-</head>
-<body>
+<t:body>
 		<h2>뉴스 게시판</h2><br/> 
 		<div class="search">
 		<form method="get" action="newssearch.do">
@@ -116,13 +111,8 @@ table {
 						<th>${news.rdate }</th>
 				</tr>
 			</c:forEach> 
-
-
-
 		</table>
 		</form>
-		</div>
-						
-</body>
-
+		</div>			
+</t:body>
 </html>

@@ -14,7 +14,7 @@ public class ModiInfoService {
 
 		private InfoDAO infoDao = new InfoDAO();
 		
-		public void update(ModiRequest updateReq) {
+		public void modify(ModiRequest updateReq) {
 			Connection conn = null;
 			System.out.println("modiInfoService -modify()호출");
 			try {
@@ -22,14 +22,13 @@ public class ModiInfoService {
 				conn.setAutoCommit(false); //트랜잭션 시작
 				
 				//dao호출
-				InfoModel savedinfo = infoDao.selectById(conn, updateReq.getItemName());
-				if(savedinfo == null) { //insert실패
+				InfoModel infom = infoDao.selectById(conn, updateReq.getItemName());
+				if(infom == null) { //insert실패
 					throw new RuntimeException("fail to modi info");
 				}
 			
 				
-				infoDao.update(conn, updateReq.getItemSeq(), updateReq.getItemName(), updateReq.getEntpName(), updateReq.getItemPermitDate(), updateReq.getCancelDate(), updateReq.getEtcOtcCode(), updateReq.getChangeDate(), updateReq.getChart(), updateReq.getClassNo(),
-					updateReq.getPackUnit(), updateReq.getNbDocData(), updateReq.getEeDocData(), updateReq.getUdDocData());
+				infoDao.update(conn, updateReq.getItemSeq(), updateReq.getItemName(), updateReq.getEntpName(), updateReq.getItemPermitDate(), updateReq.getNbDocData(),updateReq.getCancelDate() , updateReq.getEeDocData(), updateReq.getEtcOtcCode(), updateReq.getUdDocData(), updateReq.getChangeDate(), updateReq.getClassNo(), updateReq.getChart(), updateReq.getPackUnit());
 			
 			conn.commit();
 			
