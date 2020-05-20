@@ -23,13 +23,12 @@ public class FaqDAO {
 		throws SQLException{
 		PreparedStatement pstmt = null;
 		try {
-			String sql="update faq set category=? , title=? , contents=? ,mid=? rdate=sysdate "
+			String sql="update faq set category=? , title=? , contents=?, rdate=sysdate "
 					+ " where sn=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, category);
 			pstmt.setString(2, title);
 			pstmt.setString(3, contents);
-			pstmt.setString(4, mid);
 			pstmt.setInt(5, sn);
 			int cnt = pstmt.executeUpdate();
 					

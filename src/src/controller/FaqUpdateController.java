@@ -59,7 +59,7 @@ public class FaqUpdateController implements CommandHandler{
 		
 		//나중에 아이디 추가
 		FaqRequest updateReq = new FaqRequest(
-				authUser.getMid(),sn,category, title, contents);
+				sn,category, title, contents,mid);
 		
 		System.out.println("updateReq sn="+sn+"category="+category+"title="+title+
 				"contents="+contents+"mid="+authUser.getMid());
@@ -119,7 +119,7 @@ public class FaqUpdateController implements CommandHandler{
 		
 		
 		FaqRequest updateReq = new FaqRequest(
-				mid,sn,category, title, contents);
+				sn,category, title, contents,mid);
 				System.out.println("processForm sn="+sn+"/category="+category+"/title="+title
 							+"/contents="+contents+"/mid="+mid);
 				
