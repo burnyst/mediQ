@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원관리view아래</title>
+<title>회원관리</title>
 <style>
 h2{
 text-align: center;
