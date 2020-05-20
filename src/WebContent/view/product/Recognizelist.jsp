@@ -5,75 +5,111 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-    
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mediQ</title>
+   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mediq.css" />
+   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
+   <script src="${pageContext.request.contextPath}/js/search.js"></script>
 </head>
 <body>
-<div class="search">
-<form method='get' action="${pageContext.request.contextPath}/recognize.do">		
-
-</div>
-
-<br>의약품 승인 목록</br>
-<p>승인 의약품 검색
-<input type='text' id='MessageBox' class="text1" name="productName" value="${productName}"/>
-<input type="submit" value="검색"/>
-<hr>
-</div>
-	<c:if test="${page != null}">
-		<div class="result">
-		<h5>검색 결과</h5>
-	<table border=1 width=80% name="result">
-	<tr>
-		<td>번호</td>
-		<td>품목명</td>
-		<td>업체명</td>
-		<td>허가일자</td>
-		<td>등록일자</td>
-	</tr>
-	 <c:if test="${page.totalCount == 0}">
-		<tr>
-			<td colspan="5">조회된 결과가 없습니다</td>
-		</tr>
-	 </c:if>
-	 <c:forEach var="md" items="${page.content}">
-	 	<tr class="i">
- 	 		<td>번호</td>
-			<td>${i.itemName}</td>
-			<td>${i.entpName}</td>
-			<td>${i.itemPermitDate}</td>
-			<td>${i.Date}</td>
-	 	</tr>
-	 	<tr class="hidden">
-	 		<td colspan="5">
-	 			<table>
-	 			<h4>주의사항</h4>
-	 			<p>${md.nbDocData}</p>
-	 			</table>
- 			</td>
-	 	</tr>
-	 </c:forEach>
-				<c:if test="${page.totalCount > 0}">
-					<tr>
-						<th colspan="5">
-							<c:if test="${page.startPage > 5}">
-								<a href="search.do?productName=${productName}&pageNo=${page.startPage - 5}">[이전]</a>
-							</c:if>
-							<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-								<a href="search.do?productName=${productName}&pageNo=${i}">[${i}]</a>
-							</c:forEach>
-							<c:if test="${page.endPage < page.totalPages}">
-								<a href="search.do?productName=${productName}&pageNo=${page.startPage}">[다음]</a>
-							</c:if>
-						</th>
-					</tr>
-				</c:if>
-		
-		</table>
-		
+	<jsp:include page="/view/header.jsp"></jsp:include>
+	<div class="search">
+		<form method='get' action="recognize.do">		
+			<p>승인 의약품 검색</p>
+			<input type='text' id='MessageBox' class="text" name="itemname" value="${itemname}"/>
+			<input type="submit" value="검색"/>
+		</form>
 	</div>
-</form>	
+	<c:if test="${itemname != null && !itemname.isEmpty()}">
+		<div class="items">
+	<br>승인의약품 검색 결과</br>
+	<hr/>
+		<div class="result">
+		<h2>검색 결과</h2>
+		<br/>
+		  <form method="post" action="#">
+			    <div class="clearfix">
+				    <span class="float-right">
+   				    </span>
+			    </div>
+			    <hr/>
+  				<table border=1>
+			    	<colgroup>
+			    		<col class="col1" />
+			    		<col class="col2" />
+			    		<col class="col3" />
+			    		<col class="col4" />
+			    	</colgroup>
+			    	<thead>
+				        <tr>
+				        	<td>업체명</td>
+				            <td>품목명</td>
+				            <td>전문일반</td>
+				            <td>승인일자</td>
+
+				        </tr>
+			        </thead>	 
+			        <c:if test="${page == null || page.totalCount == 0}">
+						<tbody>
+							<tr>
+								<td colspan="4">조회된 결과가 없습니다</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="4">1</th>
+							</tr>
+						</tfoot>
+ 						</c:if>
+ 						<c:if test="${page != null && page.totalCount > 0}">
+			        	<tbody>
+	 				<c:forEach var="md" items="${page.content}">
+	 				<tr>
+						<td class="center">${md.entpName}</td>
+						<td class="center">${md.itemName}</td>
+						<td class="center">${md.etcOtcCode}</td>
+						<td class="center">${md.itemPermitDate}</td>
+           		
+					</tr>
+ 						<!-- <tr class="hidden"> -->
+ 						<td colspan="4">
+						<div class="content">
+ 						<table>
+ 						<colgroup>
+           				</colgroup>
+	 						<h4>주의사항</h4>
+	 						<pre>${md.nbDocData}</pre>
+ 					  </table>
+    	            </div>
+	            </td>
+	        </tr>
+		</c:forEach>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="5">
+									<c:if test="${page.startPage > 5}">
+										<a href="search.do?searchWord=${searchWord}&pageNo=${page.startPage - 5}">[이전]</a>&nbsp;
+									</c:if>
+									<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+										<c:if test="${page.currentPage == i}">
+											${i}&nbsp;
+										</c:if>
+										<c:if test="${page.currentPage != i}">
+											<a href="search.do?searchWord=${searchWord}&pageNo=${i}">${i}</a>&nbsp;
+										</c:if>
+									</c:forEach>
+									<c:if test="${page.endPage < page.totalPages}">
+										<a href="search.do?searchWord=${searchWord}&pageNo=${page.startPage + 5}">[다음]</a>
+									</c:if>
+								</th>
+							</tr>
+						</tfoot>
+					</c:if>
+				</table>
+				</form>
+			</div>
 </c:if>
+<jsp:include page="/view/footer.jsp"></jsp:include>
 </body>
 </html>

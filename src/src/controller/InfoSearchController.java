@@ -5,12 +5,13 @@ import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.RecognizeDAO;
+import dao.InfoDAO;
 import dbcp.JdbcUtil;
-import page.RecognizePage;
+import page.InfoPage;
 
-public class RecognizeSearchController  extends Controller {
 
+public class InfoSearchController extends Controller {
+	
 	@Override
 	public String doPost(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
@@ -19,20 +20,19 @@ public class RecognizeSearchController  extends Controller {
 
 	@Override
 	public String doGet(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		RecognizePage page = null;
-		String itemname = req.getParameter("itemname");
-		if (itemname != null && !itemname.isEmpty()) {
+		InfoPage page = null;
+		String indexWord = req.getParameter("indexWord");
+		if (indexWord != null && !indexWord.isEmpty()) {
 			int pageNo = getParameterInt(req, "pageNo", 1);
 			int numOfRows = getParameterInt(req, "numOfRows", 10);
 			Connection con = JdbcUtil.getConnection();
-			Integer count = RecognizeDAO.getCount(con, itemname);
-			page = new RecognizePage(count, pageNo, numOfRows, RecognizeDAO.getList(con, itemname, pageNo, numOfRows));
+			Integer count = InfoDAO.getCount(con, indexWord);
+			page = new InfoPage(count, pageNo, numOfRows, InfoDAO.getList(con, indexWord, pageNo, numOfRows));
 			JdbcUtil.close(con);
 		}
 		req.setAttribute("page", page);
-		req.setAttribute("itemname", itemname);
-		return "/view/product/Recognizelist.jsp";
-		}
-
+		req.setAttribute("searchWord", indexWord);
+		return "/infolist.jsp";
 	}
 
+}

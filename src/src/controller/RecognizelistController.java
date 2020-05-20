@@ -9,7 +9,7 @@ import dao.RecognizeDAO;
 import dbcp.JdbcUtil;
 import page.RecognizePage;
 
-public class RecognizeSearchController  extends Controller {
+public class RecognizelistController extends Controller {
 
 	@Override
 	public String doPost(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -26,13 +26,16 @@ public class RecognizeSearchController  extends Controller {
 			int numOfRows = getParameterInt(req, "numOfRows", 10);
 			Connection con = JdbcUtil.getConnection();
 			Integer count = RecognizeDAO.getCount(con, itemname);
-			page = new RecognizePage(count, pageNo, numOfRows, RecognizeDAO.getList(con, itemname, pageNo, numOfRows));
+			if (count > 0) {
+				page = new RecognizePage(count, pageNo, numOfRows, RecognizeDAO.getList(con, itemname, pageNo, numOfRows));
+				
+			}
 			JdbcUtil.close(con);
+			
 		}
 		req.setAttribute("page", page);
 		req.setAttribute("itemname", itemname);
 		return "/view/product/Recognizelist.jsp";
-		}
-
 	}
 
+}

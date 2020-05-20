@@ -31,37 +31,10 @@ public class RecognizeDAO {
 			}
 			return rst;
 		}
-		//목록 상세 조회
-		
-		
-		/*
-		 * public static List<Recognize> select(Connection conn, String name, int
-		 * pageNo, int size)throws SQLException {
-		 * 
-		 * System.out.println("검색 RecognizeDAO-selectById()호출성공"); PreparedStatement
-		 * pstmt = null; ResultSet rs = null; try { String sql = "select name  " +
-		 * " from ( select item from MdcinPrductItem )  " +
-		 * " where title like '%' || ? ||'"; pstmt = conn.prepareStatement(sql);
-		 * pstmt.setString(1,name);
-		 * 
-		 * System.out.println("pstmt 호출"+pstmt); //sql문이 나와야함 rs = pstmt.executeQuery();
-		 * System.out.println("rs 호출"+rs); List<Recognize> result = new ArrayList<>();
-		 * while( rs.next() ) { result.add convertsss(rs)); } return result;
-		 * 
-		 * }finally { JdbcUtil.close(rs); JdbcUtil.close(pstmt); } } //selectById쿼리문 결과를
-		 * 받아서 Recognize클래스타입으로 묶어주는 함수 p647 36 private model.Recognize (ResultSet rs)
-		 * throws SQLException{ System.out.println("RecognizeDAO의  a()"); return new
-		 * Recognize( rs.getString("ITEM_SEQ"), rs.getString("ITEM_NAME"),
-		 * rs.getString("ENTP_NAME"), rs.getString("ITEM_PERMIT_DATE"),
-		 * rs.getString("NB_DOC_DATA"), rs.getString("CANCEL_DATE"),
-		 * rs.getString("EE_DOC_DATA"), rs.getString("ETC_OTC_CODE"),
-		 * rs.getString("UD_DOC_DATA"), rs.getString("CHANGE_DATE"),
-		 * rs.getString("CLASS_NO"), rs.getString("CHART"), rs.getString("PACK_UNIT") );
-		 * }
-		 */
+
 				
 		
-	public static List<Recognize> getList(Connection con, String name, int pageNo, int size) throws SQLException {
+	public static List<Recognize> getList(Connection con, String itemname, int pageNo, int size) throws SQLException {
 		List<Recognize> rst = new ArrayList<Recognize>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -82,7 +55,7 @@ public class RecognizeDAO {
 				+ "from MdcinPrductItem where ITEM_NAME like '%' || ? || '%') where rn between ? and ?";
 		try {
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, name);
+			stmt.setString(1, itemname);
 			stmt.setInt(2, pageNo);
 			stmt.setInt(3, size);
 			rs = stmt.executeQuery();
