@@ -19,7 +19,7 @@ header h1 {
 	flex: 0 0 5em;
     text-align: center;
 }
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 	header {
 		-webkit-flex-direction: column;
 		flex-direction: column;
@@ -46,7 +46,7 @@ nav a {
 nav li {
 	text-align: center;
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 	nav ul {
 		-webkit-flex-direction: column;
 		flex-direction: column;
