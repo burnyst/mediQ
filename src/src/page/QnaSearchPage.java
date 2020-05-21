@@ -23,11 +23,6 @@ public class QnaSearchPage {
 		
 		
 	}
-//	public QnaSearchPage(int total,List<Qnamodel> search,String title) {
-//			this.total =total;
-//			this.search = search;
-//			this.title =title;		
-//		}
 
 	public int getTotal() {
 		return total;

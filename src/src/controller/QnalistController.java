@@ -1,14 +1,10 @@
 package controller;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.QnaRequest;
 import model.User;
 import page.QnaPage;
 

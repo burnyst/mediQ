@@ -5,9 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-<script src="<%= request.getContextPath()%>/js/qna.js?v=<%=System.currentTimeMillis() %>"></script> 
 <t:head title="메디큐">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/items.css" />
+<script src="${pageContext.request.contextPath}/js/qna.js"></script>
 <meta charset="UTF-8">
 </t:head>
 <t:body>

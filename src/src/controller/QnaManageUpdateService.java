@@ -2,13 +2,11 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 import dao.QnaDAO;
 import dbcp.JdbcUtil;
 import model.QnaRequest;
 import model.Qnamodel;
-import page.QnaSearchPage;
 
 public class QnaManageUpdateService {
 	private QnaDAO qnaDao = new QnaDAO();

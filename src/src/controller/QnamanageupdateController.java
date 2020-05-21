@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,10 +50,7 @@ public class QnamanageupdateController implements CommandHandler {
 			qnamanageaction.updateAnswer(qnareqa);
 			return  "qnalist.do";		
 		}
-		private QnaRequest createAnswerRequest(int sn,String answer) {
-			return new QnaRequest(sn,answer);
 
-		}
 		//GET방식 폼 보여주기
 		private String processForm(HttpServletRequest request, 
 				HttpServletResponse response) throws IOException {

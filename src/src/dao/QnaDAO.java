@@ -3,16 +3,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 import dbcp.JdbcUtil;
 import model.Qnamodel;
@@ -155,7 +149,7 @@ public  class QnaDAO{
 			JdbcUtil.close(pstmt);
 		  }
 		}
-			//selectByIdT쿼리문 결과를 받아서  Search클래스타입으로 묶어주는 함수 p647 36
+			//selectByIdT쿼리문 결과를 받아서  Search클래스타입으로 묶어주는 함수
 			private static Qnamodel convertQuestiont(ResultSet rs) 
 			    throws SQLException{
 				System.out.println("QnaDAO의  convertQuestiont()");
@@ -172,7 +166,7 @@ public  class QnaDAO{
 						
 			}
 
-			//Timestamp타입을 Date타입으로 변환 p648 47
+			//Timestamp타입을 Date타입으로 변환
 			private static Date toDatet(Timestamp timestamp) {
 				return new Date(timestamp.getTime());
 			}
@@ -238,7 +232,6 @@ public  class QnaDAO{
 		throws SQLException{
 		System.out.println("QnaDAO의 insert() qm="+qm);
 		PreparedStatement pstmt = null;
-		//sn과 mid 체크
 		try{String sql="insert into qna(title,category,qpublic,vcount,mid,rdate,question,image,qstate)  " + 
 				"values (?,?,?,?,?,?,?,?,?)";
 		
@@ -249,10 +242,8 @@ public  class QnaDAO{
 		pstmt.setInt(3, qm.getQpublic());
 		pstmt.setInt(4,qm.getVcount());
 		pstmt.setString(5,qm.getMid() );
-		//pstmt.setTimestamp(5, new Timestamp(qm.getRdate().getTime()));
 		pstmt.setTimestamp(6, toTimestamp(qm.getRdate()));
 		pstmt.setString(7,qm.getQuestion() );
-		//★인풋타입 파일, 문제
 		pstmt.setString(8,qm.getImage() );
 		pstmt.setInt(9,qm.getQstate());
 		pstmt.executeUpdate();

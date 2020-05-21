@@ -23,20 +23,18 @@ public class QnaPage {
 				startPage = 0;
 				endPage = 0;
 			} else { //등록된 게시글이 1건이상 존재한다면 
-				totalPages = total / size; // 10=109/10  9  
+				totalPages = total / size; 
 			    //전체 페이지수  = 전체게시물수 /한페이지당 게시글수;
 				if (total % size > 0) {
 					totalPages++;  //나머지 게시물을 출력하기위한 페이지를 추가
 				}
 				
 				//아래의 10값은  한번에 출력하고 싶은 페이지개수를 뜻한다
-				int modVal = currentPage % 10;   //보고싶은페이지10%5  1 2 3 4
-				startPage = currentPage /10 * 10 + 1; //시작페이지=10/5*5+1
-			   //시작 페이지번호=   보고싶은페이지 / 5 * 5 + 1;
-				if (modVal == 0) startPage -=10; //startPage=startPage-5
+				int modVal = currentPage % 10;  
+				startPage = currentPage /10 * 10 + 1; 
+				if (modVal == 0) startPage -=10; 
 				
 				endPage = startPage + 9;
-			  //끝 페이지번호= 시작 페이지번호  + 4      
 
 				//끝페이지번호가   실제총페이지수보다 크게 되면
 				//끝페이지번호를  실제총페이수로 조정하여
