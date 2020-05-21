@@ -26,9 +26,8 @@ public class XmemberController implements CommandHandler{
 			}
 		}
 		
-		//GET방식으로 요청이 들어오면  폼(/view/member/join.jsp)을 보여주기
 		private String processForm(HttpServletRequest request, HttpServletResponse response) {
-			System.out.println("JoinController의 processFrom()호출");
+			System.out.println("XmemberController의 processFrom()호출");
 			return FORM_VIEW;
 		}
 		
@@ -36,9 +35,9 @@ public class XmemberController implements CommandHandler{
 		private String processSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 			//1. 요청파라미터 받기
 			HttpSession session = request.getSession();
-			User user = (User) session.getAttribute("AUTHUSER");
+			User user = new User();
 			//세션의 id(=AUTHUSER)에 해당하는 비번과 사용자가 입력한 비번이 같은지 확인
-			
+			user = (User) session.getAttribute("AUTHUSER");
 			String mid = user.getMid();
 			System.out.println(mid);
 			String mpwd=request.getParameter("mpwd");

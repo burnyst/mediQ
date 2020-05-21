@@ -24,7 +24,7 @@ public class MailService {
 		this.port = "465";
 	}
 	
-	public void sendMail(String title, String content, String email) throws UnsupportedEncodingException, MessagingException {
+	public void sendMail(String title, String content, String eamil) throws UnsupportedEncodingException, MessagingException {
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", this.host);
 		props.put("mail.smtp.user", this.user);
@@ -38,12 +38,17 @@ public class MailService {
 		Session session = Session.getDefaultInstance(props, auth);
 		MimeMessage msg = new MimeMessage(session);
 		msg.setSentDate(new Date());
+		System.out.println(eamil);
 		msg.setFrom(new InternetAddress("mediqmaster@gmail.com"));
-		msg.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+		System.out.println("setFrom");
+		msg.setRecipient(Message.RecipientType.TO, new InternetAddress(eamil));
+		System.out.println("setRecipient");
 		msg.setSubject(title, "UTF-8");
 		msg.setText(content, "UTF-8");
-		msg.setHeader("content-Type", "text/html");
+		//msg.setHeader("content-Type", "text/html");
+		System.out.println("set all");
 		Transport.send(msg);
+		System.out.println("send");
 	}
 }
 class MailAuthentication extends Authenticator {
