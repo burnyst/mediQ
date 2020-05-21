@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
@@ -39,7 +39,7 @@
 		<td>업체명 :</td>
 		<input type='text' id="ENTP_NAME" name="ENTP_NAME"/>
 		<td>허가일자 :</td>
-		<input type='text' id="ITEM_PERMIT_DATE" name="ITEM_PERMIT_DATE" />
+	<input type='text'id="ITEM_PERMIT_DATE"name="ITEM_PERMIT_DATE" />
 </tr></br></br>
 <tr>
 		<td>주의사항 :</td>
