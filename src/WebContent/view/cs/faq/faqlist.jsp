@@ -16,7 +16,7 @@
         #category{float:left;}
         #fsearch{float:right;}
         #fboard_list{clear:both;}
-        th{padding:13px 0 12px 0; background:gray;}
+        th{padding:13px 0 12px 0; background:gray; color:white;}
         #pageBtn{text-align:center;}
         #writebtn{float:right; margin-top:25%;}
         tr{text-align:center;}

@@ -28,7 +28,10 @@
 		  text-align: center;
 		  
 			}
-		
+		th{
+		background: gray;
+		color: white;
+		}		
 		</style>
 </t:head>
 <t:body>
@@ -67,13 +70,13 @@
 			<c:forEach  var="news" items="${newsPAGE.content}">
 				<tr>
 						<%-- ${news.sn} 은 News클래스의 get sn()메소드를 호출 --%>
-						<th>${news.sn }</th>
-						<th><a href="${pageContext.request.contextPath}/newsdetail.do?title=${news.title}&pageNo=${newsPAGE.currentPage}&sn=${news.sn}">${news.title}</a></th>
-						<th style="border: 1px solid black; max-width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-						${news.summary }</th>
-						<th>${news.press }</th>
-						<th>${news.mid }</th>
-						<th><fmt:formatDate value="${news.rdate}" pattern="yyyy-MM-dd"/></th>
+						<td>${news.sn }</td>
+						<td><a href="${pageContext.request.contextPath}/newsdetail.do?title=${news.title}&pageNo=${newsPAGE.currentPage}&sn=${news.sn}">${news.title}</a></th>
+						<td style="border: 1px solid black; max-width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+						${news.summary }</td>
+						<td>${news.press }</td>
+						<td>${news.mid }</td>
+						<td><fmt:formatDate value="${news.rdate}" pattern="yyyy-MM-dd"/></td>
 				</tr>
 			</c:forEach> 
 			<c:if test="${newsPAGE.hasNews()}">
