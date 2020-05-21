@@ -191,8 +191,10 @@ public class InfoDAO {
 			String udDocData, String changeDate, String classNo, String chart, String packUnit) throws SQLException{
 			PreparedStatement pstmt = null;
 			try {
-				String sql="update MdcinPrductItem set ITEM_NAME=?,ENTP_NAME=?,ITEM_PERMIT_DATE=?,NB_DOC_DATA=?,CANCEL_DATE=?,EE_DOC_DATA=?,ETC_OTC_CODE=?,UD_DOC_DATA=?,CHANGE_DATE=?,CHART=?,CLASS_NO=?,PACK_UNIT=?" + 
-						"                            where ITEM_NAME = ?";
+				String sql="update MdcinPrductItem set ITEM_NAME=?,ENTP_NAME=?,ITEM_PERMIT_DATE=?,NB_DOC_DATA=?,"
+						+ "CANCEL_DATE=?,EE_DOC_DATA=?,ETC_OTC_CODE=?,UD_DOC_DATA=?,"
+						+ "CHANGE_DATE=?,CHART=?,CLASS_NO=?,PACK_UNIT=?" + 
+						"                            where ITEM_SEQ = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1,itemName);
 				pstmt.setString(2,entpName);
@@ -206,7 +208,7 @@ public class InfoDAO {
 				pstmt.setString(10,classNo);
 				pstmt.setString(11,chart);
 				pstmt.setString(12,packUnit);
-				pstmt.setString(13,itemName);
+				pstmt.setString(13,itemSeq);
 				int cnt = pstmt.executeUpdate();
 						
 				System.out.println("글 수정InfoDAO-update()호출성공 category="+cnt);
