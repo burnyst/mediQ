@@ -273,13 +273,13 @@ public class FaqDAO {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1,faq.getTitle());
 				pstmt.setString(2,faq.getMid());
-				pstmt.setTimestamp(3, toTimestamp(faq.getRdate()));
-				pstmt.setString(4, faq.getContents());
+				pstmt.setTimestamp(3,toTimestamp(faq.getRdate()));
+				pstmt.setString(4,faq.getContents());
 				pstmt.setString(5,faq.getCategory());
 				pstmt.executeUpdate();
 				
+				System.out.println("faq="+faq);
 				return faq;
-				
 			}finally {
 				JdbcUtil.close(rs);
 				JdbcUtil.close(stmt);

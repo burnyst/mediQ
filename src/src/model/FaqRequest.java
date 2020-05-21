@@ -3,25 +3,26 @@ package model;
 import java.util.Map;
 
 public class FaqRequest {
-	private int sn;
 	private String mid;
+	private int sn;
 	private String category;
 	private String title;
 	private String contents;
 	
-	public FaqRequest(String category, String title, String contents, String mid) {
+	public FaqRequest(String mid, String category, String title, String contents) {
+		this.mid=mid;
 		this.category=category;
 		this.title=title;
 		this.contents=contents;
-		this.mid=mid;
 	}
 	
-	public FaqRequest(int sn,String category, String title, String contents, String mid ) {
+	public FaqRequest(int sn, String category,String title, String contents, String mid) {
 		this.sn=sn;
 		this.category=category;
 		this.title=title;
 		this.contents=contents;
 		this.mid=mid;
+		
 	}
 
 	public FaqRequest(String category, String title, String contents) {
@@ -30,7 +31,17 @@ public class FaqRequest {
 		this.contents=contents;
 	}
 
+
 	
+
+
+	public String getMid() {
+		return mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
 
 	public int getSn() {
 		return sn;
@@ -40,13 +51,6 @@ public class FaqRequest {
 		this.sn = sn;
 	}
 
-	public String getMid() {
-		return mid;
-	}
-
-	public void setMid(String mid) {
-		this.mid = mid;
-	}
 
 	public String getCategory() {
 		return category;
@@ -79,5 +83,15 @@ public class FaqRequest {
 		
 	}
 
+	@Override
+	public String toString() {
+		return "FaqRequest [mid=" + mid + ", sn=" + sn + ", category=" + category + ", title=" + title + ", contents="
+				+ contents + "]";
+	}
+
+
+	
+	
+	
 	
 }
