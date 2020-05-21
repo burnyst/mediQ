@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mediq.css" />
     <style>
         .page_body{width:80%; margin:0px 10% 0px 10%;}
         #category{float:left;}

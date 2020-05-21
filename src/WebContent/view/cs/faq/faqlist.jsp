@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mediq.css" />
     <style>
         .page_body{width:80%; margin:0px 10% 0px 10%;}
         #category{float:left;}
@@ -26,8 +27,7 @@
         .page{clear:both; text-align:center;}
         #modify{display:inline;}
         textarea{display:block; margin : 0px 0px 30px 0px; padding :50px 50px 50px 50px ;}
-        .row{border-bottom:10px; solid red;border-top:10px; solid red;}
-/*         .contentView{padding : 0px 0px 0px 350px; text-align:left;} */
+        .row{border-bottom:10px solid red;border-top:10px solid red;}
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/faq.js?version=20200519" type="text/javascript" charset='euc-kr'></script>
