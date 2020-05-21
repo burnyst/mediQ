@@ -10,7 +10,7 @@
 <title>mediQ</title>
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mediq.css" />
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
-   <script src="${pageContext.request.contextPath}/js/search.js"></script>
+   <script src="${pageContext.request.contextPath}/js/faq.js"></script>
 </head>
 <body>
 	<jsp:include page="/view/header.jsp"></jsp:include>
@@ -34,7 +34,7 @@
    				    </span>
 			    <hr/>
 			    </div>
-  				<table>
+  				<table class="result">
 			    	<colgroup>
 			    		
 			    		<col class="col1" />
@@ -65,7 +65,7 @@
  						<c:if test="${page != null && page.totalCount > 0}">
 			        	<tbody>
 	 				<c:forEach var="i" items="${page.content}">
-	 				<tr>
+	 				<tr class="row">
 						<td class="center" colspan="2">${i.entpName}</td>
 						<td class="center">${i.itemName}</td>
 						<td class="center">${i.etcOtcCode}</td>
