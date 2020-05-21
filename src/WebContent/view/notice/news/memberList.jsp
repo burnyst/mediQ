@@ -26,17 +26,17 @@
 		}
 		</style>
 <script>
-$(document).ready(function(){
+/* $(document).ready(function(){
  	  
-	 $("#delete").click(function(){
-			alert($("#xreason").text().length);
-		 //if($("#xreason").text()=="")
+ 			$("#delete").click(function(){
+	 		alert($("#xmember").text());
+		 	//if($("#xreason").text()=="")
 			//alert("탈퇴여부가 변경되지 않았습니다.")
-			//return false; 
+			return false; 
 	});  
 	 
 	
-});
+}); */
 </script>
 </t:head>
 <t:body>
@@ -77,7 +77,7 @@ $(document).ready(function(){
                   <th>${member.mlevel}</th>
                   <th id="xmember" >${member.xmember}</th>
                   <th id="xreason">${member.xreason}</th>
-                  <input type="hidden" name="member" value="${member}" />
+                  <%-- <input type="hidden" name="member" value="${member}" /> --%>
                </tr>
                </c:forEach>
                <!--페이지처리  -->

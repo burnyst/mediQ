@@ -24,6 +24,10 @@ public class User {
 		this.mlevel = mlevel;
 	}
 	
+	//회원탈퇴를 위한 기본생성자
+	public User() {
+	}
+
 	public String getMid() {
 		return mid;
 	}
