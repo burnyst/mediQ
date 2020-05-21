@@ -76,6 +76,8 @@
 
 	 						<h4>품목기준코드</h4>
 	 						<pre>${i.itemSeq}</pre>
+	 						<h4>허가일자</h4>
+	 						<pre>${i.itemPermitDate}</pre>
 	 						<h4>주의사항</h4>
 	 						<pre>${i.nbDocData}</pre>
 	 						<h4>취소일자</h4>
