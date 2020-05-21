@@ -50,6 +50,7 @@
 							<th>파일 첨부 목록:</th>
 							<td colspan="3">
 							<c:if test="${qm.image !=null }">
+								<img src="${pageContext.request.contextPath}/upload/${qm.image}"></br>
 							${qm.image}<a href="#"  onclick="onDownload(${qm.sn})" >  ▽다운로드</a>
 							</c:if>
 							</td>
@@ -57,7 +58,7 @@
 						<tr>
 							<td colspan="4"   style="text-align:right;"><input  type="submit" value="삭제"  />
 							<button type="button"  onclick="location.href='qnalist.do'">목록</button>
-							<c:if test="${user.mlevel==2}">
+							<c:if test="${user.mlevel==2}"> 
 							<button type="button" onclick="location.href='manageupdate.do?no=${qm.sn}&pageNo=${qnaPAGE.currentPage}' ">답변 쓰기</button>
 							</c:if>
 							</td>
