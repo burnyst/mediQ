@@ -1,5 +1,8 @@
 window.addEventListener("load", function() {
-	document.getElementById("findPw").addEventListener("submit", function(e) {
+	document.getElementById("pre").addEventListener("click", function() {
+		location.href = this.value;
+	});
+	document.getElementById("next").addEventListener("click", function(e) {
 		var mid = document.getElementById("mid");
 		var memail = document.getElementById("memail");
 		var authCode = document.getElementById("authCode");

@@ -10,8 +10,12 @@ window.addEventListener("load", function() {
 		authCode.value = code;
 		location.href = "findPwEmail.do?mid="+mid.value+"&memail="+memail.value+"&authCode="+code+"&title=메디큐 메일인증";
     });
+
+	document.getElementById("pre").addEventListener("click", function() {
+		location.href = this.value;
+	});
 	
-	document.getElementById("findPwResult").addEventListener("submit", function(e) {
+	document.getElementById("next").addEventListener("click", function(e) {
 		
 		var authCode = document.getElementById("authCode");
 		var authCodeCheck = document.getElementById("authCodeCheck");
