@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,17 +17,14 @@
 		<div class="search">
 		<form method='get' action="infosearch.do">		
 			<label>의약품 리스트</label>
-		
-		
 			<input type='text' id='MessageBox' class="text" name="itemname" value="${itemname}"/>
 			<input type="submit" value="검색"/>
 		</form>
 		</div>
 		<c:if test="${itemname != null && !itemname.isEmpty()}">
 		<div class="items">
-		<br/>
-		의약품리스트 검색 결과
-		<br/>
+		<hr/>
+		<h2>의약품리스트 검색 결과</h2>
 		<hr/>
 			    <form method="post" action="#">
 			    <div class="clearfix">
@@ -132,6 +130,7 @@
 </form>
 </div>
 </c:if>
+<hr/>
 <form method='get' action="plusinfo.do">
 	<span class="float-right">
 		<input type="submit" id="plus" name="plus" value="추가"/>

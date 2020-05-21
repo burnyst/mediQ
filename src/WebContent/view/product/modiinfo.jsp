@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,14 +28,14 @@
 			    <hr/>
 			    </div>
        			  <h2>의약품 수정 게시판</h2>
-  				<table border="1" width=1024px>
+  				<table border="1" width="100%">
 			    		    	
-						<tr>	
-							<td colspan="2">품목명</td>
-							<td>업체명</td>
-							<td>전문일반</td>
-							<td>성상</td>
-						</tr>
+				<tr>	
+					<td colspan="2">품목명</td>
+					<td>업체명</td>
+					<td>전문일반</td>
+					<td>성상</td>
+				</tr>
 						<tr>
 						<td colspan="2"><input type="text" id="itemName" name="itemName" value="${updateReq.itemName}"/></td>
 						<td><input type="text" id="entpName" name="entpName" value="${updateReq.entpName}"/></td>
@@ -47,7 +48,7 @@
 	 					</tr>
 	 					<tr>	
 	 						<td>주의사항</td>
-	 						<td colspan="4"><input type="text" id="nbDocData" name="nbDocData" value="${updateReq.nbDocData}"/></td>
+	 						<td colspan="4"><textarea rows="10" cols="100" id="nbDocData" name="nbDocData">${updateReq.nbDocData}</textarea></td>
 	 					</tr>
 	 					<tr>	
 	 						<td>취소일자</td>
@@ -55,7 +56,7 @@
 	 					</tr>
 	 					<tr>	
 	 						<td>효능효과</td>
-	 						<td colspan="4"><input type="text" id="eeDocData" name="eeDocData" value="${updateReq.eeDocData}"/></td>
+	 						<td colspan="4"><textarea rows="5" cols="100" id="eeDocData" name="eeDocData">${updateReq.eeDocData}</textarea></td>
 	 					</tr>
 	 					<tr>	
 	 						<td>용법용량</td>
@@ -90,6 +91,9 @@
 	</tfoot>
 
 </table>
+<a href="infolist.do">
+<input type='button' id='Select' value="처음으로"/></a>
+
 <input type='reset' id='Select'  value="초기화"/>
 
 <input type='submit' id='SModify' value="저장"/>
