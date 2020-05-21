@@ -10,7 +10,7 @@ body {
 	font-size: 1rem;
 	position: relative;
 }
-button, input[type="submit"] {
+button, input[type="submit"], input[type="reset"] {
     cursor: pointer;
 	background: Gray;
     color: White;
