@@ -40,10 +40,8 @@
 	}
 %>
 <jsp:include page="../../header.jsp"></jsp:include>
-	FaqCategoryPage=${faqCategoryPage}<br/>
-	*총페이지수 ${faqCategoryPage.categorytotal}건<br/>
-	현재페이지 : ${faqCategoryPage.currentPage}/총페이지수 ${faqCategoryPage.totalPages }
 <h1>FAQ</h1>
+*총 ${faqCategoryPage.categorytotal}건<br/>
 <hr/><br/>
  <div class="page_body">
     <div class="board_search">

@@ -43,6 +43,7 @@
 %>
 <jsp:include page="../../header.jsp"></jsp:include>
 <h1>FAQ</h1>
+*총 ${faqPage.total}건<br/>
 <hr/><br/>
 <div class="page_body">
     <div class="board_search">
