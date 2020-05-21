@@ -6,28 +6,23 @@ import java.sql.SQLException;
 import dao.MemberDAO;
 import dbcp.JdbcUtil;
 import model.Member;
-import model.MemberRequest;
 
 public class MyinfoService {
 
-	public void update(MemberRequest myinfoReq) throws SQLException {
+	private static MemberDAO memberDao = new MemberDAO();
+	public static Member getInfo(String mid) {
+		System.out.println("MyinfoService호출성공");
 		Connection conn = null;
-		Member member = new Member();
-		
 		try {
 			conn = JdbcUtil.getConnection();
-			conn.setAutoCommit(false);
 			
-			MemberDAO memberDao = new MemberDAO();
-			memberDao.insert(conn, member);
-			
-			if(memberDao != null) {
-				JdbcUtil.rollback(conn);
-				throw new DuplicateIdException();
-			}
+			Member minfo = memberDao.selectById(conn, mid);
+			return minfo;
+		}catch(SQLException e) {
+			throw new RuntimeException(e);
 		}finally {
-			
+			JdbcUtil.close(conn);
 		}
-	}
 
+	}
 }

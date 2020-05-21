@@ -8,28 +8,40 @@
 		<script src="${pageContext.request.contextPath}/js/join.js"></script>
 		<script>
 		function check() {
-			//var form = document.getElementById("join");
 			var midObj = document.getElementById("mid");
-			//if(${frm.mid==param.mid}){
 			if(midObj.value==''){	
-				//alert("중복된 아이디입니다");
 				alert("아이디는 필수입니다");
 				midObj.focus();
 				return false;
 			}
 			
 			location.href="./searchId.do?mid="+midObj.value;
-			//form.reqMethod = "checkDuplicateId";
-			//이메일인증  보낼곳 form.action = "mail.do";
-			//form.submit();
-			//	if(frm.mid==member.mid)	{
-			//		alert("중복된 아이디입니다");
-			//		return false;
-			//	}else{
-			//		alert("사용할 수 있는 아이디입니다")
-			//	}
+			
 			console.log('~~');
 			return;
+		}
+		function sendMail() {
+			var email = document.getElementById("memail");
+			var content = document.getElementById("authCode");
+			if(email.value==''){	
+				alert("이메일은 필수입니다");
+				email.focus();
+				return false;
+			}
+			
+			location.href="./mail.do?title=메디큐 이메일 인증"+"&content="+content.value+"&email"+email.value;
+			authCode2.hide();
+			return;
+		}
+		function checkAuthCode() {
+			var authCode = document.getElementById("authCode");
+			var authCode2 = document.getElementById("authCode2");
+			var checkAuthCodeResult = document.getElementById("checkAuthCodeResult");
+			if(authCode.value == authCode2.value){
+				checkAuthCodeResult.value = "인증완료";
+			} else {
+				checkAuthCodeResult.value = "인증 번호가 다릅니다";
+			}
 		}
 		</script>
 		
@@ -72,19 +84,23 @@ ${result}
 	    <option value ="nate.com">nate.com</option> 
 	    <option value ="yahoo.com">yahoo.com</option>
     </select>
- <!--    <button type="button" id="mverify" onclick="">이메일 인증</button>
-	  <form action="post">
-		  <script>
-		     $("#mverify").click(function(){
-		    		if(verify.success){
-		    		var msg = '인증이 완료되었습니다'
-		    	}else{
-		    		var msg = '인증이 실패하였습니다'
-		    	}
-		    	alert (msg);
-		    }
-		   </script>
-	   </form>   -->
+    <button type="button" id="mverify" onclick="sendMail()">이메일 인증</button><br/>
+    <input type="hidden" id="authCode" />
+    <input type="text" id="authCode2" />
+    <button type="button" id="mverify" onclick="checkAuthCode()">인증</button>
+    <span id="checkAuthCodeResult"></span>
+		  <form action="post">
+			  <script>
+					$("#mverify").click(function()){
+			    		if(verify.success){
+			    			var msg = '인증이 완료되었습니다'
+				    	}else{
+				    		var msg = '인증이 실패하였습니다'
+				    	}
+			    	alert (msg);
+					}
+			   </script>
+		   </form>
 	</p>
 	<p>
 		*핸드폰번호:&nbsp;
@@ -101,7 +117,7 @@ ${result}
 	</p>
 	<p>
     <a href='index.jsp'>돌아가기</a>
-		<a href="#" onclick="frmChk('this.form');return false;"/>
+		<a href="#" onclick="frmChk('this.form');return false;"></a>
 		<input type="submit" value="가입하기"/>
 	</p>
 </form>
