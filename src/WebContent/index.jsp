@@ -9,6 +9,8 @@
     <script src="${pageContext.request.contextPath}/js/search.js"></script>
 </t:head>
 <t:body>
+	<h2>의약품 검색</h2>
+	<hr />
 	<div class="search">
 	    <form method="get" action="search.do">
 	        <label>의약품 검색</label>

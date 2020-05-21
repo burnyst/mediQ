@@ -9,9 +9,9 @@
     <script src="${pageContext.request.contextPath}/js/history.js"></script>
 </t:head>
 <t:body>
+	<h2>검색이력</h2>
+	<hr />
 	<div class="items">
-	    <label>검색이력</label>
-	    <hr />
 	    <form method="post" action="${pageContext.request.contextPath}/history.do">
 		    <div class="clearfix">
 			    <span class="float-right">
