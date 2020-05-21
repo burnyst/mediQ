@@ -64,7 +64,7 @@
           <td>
           	<c:if test="${newsd.nimage !=null }">
 								<img src="${pageContext.request.contextPath}/upload/${newsd.nimage}"></br>
-								${newsd.nimage}
+								
 						</c:if>
            ${newsd.summary}
          </tr>
