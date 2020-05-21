@@ -1,12 +1,7 @@
 package controller;
 
-import java.sql.Connection;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dao.MemberDAO;
-import dbcp.JdbcUtil;
 
 public class FindPwEmailController extends Controller {
 	private MailService service = new MailService();

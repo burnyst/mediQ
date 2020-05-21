@@ -1,5 +1,8 @@
 window.addEventListener("load", function() {
-	document.getElementById("findPwResult").addEventListener("submit", function(e) {
+	document.getElementById("pre").addEventListener("click", function() {
+		location.href = this.value;
+	});
+	document.getElementById("next").addEventListener("click", function(e) {
 		var mpw1 = document.getElementById("mpw1");
 		var mpw2 = document.getElementById("mpw2");
 		if (mpw1 === undefined || mpw1.value == "") {
