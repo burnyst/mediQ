@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import model.News;
 import model.User;
 
@@ -59,12 +62,39 @@ public class NewsWriteController implements controller.CommandHandler {
 		Map<String, Boolean> errors = new HashMap<>();
 		request.setAttribute("errors", errors);
 		System.out.println("ERRORS"+errors);
+		//할일
+		// 파일 업로드를 하기 위해서 cos.jar 추가 및 객체 생성
+		MultipartRequest multi = null;
+		// 업로드 될 파일의 최대 사이즈 (10메가)
+		   int sizeLimit = 10 * 1024 * 1024;
+		 
+		        // 파일이 업로드될 실제 tomcat 폴더의 경로 (WebContent 기준)
+		        @SuppressWarnings("deprecation")
+				String savePath = request.getSession().getServletContext().getRealPath("/upload");
+		        System.out.println(savePath);
+		        // 
+		        try{
+		            multi=new MultipartRequest(
+		                    request
+		                    , savePath
+		                    , sizeLimit
+		                    , "UTF-8"
+		                    , new DefaultFileRenamePolicy()); 
+		 
+		         }catch (Exception e) {
+		                e.printStackTrace();
+		         } 
+		         
+		        //파일 이름 저장
+		        String nimage= multi.getFilesystemName("nimage");
+		        System.out.println(nimage);
+
 		//1.파라미터받기
 		 
-		String title = request.getParameter("title");
-		String press = request.getParameter("press");
-		String summary = request.getParameter("summary");
-		String nimage = request.getParameter("nimage");		
+		String title = multi.getParameter("title");
+		String press = multi.getParameter("press");
+		String summary = multi.getParameter("summary");
+//		String nimage = request.getParameter("nimage");		
 		
 		//2.비즈니스로직(<->Service<->DAO<->DB) p640 39
 		HttpSession session = request.getSession();
@@ -72,6 +102,7 @@ public class NewsWriteController implements controller.CommandHandler {
 		System.out.println("user"+user);
 		//글등록 p641 40
 		WriteRequest writeReq = createWriteRequest(user, title,press, summary,nimage);
+		System.out.println("user"+user+"title"+title+"press"+press+"summary"+summary+"nimage"+nimage);
 		writeReq.validate(errors);
 		
 		//유효성검사를 불통하여 글등록폼으로 이동

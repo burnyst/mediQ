@@ -36,15 +36,8 @@
 		</style>
 </t:head>
 <t:body>
-		<%-- <form id="f" name="f" action="./newsmodify.do?sn=${newd.sn}" method="post">
-				 	<input type="submit" id="modify" value="수정"/>
-		</form> --%>
-
         <form method="post" action="./newsmodify.do?sn=${newsd.sn}">
-        <%-- <form method="post" action="./newsmodify.do?sn=${newd.sn}&title=${newd.title}&summary=${newd.summary}">
-         --%>
-       <%--  <input type="hidden" name="press" id="press" value="${newd.press}"/> --%>
-       
+        
          <h2>뉴스게시판</h2>
          <table id= info>
          <tr>
@@ -69,6 +62,10 @@
          <table border="1" id="contents" >
          <tr>
           <td>
+          	<c:if test="${newsd.nimage !=null }">
+								<img src="${pageContext.request.contextPath}/upload/${newsd.nimage}"></br>
+								${newsd.nimage}
+						</c:if>
            ${newsd.summary}
          </tr>
          </table>

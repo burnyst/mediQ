@@ -31,7 +31,7 @@
 			</style>
 </t:head>
 <t:body>
-    <form action="newswrite.do" method="POST">
+    <form action="newswrite.do" method="POST" enctype="multipart/form-data">
     <h2>뉴스게시판 등록</h2>
     <span>제목</span>
     <input type="text" name="title" id="title" placeholder="제목을 입력해주세요" ><br/>
