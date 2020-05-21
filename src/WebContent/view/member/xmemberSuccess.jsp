@@ -15,7 +15,7 @@
 		</tr>
 		<tr class="center">
 			<td>
-				<button type="button" onclick="location.href='index.jsp'">&nbsp;홈으로&nbsp;</button>
+				<a href="${pageContext.request.contextPath}/logout.do">홈으로</a>
 			</td>
 		</tr>
 	</table>
