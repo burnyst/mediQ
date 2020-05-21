@@ -47,13 +47,13 @@
 		<td>취소일자 :</td>
 		<input type='text' id="CANCEL_DATE" name="CANCEL_DATE"/>
 		<td>전문일반 :</td>
-		<input type='text' id="EE_DOC_DATA" name="EE_DOC_DATA"/>
-		<td>용법용량 :</td>
 		<input type='text' id="ETC_OTC_CODE" name="ETC_OTC_CODE"/>
+		<td>용법용량 :</td>
+		<input type='text' id="UD_DOC_DATA" name="UD_DOC_DATA"/>
 </tr></br></br>
 <tr>
 		<td>변경일자 :</td>
-		<input type='text' id="UD_DOC_DATA" name="UD_DOC_DATA"/>
+		<input type='text' id="CHANGE_DATE" name="CHANGE_DATE"/>
 		<td>분류 :</td>
 		<input type='text' id="CLASS_NO"  name="CLASS_NO"/>
 		<td>성상 :</td>
@@ -63,7 +63,7 @@
 </tr></br></br>
 <tr>
 		<td>효능효과 :</td>
-		<input type="text" cols=30/>
+		<input type="text" id="EE_DOC_DATA" name="EE_DOC_DATA"/>
 </tr>
 </br></br></br>
 <hr>
