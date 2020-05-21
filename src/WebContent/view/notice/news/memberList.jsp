@@ -27,12 +27,12 @@
 		</style>
 <script>
 $(document).ready(function(){
-	
-	$("#delete").click(function(){
-			if(!$("#xmember").val()==true)
+ 	
+	/* $("#delete").click(function(){
+			if($("#xreason").val()==null)
 			alert("탈퇴여부가 변경되지 않았습니다.")
 			return false; 
-	});
+	}); */ 
 	
 	
 });
@@ -72,8 +72,8 @@ $(document).ready(function(){
                   <th>${member.mhp}</th>
                   <th>${member.mbd}</th>
                   <th>${member.mlevel}</th>
-                  <th id="xmember">${member.xmember}</th>
-                  <th>${member.xreason}</th>
+                  <th id="xmember" value="${member.xmember}">${member.xmember}</th>
+                  <th id="xreason">${member.xreason}</th>
                </tr>
                </c:forEach>
                <!--페이지처리  -->

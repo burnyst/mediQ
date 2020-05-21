@@ -10,7 +10,7 @@ public class MemberRequest {
 	private String	mhp;
 	private String	mbd;
 	private int		mlevel;
-	private char	xmember;
+	private int	xmember;
 	private String	xreason;
 	private String	confirmPwd;
 	
@@ -20,7 +20,7 @@ public class MemberRequest {
 	}
 	
 	public MemberRequest(String mid, String mname, String mpwd, String memail,String mhp,
-			String mbd, int mlevel, char xmember, String xreason, String confirmPwd) {
+			String mbd, int mlevel, int xmember, String xreason, String confirmPwd) {
 		this.mid		=	mid;
 		this.mname		=	mname;
 		this.mpwd		=	mpwd;
@@ -90,11 +90,13 @@ public class MemberRequest {
 		this.mlevel = mlevel;
 	}
 
-	public char getXmember() {
+	
+
+	public int getXmember() {
 		return xmember;
 	}
 
-	public void setXmember(char xmember) {
+	public void setXmember(int xmember) {
 		this.xmember = xmember;
 	}
 

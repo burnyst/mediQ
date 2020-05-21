@@ -10,12 +10,12 @@ public class Member {
 	private String	mhp;
 	private String	mbd;
 	private int		mlevel;
-	private char	xmember;//get때는 string
+	private int 	xmember;
 	private String	xreason;
 	
 	//생성자
 	public Member(String mid, String mname, String mpwd, String memail,String mhp,
-			String mbd, int mlevel, char xmember, String xreason) {
+			String mbd, int mlevel, int xmember, String xreason) {
 		this.mid	=	mid;
 		this.mname	=	mname;
 		this.mpwd	=	mpwd;
@@ -103,11 +103,13 @@ public class Member {
 		this.mlevel = mlevel;
 	}
 
-	public char getXmember() {
+	
+
+	public int getXmember() {
 		return xmember;
 	}
 
-	public void setXmember(char xmember) {
+	public void setXmember(int xmember) {
 		this.xmember = xmember;
 	}
 

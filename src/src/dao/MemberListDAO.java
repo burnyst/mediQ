@@ -77,8 +77,8 @@ public static List<Memberlist> select (Connection conn,int startRow, int size) t
 				rs.getString("memail"),
 				rs.getString("mhp"),
 				rs.getString("mbd"),
-				rs.getInt("mlevel"),
-				rs.getBoolean("xmember"),
+				rs.getInt    ("mlevel"),
+				rs.getInt  ("xmember"),
 				rs.getString("xreason")
 				);
 			}

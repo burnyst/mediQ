@@ -1,6 +1,5 @@
 package model;
 
-import java.io.Reader;
 
 public class Memberlist {
 	
@@ -13,7 +12,7 @@ public class Memberlist {
 	private String	mhp2;
 	private String	mbd;
 	private int		mlevel;
-	private boolean	xmember;
+	private int	   xmember;
 	private String	xreason;
 	private String e_domain;
 	
@@ -23,7 +22,7 @@ public class Memberlist {
 	}
 	
 	public Memberlist(String mid, String mname, String mpwd, String memail,String mhp,
-			String mbd, int mlevel, boolean xmember, String xreason) {
+			String mbd, int mlevel, int xmember, String xreason) {
 		this.mid	=	mid;
 		this.mname	=	mname;
 		this.mpwd	=	mpwd;
@@ -35,7 +34,7 @@ public class Memberlist {
 		this.xreason=	xreason;
 	}
 	public Memberlist(String mid, String mname, String memail,String mhp,
-			String mbd, int mlevel, boolean xmember, String xreason) {
+			String mbd, int mlevel, int xmember, String xreason) {
 		this.mid	=	mid;
 		this.mname	=	mname;
 		this.memail	=	memail;
@@ -118,11 +117,13 @@ public class Memberlist {
 		this.mlevel = mlevel;
 	}
 
-	public boolean getXmember() {
+	
+
+	public int getXmember() {
 		return xmember;
 	}
 
-	public void setXmember(boolean xmember) {
+	public void setXmember(int xmember) {
 		this.xmember = xmember;
 	}
 

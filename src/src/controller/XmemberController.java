@@ -36,9 +36,9 @@ public class XmemberController implements CommandHandler{
 		private String processSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 			//1. 요청파라미터 받기
 			HttpSession session = request.getSession();
-			User user = new User();
+			User user = (User) session.getAttribute("AUTHUSER");
 			//세션의 id(=AUTHUSER)에 해당하는 비번과 사용자가 입력한 비번이 같은지 확인
-			user = (User) session.getAttribute("AUTHUSER");
+			
 			String mid = user.getMid();
 			System.out.println(mid);
 			String mpwd=request.getParameter("mpwd");

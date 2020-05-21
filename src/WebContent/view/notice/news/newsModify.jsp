@@ -36,8 +36,8 @@
 	
     <span>제목</span>
     <input type="text" id="title" required="required" value="${modiREQ.title}"><br/>
-    <span>언론사명</span>
-    <%-- <input type="text" id="newsMedia" placeholder="언론사를 입력해주세요" >${modiReq.press}<br/> --%>
+   <%--  <span>언론사명</span>
+    <input type="text" id="newsMedia" placeholder="언론사를 입력해주세요" >${modiReq.press}<br/> --%>
     <table border="1" >
          <tr>
           <td><textarea name="summary" rows="20" cols="100" required="required" > ${modiREQ.summary}</textarea>

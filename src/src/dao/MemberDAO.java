@@ -195,7 +195,7 @@ public class MemberDAO {
 		int check = 0;
 		try {
 			//xmember 를 알아서 고쳐야함 받을값 Y도(Y인지 T인지 모름)
-			sql = "update member set xmember='Y', xreason=? where mid = ?";
+			sql = "update member set xmember='1', xreason=? where mid = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, xreason); // email로 정보 조회
 			pstmt.setString(2, mid);
