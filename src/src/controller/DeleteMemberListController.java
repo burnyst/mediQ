@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.CommandHandler;
+import model.Memberlist;
 
 
 
@@ -21,11 +22,15 @@ public class DeleteMemberListController implements CommandHandler {
 		
 		//1.파라미터 받기
 		
-		String mid = request.getParameter("mid");
-		System.out.println("mid="+mid);
+//		String mid = request.getParameter("mid");
+//		System.out.println("mid="+mid);
+		String[] members = request.getParameterValues("mid");
+		for (Object i : members) {
+			System.out.println(((Memberlist)i).getMname());
+		}
 		
 		try {
-			deleteMemberListService.delete(mid);
+			//deleteMemberListService.delete(mid);
 			return FORM_VIEW;
 		}catch(Exception e) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);

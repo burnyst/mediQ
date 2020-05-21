@@ -27,13 +27,14 @@
 		</style>
 <script>
 $(document).ready(function(){
- 	
-	/* $("#delete").click(function(){
-			if($("#xreason").val()==null)
-			alert("탈퇴여부가 변경되지 않았습니다.")
-			return false; 
-	}); */ 
-	
+ 	  
+	 $("#delete").click(function(){
+			alert($("#xreason").text().length);
+		 //if($("#xreason").text()=="")
+			//alert("탈퇴여부가 변경되지 않았습니다.")
+			//return false; 
+	});  
+	 
 	
 });
 </script>
@@ -41,12 +42,14 @@ $(document).ready(function(){
 <t:body>
       <br/>
       <h2>회원관리</h2>
-      <form method="post" action="memberdelete.do">
+      <form method="post" action="memberdelete.do" >
+     
 			<input type="submit" id="delete"value="삭제">
+		
       <hr>
       <br/>
             <table border="1" id="memberM" >
-         		
+    
                <tr>
                		<th width="5%">선택</th>
                   <th width="10%">아이디</th>
@@ -72,8 +75,9 @@ $(document).ready(function(){
                   <th>${member.mhp}</th>
                   <th>${member.mbd}</th>
                   <th>${member.mlevel}</th>
-                  <th id="xmember" value="${member.xmember}">${member.xmember}</th>
+                  <th id="xmember" >${member.xmember}</th>
                   <th id="xreason">${member.xreason}</th>
+                  <input type="hidden" name="member" value="${member}" />
                </tr>
                </c:forEach>
                <!--페이지처리  -->
