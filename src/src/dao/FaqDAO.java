@@ -272,12 +272,9 @@ public class FaqDAO {
 						+ " values (?,?,?,?,?,0)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1,faq.getTitle());
-				System.out.println("faq.getTitle()"+faq.getTitle());
 				pstmt.setString(2,faq.getMid());
-				System.out.println("faq.getMid()"+faq.getMid());
 				pstmt.setTimestamp(3, toTimestamp(faq.getRdate()));
 				pstmt.setString(4, faq.getContents());
-				System.out.println("faq.getContents()"+faq.getContents());
 				pstmt.setString(5,faq.getCategory());
 				pstmt.executeUpdate();
 				
