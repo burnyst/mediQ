@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.QnaDAO;
 import dbcp.JdbcUtil;
-import model.Qnamodel;
 
 public class QnadeleteController  implements CommandHandler  {
 
@@ -19,7 +18,6 @@ public class QnadeleteController  implements CommandHandler  {
 						  HttpServletResponse response) throws Exception {
 		System.out.println("qnadeletecontroller진입성공");
 		
-		//GET방식으로  요청이 들어오면
 				if(request.getMethod().equalsIgnoreCase("GET")) { 		
 					return processSubmit(request,response);
 				}else if(request.getMethod().equalsIgnoreCase("POST")) { //POST방식으로 요청이 들어오면
@@ -30,6 +28,8 @@ public class QnadeleteController  implements CommandHandler  {
 					return   null;
 				}	
 	}
+	
+	//Get 방식 답변삭제
 	private String processSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("qnaDcontroller의 processSubmit()호출");	
 		int sn =(Integer.parseInt(request.getParameter("no")));
@@ -52,6 +52,7 @@ public class QnadeleteController  implements CommandHandler  {
 	}
 	}//processSubmit end
 	
+	//Post 방식 질문삭제
 	private String processSubmitQ(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("qnaDcontroller의 processSubmitQ()호출");	
 		int sn=(Integer.parseInt(request.getParameter("no")));

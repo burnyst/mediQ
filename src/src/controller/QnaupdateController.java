@@ -6,12 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import model.User;
 import model.QnaRequest;
-import model.Qnamodel;
+import model.User;
 
 public class QnaupdateController implements CommandHandler {
 
@@ -24,7 +24,6 @@ public class QnaupdateController implements CommandHandler {
 						  HttpServletResponse response) throws Exception {
 		System.out.println("qnaupdatecontroller진입성공");
 
-		//GET방식으로  요청이 들어오면
 		if(request.getMethod().equalsIgnoreCase("GET")) { 		
 			return processForm(request,response);
 		}else if(request.getMethod().equalsIgnoreCase("POST")) { //POST방식으로 요청이 들어오면

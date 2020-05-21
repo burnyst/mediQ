@@ -3,12 +3,9 @@ package controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpSession;
-
 import dao.QnaDAO;
 import dbcp.JdbcUtil;
 import model.Qnamodel;
-import model.User;
 
 public class QnaDetailService {
 

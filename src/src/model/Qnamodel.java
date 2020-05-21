@@ -1,5 +1,4 @@
 package model;
-import java.sql.Connection;
 import java.util.Date;
 
 public class Qnamodel {
