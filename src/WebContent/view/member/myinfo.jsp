@@ -29,7 +29,7 @@
 			<p>
 				<input type="reset" value="메인 화면으로" onclick="location.href='index.jsp'"/>
 				<input type="button" onclick="location.href='view/member/xmember.jsp'"value="탈퇴하기"/>
-				<input type="button" onclick="location.href='view/member/myinfoUpdate.jsp'" value="정보 변경하기"/>
+				<input type="button" onclick="location.href='<%= request.getContextPath()%>/myinfoUpdate.do'" value="정보 변경하기"/>
 			</p>
 		</form>
 </body>

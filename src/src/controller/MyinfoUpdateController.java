@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,12 +12,22 @@ import model.Member;
 public class MyinfoUpdateController implements CommandHandler {
 	
 	private static final String FORM_VIEW = "/view/member/myinfoUpdate.jsp";
-	private MyinfoUpdateService myinfoUpdateService = new MyinfoUpdateService();
+	
+	String mid = null;
+	String mpwd = null;
+	String memail = null;
+	String mhp = null;
+	String mname = null;
+	User user = null;
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("MyinfoUpdateController 진입성공");
 		
+		HttpSession session = request.getSession();
+		user = (User)session.getAttribute("AUTHUSER");
+		mid = user.getMid();
+		System.out.println("세션에서 받은 mid = "+mid);
 		//GET방식으로  요청이 들어오면
 		if(request.getMethod().equalsIgnoreCase("GET")) {
 			System.out.println("myinfoUpdate.jsp의 method방식="+request.getMethod());
@@ -38,21 +47,19 @@ public class MyinfoUpdateController implements CommandHandler {
 		System.out.println("MyinfoUpdateController의 processForm()호출");
 		//할일
 		//1.파라미터받기
-		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("AUTHUSER");
-		String mid = user.getMid();
-		System.out.println("세션에서 받은 mid = "+mid);
 				
 		//2.비즈니스로직(<->Service<->DAO<->DB)
 		try {
-			Member member = MyinfoUpdateService.myinfo(mid);
-			System.out.println("MypageHandler-process(member)="+member);
+			
+			Member member = MyinfoUpdateService.getInfo(mid);
+			System.out.println("MyinfoController-processForm(member)="+member);
 			
 			//3.Model
 			request.setAttribute("member",member);
+			System.out.println("테스트 member="+member);
 			
 			//4.View
-			return "/view_member/myinfoUpdateForm.jsp";
+			return "/view/member/myinfoUpdate.jsp";
 		}catch(Exception e) {
 			request.getServletContext().log("no article", e);
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -60,28 +67,21 @@ public class MyinfoUpdateController implements CommandHandler {
 		}
 	}
 	
-		//POST방식으로 요청이 들어오면 회원정보수정 요청을 진행
+		//service호출
 		private String processSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+			
 			System.out.println("MyinfoController의 processSubmit()호출");
-//			//할일
-//			//1. 요청파라미터 받기
-//			//MyinfoController는 유저가 입력한 폼의 내용을 객체로 묶어서 처리
-//			Member mem = new Member();
-//			
-//			mem.setMid(request.getParameter("mid"));
-//			mem.setMname(request.getParameter("mname"));
-//			mem.setMemail(request.getParameter("memail"));
-//			mem.setMhp(request.getParameter("mhp"));
-//			mem.setMbd(request.getParameter("mbd"));
-//			
-//			//p.598 line 42~49까지 다 쓰기
-//			//2.비즈니스로직수행(<->Service<->DAO<->DB)
-//			MyinfoUpdateService.myinfo(mem);
-//			
-//			//3.Model
-//			//4.View지정
+			
+			mpwd = request.getParameter("mpwd");
+			memail = request.getParameter("memail");
+			mhp = request.getParameter("mhp");
+			
+			MyinfoUpdateService myinfoUpdateService = new MyinfoUpdateService();
+			myinfoUpdateService.InfoUpdateService(mid, mpwd, memail, mhp);
+			
+			mname = user.getMname();
+			request.setAttribute("mname",mname);
 			return "/view/member/myinfoUpdateSuccess.jsp";
-//			return null;
 		}
 }
 

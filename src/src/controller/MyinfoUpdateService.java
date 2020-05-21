@@ -10,38 +10,38 @@ public class MyinfoUpdateService {
 	
 	private static MemberDAO memberDao = new MemberDAO();
 	
+
 	//마이페이지 처리 요청
 	//MyinfoUpdateController에서 호출
-	public static Member myinfo(Member mem) {
-		Connection conn =null;
-		System.out.println("MyinfoService의 myinfo()호출");
+	public static Member getInfo(String mid) {
+		System.out.println("MyinfoService호출성공");
+		Connection conn = null;
 		try {
-			conn=JdbcUtil.getConnection();
-			conn.setAutoCommit(false);
+			conn = JdbcUtil.getConnection();
 			
-			memberDao.update(conn,
-					new Member(
-						// 조건-> controller에
-						//다 입력하지 않아도 수정 가능
-						//현재 데이터와 다른 정보로만 수정 가능
-						mem.getMpwd(),
-						mem.getMpwd2(),
-						mem.getMemail(),
-						mem.getMhp()
-						)
-					);
-			//트랜잭션 반영
-			conn.commit();
+			Member minfo = memberDao.selectById(conn, mid);
+			return minfo;
 		}catch(SQLException e) {
-			JdbcUtil.rollback(conn);	//트랜잭션 취소
 			throw new RuntimeException(e);
 		}finally {
 			JdbcUtil.close(conn);
 		}
-		return mem;
-	}
 
-	public static Member myinfo(String mid) {
-		return null;
 	}
+	
+	public void InfoUpdateService(String mid, String mpwd, String memail, String mhp) {
+		System.out.println("InfoService호출성공");
+		Connection conn = null;
+		try {
+			conn = JdbcUtil.getConnection();
+			
+			memberDao.updateMyinfo(conn, mid, mpwd, memail, mhp);
+		}catch(SQLException e) {
+			throw new RuntimeException(e);
+		}finally {
+			JdbcUtil.close(conn);
+		}
+	}
+	
+
 }
