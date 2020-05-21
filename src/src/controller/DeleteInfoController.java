@@ -10,16 +10,17 @@ public class DeleteInfoController implements CommandHandler{
 	//Service
 	private DeleteInfoService deleteService = new DeleteInfoService();
 
+
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("infoDeleteController의 process()진입");
+		System.out.println("InfoDeleteController의 process()진입");
 		
 		//1.파라미터 받기
-		String itemname = request.getParameter("itemname");
-		System.out.println("itemname="+itemname);
+		String ITEM_NAME = request.getParameter("itemName");
+		System.out.println("ITEM_NAME="+ITEM_NAME);
 		
 		try {
-			deleteService.delete(itemname);
+			deleteService.delete(ITEM_NAME);
 			return FORM_VIEW;
 		}catch(FaqNotFoundException e) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);

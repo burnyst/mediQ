@@ -93,19 +93,37 @@ public class InfoDAO {
 	
 	//테이블의 특정 글번호 조회
 	public InfoModel selectById(Connection conn, String itemName) throws SQLException {
+		System.out.println("InfoDAO의 selectById(itemName)="+itemName);
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
 		try {
-			String sql = "select * from MdcinPrductItem where item_Name=?";
+			String sql = "select ITEM_SEQ,ITEM_NAME,ENTP_NAME,"
+					+ "ITEM_PERMIT_DATE,CANCEL_DATE,CANCEL_DATE,"
+					+ "ETC_OTC_CODE,CHANGE_DATE,CLASS_NO,CHART,PACK_UNIT,"
+					+ "NB_DOC_DATA,EE_DOC_DATA,UD_DOC_DATA "
+					+ "from MdcinPrductItem where item_Name=?";
 			pstmt = conn.prepareStatement(sql);	
 			pstmt.setString(1, itemName);
 			rs = pstmt.executeQuery();
-			
-			InfoModel item_Name1 = null;
+			InfoModel itemNamee = null;
 			if(rs.next()) {
-				item_Name1 = convertinfo(rs);
+				itemNamee = new InfoModel(
+						rs.getString("ITEM_SEQ"),
+						rs.getString("ITEM_NAME"),
+						rs.getString("ENTP_NAME"),
+						rs.getString("ITEM_PERMIT_DATE"),
+						rs.getString("NB_DOC_DATA"),
+						rs.getString("CANCEL_DATE"),
+						rs.getString("EE_DOC_DATA"),
+						rs.getString("ETC_OTC_CODE"),
+						rs.getString("UD_DOC_DATA"),
+						rs.getString("CHANGE_DATE"),
+						rs.getString("CLASS_NO"),
+						rs.getString("CHART"),
+						rs.getString("PACK_UNIT")
+						);
 			}
-			return item_Name1;
+			return itemNamee;
 		
 		}finally {
 				JdbcUtil.close(rs);
@@ -169,30 +187,27 @@ public class InfoDAO {
 	
 	
 	public int update(Connection conn, String itemSeq, String itemName, String entpName,
-			String itemPermitDate, String cancelDate, String etcOtcCode, String changeDate, String chart,
-			String classNo, String packUnit, String nbDocData, String eeDocData, String udDocData) throws SQLException{
+			String itemPermitDate, String nbDocData, String cancelDate, String eeDocData, String etcOtcCode,
+			String udDocData, String changeDate, String classNo, String chart, String packUnit) throws SQLException{
 			PreparedStatement pstmt = null;
 			try {
-				String sql="update MdcinPrductItem set "
-						+ " ItemSeq=?,ItemName=?,EntpName=?,ItemPermitDate=?,"
-						+ "CancelDate=?,EtcOtcCode=?,ChangeDate=?,Chart=?,ClassNo=?,"
-						+ "PackUnit=?,NbDocData=?,EeDocData=?,UdDocData=?"
-						+ "where ITEM_NAME like '%' || ? || '%'";
+				String sql="update MdcinPrductItem set ITEM_NAME=?,ENTP_NAME=?,ITEM_PERMIT_DATE=?,NB_DOC_DATA=?,CANCEL_DATE=?,EE_DOC_DATA=?,ETC_OTC_CODE=?,UD_DOC_DATA=?,CHANGE_DATE=?,CHART=?,CLASS_NO=?,PACK_UNIT=?" + 
+						"                            where ITEM_NAME = ?";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1,itemSeq);
-				pstmt.setString(2,itemName);
-				pstmt.setString(3,entpName);
-				pstmt.setString(4,itemPermitDate);
+				pstmt.setString(1,itemName);
+				pstmt.setString(2,entpName);
+				pstmt.setString(3,itemPermitDate);
+				pstmt.setString(4,nbDocData);
 				pstmt.setString(5,cancelDate);
-				pstmt.setString(6,etcOtcCode);
-				pstmt.setString(7,changeDate);
-				pstmt.setString(8,chart);
-				pstmt.setString(9,classNo);
-				pstmt.setString(10,packUnit);
-				pstmt.setString(11,nbDocData);
-				pstmt.setString(12,eeDocData);
-				pstmt.setString(13,udDocData);
-				int cnt =pstmt.executeUpdate();
+				pstmt.setString(6,eeDocData);
+				pstmt.setString(7,etcOtcCode);
+				pstmt.setString(8,udDocData);
+				pstmt.setString(9,changeDate);
+				pstmt.setString(10,classNo);
+				pstmt.setString(11,chart);
+				pstmt.setString(12,packUnit);
+				pstmt.setString(13,itemName);
+				int cnt = pstmt.executeUpdate();
 						
 				System.out.println("글 수정InfoDAO-update()호출성공 category="+cnt);
 
@@ -243,7 +258,7 @@ public class InfoDAO {
 
 		//게시물 수 구하기
 		public int selectCount(Connection conn) throws SQLException{
-			System.out.println("전체게시물수 구하기 FaqDAO-selectCount()호출성공");
+			System.out.println("전체게시물수 구하기 InfoDAO-selectCount()호출성공");
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
@@ -260,8 +275,27 @@ public class InfoDAO {
 			}
 		}
 
-	
 
+		//delete
+		public static String delete(Connection conn, String itemName) throws SQLException {
+			System.out.println("InfoDAO의 delete() itemname="+itemName);
+			PreparedStatement pstmt = null;
+			Statement stmt = null;
+			ResultSet rs   = null;	
+			try {
+				String sql = "delete from MdcinPrductItem where ITEM_NAME = ? ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1,itemName);
+				pstmt.executeUpdate();
+				
+				return itemName;
+				
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(stmt);
+				JdbcUtil.close(pstmt);
+			}
+		
 
-
+	}
 }

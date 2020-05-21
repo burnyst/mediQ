@@ -14,23 +14,24 @@ public class ModiInfoService {
 
 		private InfoDAO infoDao = new InfoDAO();
 		
-		public void modify(ModiRequest updateReq) {
+		public void modify(InfoModel updateReq) {
 			Connection conn = null;
 			System.out.println("modiInfoService -modify()호출");
 			try {
 				conn = JdbcUtil.getConnection();
 				conn.setAutoCommit(false); //트랜잭션 시작
 				
-				//dao호출
-				InfoModel infom = infoDao.selectById(conn, updateReq.getItemName());
-				if(infom == null) { //insert실패
-					throw new RuntimeException("fail to modi info");
-				}
+			
+			/*
+			 * if(infom == null) { //insert실패 throw new
+			 * RuntimeException("fail to modi info"); }
+			 */
 			
 				
 				infoDao.update(conn, updateReq.getItemSeq(), updateReq.getItemName(), updateReq.getEntpName(), updateReq.getItemPermitDate(), updateReq.getNbDocData(),updateReq.getCancelDate() , updateReq.getEeDocData(), updateReq.getEtcOtcCode(), updateReq.getUdDocData(), updateReq.getChangeDate(), updateReq.getClassNo(), updateReq.getChart(), updateReq.getPackUnit());
+				System.out.println("getItemName="+updateReq.getItemName());
 			
-			conn.commit();
+				conn.commit();
 			
 			}catch(SQLException e) {
 			JdbcUtil.rollback(conn);
@@ -43,7 +44,27 @@ public class ModiInfoService {
 		}
 	}
 
+		public InfoModel modiSelect(String itemName) {
+			Connection conn = null;
+			System.out.println("modiInfoService -modify()호출");
+			try {
+				conn = JdbcUtil.getConnection();
+				conn.setAutoCommit(false); //트랜잭션 시작
+				
+				//dao호출
+			InfoModel infom = infoDao.selectById(conn, itemName);
+			
+			return infom;
+			
+
+			}catch(SQLException e) {
+				throw new RuntimeException(e);
+			}
+			
+		}
+
+}
 	
 
-		
-}
+	
+

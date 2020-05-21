@@ -81,7 +81,7 @@
 
 </table>
 
-<a href="modiinfo.do">
+<a href="modiinfo.do?itemName=${im.itemName}">
 <input type="button" id="update" value="수정"/></a><!-- 이영역은 관리자로 로그인할 경우만 보이는 버튼 -->
 
 
@@ -89,7 +89,12 @@
 <input type=button  value="목록으로"   /></a>
 </form>
 
+<a href="infodelete.do?itemName=${im.itemName}">
+<input type=submit  value="삭제"   /></a>
+</form>
+
 
 <jsp:include page="/view/footer.jsp"></jsp:include>
+
 </body>
 </html>

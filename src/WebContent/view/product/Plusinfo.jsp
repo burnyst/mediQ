@@ -70,5 +70,5 @@
 <input type='submit' id='Add'  value="추가"/> 
 </form>
 </body>
-<h2>footer</h2> <!-- Footer부분이 되어집니둥 -->
+<jsp:include page="/view/footer.jsp"></jsp:include>
 </html>

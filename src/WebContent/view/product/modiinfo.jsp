@@ -1,5 +1,6 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +18,11 @@
 <script type="text/javascript">
 
 </script>
-<h2>header</h2><!-- header부분입니둥 -->
+
 <body>
-<form method="get" action="infolist.jsp">
+<form method="post" action="infoupdate.do">
+
+
 			    <div class="clearfix">
 			    <hr/>
 			    </div>
@@ -33,46 +36,46 @@
 							<td>성상</td>
 						</tr>
 						<tr>
-						<td colspan="2">${im.itemName}</td>
-						<td>${im.entpName}</td>
-						<td>${im.etcOtcCode}</td>
-						<td>${im.chart}</td>
+						<td colspan="2"><input type="text" id="itemName" name="itemName" value="${updateReq.itemName}"/></td>
+						<td><input type="text" id="entpName" name="entpName" value="${updateReq.entpName}"/></td>
+						<td><input type="text" id="etcOtcCode" name="etcOtcCode" value="${updateReq.etcOtcCode}"/></td>
+						<td><input type="text" id="chart" name="chart" value="${updateReq.chart}"/></td>
 						</tr>
 						<tr>
 							<td>품목기준코드</td>
-							<td colspan="4"><input type="text" id="modi" value="${im.itemSeq}"/>${im.itemSeq}</td>
+							<td colspan="4"><input type="text" id="itemSeq" name="itemSeq" value="${updateReq.itemSeq}"/></td>
 	 					</tr>
 	 					<tr>	
 	 						<td>주의사항</td>
-	 						<td colspan="4"><input type="text" id="modi" value="${im.nbDocData}"/>${im.nbDocData}</td>
+	 						<td colspan="4"><input type="text" id="nbDocData" name="nbDocData" value="${updateReq.nbDocData}"/></td>
 	 					</tr>
 	 					<tr>	
 	 						<td>취소일자</td>
-	 						<td colspan="4"><input type="text" id="modi" value="${im.cancelDate}"/>${im.cancelDate}</td>
+	 						<td colspan="4"><input type="text" id="cancelDate" name="cancelDate" value="${updateReq.cancelDate}"/></td>
 	 					</tr>
 	 					<tr>	
 	 						<td>효능효과</td>
-	 						<td colspan="4"><input type="text" id="modi" value="${im.eeDocData}"/>${im.eeDocData}</td>
+	 						<td colspan="4"><input type="text" id="eeDocData" name="eeDocData" value="${updateReq.eeDocData}"/></td>
 	 					</tr>
 	 					<tr>	
 	 						<td>용법용량</td>
-	 						<td colspan="4"><input type="text" id="modi" value="${im.udDocData}"/>${im.udDocData}</td>
+	 						<td colspan="4"><input type="text" id="udDocData" name="udDocData" value="${updateReq.udDocData}"/></td>
 	 					</tr>
 	 					<tr>	
 	 						<td>변경일자</td>
-	 						<td colspan="4"><input type="text" id="modi" value="${im.changeDate}"/>${im.changeDate}</td>
+	 						<td colspan="4"><input type="text" id="changeDate" name="changeDate" value="${updateReq.changeDate}"/></td>
 	 					</tr>
 	 					<tr>	
 	 						<td>분류</td>
-	 						<td colspan="4"><input type="text" id="modi" value="${im.classNo}"/>${im.classNo}</td>
+	 						<td colspan="4"><input type="text" id="classNo" name="classNo" value="${updateReq.classNo}"/></td>
 	 					</tr>
 	 					<tr>	
 	 						<td>성상</td>	
-	 						<td colspan="4"><input type="text" id="modi" value="${im.chart}"/>${im.chart}</td>
+	 						<td colspan="4"><input type="text" id="chart" name="chart" value="${updateReq.chart}"/></td>
 	 					</tr>
 	 					<tr>	
 	 						<td>포장단위</td>	
-	 						<td colspan="4"><input type="text" id="modi" value="${im.packUnit}"/>${im.packUnit}</td>
+	 						<td colspan="4"><input type="text" id="packUnit" name="packUnit" value="${updateReq.packUnit}"/></td>
  						</tr>
  					  </table>
 			     </div>
@@ -87,10 +90,14 @@
 	</tfoot>
 
 </table>
+<input type='reset' id='Select'  value="초기화"/>
+
+<input type='submit' id='SModify' value="저장"/>
+
 </form>
 <br/>
-<input type='reset' id='Select'  value="이전페이지로"/>
-<input type='submit' id='SModify' value="저장"/> 
+
+ 
 </body>
-<h2>footer</h2> <!-- Footer부분이 되어집니둥 -->
+<jsp:include page="/view/footer.jsp"></jsp:include>
 </html>

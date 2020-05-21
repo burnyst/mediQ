@@ -10,12 +10,12 @@ public class DeleteInfoService {
 
 	private InfoDAO infoDAO = new InfoDAO();
 
-	public void delete(String itemname) {
+	public void delete(String itemName) {
 		Connection conn = null;
 		try {
 			conn = JdbcUtil.getConnection();
 			conn.setAutoCommit(false);
-			InfoDAO.delete(conn, itemname);
+			InfoDAO.delete(conn, itemName);
 			
 			conn.commit();
 			
