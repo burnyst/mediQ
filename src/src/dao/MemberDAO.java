@@ -1,4 +1,4 @@
-package dao;
+﻿package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -184,6 +184,33 @@ public class MemberDAO {
 		}
 	}
 	
+
+	//회원정보 수정시 필요한 메서드
+	public void updateMyinfo(Connection conn, String mid, String mpwd, String memail, String mhp) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		try {
+			//회원정보 수정시 비밀번호,비밀번호확인,이메일,핸드폰번호 변경가능
+			sql = "update member set mpwd=?, memail=?, mhp=? where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mpwd);
+			pstmt.setString(2, memail);
+			pstmt.setString(3, mhp);
+			pstmt.setString(4, mid);
+			
+			System.out.println(pstmt);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(conn);
+		} 
+	}
+
 	//회원탈퇴시 필요한 메서드
 	//탈퇴한 회원을 삭제하지 않고 리스트로 관리하기 위해 delete가 아니라 update를 사용
 	public int updateXmember(String mid, String xreason) throws SQLException {
@@ -194,7 +221,6 @@ public class MemberDAO {
 		String sql = "";
 		int check = 0;
 		try {
-			//xmember 를 알아서 고쳐야함 받을값 Y도(Y인지 T인지 모름)
 			sql = "update member set xmember='1', xreason=? where mid = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, xreason); // email로 정보 조회

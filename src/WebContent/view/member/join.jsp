@@ -22,17 +22,19 @@
 		}
 		function sendMail() {
 			var email = document.getElementById("memail");
+			var email2 = document.getElementById("memail2");
 			var content = document.getElementById("authCode");
 			if(email.value==''){	
 				alert("이메일은 필수입니다");
 				email.focus();
 				return false;
 			}
-			
-			location.href="./mail.do?title=메디큐 이메일 인증"+"&content="+content.value+"&email"+email.value;
+			location.href="mail.do?title=메디큐이메일인증"+"&content="+content.value+"&email="+email.value+"@"+email2.value;
 			authCode2.hide();
 			return;
 		}
+		
+		
 		function checkAuthCode() {
 			var authCode = document.getElementById("authCode");
 			var authCode2 = document.getElementById("authCode2");
@@ -76,7 +78,7 @@ ${result}
 	</p>
 	<p>
 		*이메일:&nbsp;	<input type="text" id="memail" name="memail" style="width:80" value="${param.memail}">@
-		<select name="memail2" >
+		<select id="memail2" name="memail2" >
 	    <option value ="">선택하세요</option>
 	    <option value ="naver.com" >naver.com</option>
 	    <option value="gmail.com">gmail.com</option>
@@ -84,23 +86,11 @@ ${result}
 	    <option value ="nate.com">nate.com</option> 
 	    <option value ="yahoo.com">yahoo.com</option>
     </select>
-    <button type="button" id="mverify" onclick="sendMail()">이메일 인증</button><br/>
+    <button type="button" id="mverify" onclick="sendMail()">이메일 인증</button>
     <input type="hidden" id="authCode" />
     <input type="text" id="authCode2" />
-    <button type="button" id="mverify" onclick="checkAuthCode()">인증</button>
+    <button type="button" id="mverify" onclick="checkAuthCode()" maxlength="6" size="8">인증하기</button>
     <span id="checkAuthCodeResult"></span>
-		  <form action="post">
-			  <script>
-					$("#mverify").click(function()){
-			    		if(verify.success){
-			    			var msg = '인증이 완료되었습니다'
-				    	}else{
-				    		var msg = '인증이 실패하였습니다'
-				    	}
-			    	alert (msg);
-					}
-			   </script>
-		   </form>
 	</p>
 	<p>
 		*핸드폰번호:&nbsp;
@@ -116,9 +106,9 @@ ${result}
 		<input id="mhp2" type="text" name="mhp2" maxlength="4" size="5" value="${param.mhp2}">
 	</p>
 	<p>
-    <a href='index.jsp'>돌아가기</a>
-		<a href="#" onclick="frmChk('this.form');return false;"></a>
-		<input type="submit" value="가입하기"/>
+		<input type="reset" value="취소" onclick="history.back()"/>	
+		<a href="#" onclick="frmChk('this.form');return false;">
+		<input type="submit" value="가입하기"/></a>
 	</p>
 </form>
 </body>

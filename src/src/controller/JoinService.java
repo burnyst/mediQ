@@ -13,7 +13,7 @@ public class JoinService {
 	private MemberDAO memberDao = new MemberDAO();
 	
 	//회원가입처리요청과 관련된 함수 p.596 line 16
-	public void join(MemberRequest joinReq) {
+	public void join(Member joinReq) {
 		Connection conn = null;
 		try {
 			conn = JdbcUtil.getConnection();

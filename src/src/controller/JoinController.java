@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.JoinService;
 import dao.MemberDAO;
 import dbcp.JdbcUtil;
+import model.Member;
 import controller.CommandHandler;
 
 public class JoinController implements CommandHandler {
@@ -49,36 +50,35 @@ public class JoinController implements CommandHandler {
 		String reqMethod = request.getParameter("reqMethod");
 		String mid = request.getParameter("mid");
 		System.out.println("duplicatedId:" + reqMethod + ", mid:" + mid);
-		if (reqMethod != null && !reqMethod.isEmpty()) {
-			try {
-				boolean rst = MemberDAO.checkDuplicate(JdbcUtil.getConnection(), mid);
-				request.setAttribute("duplicatedId", rst);
-			} catch (SQLException e) {
-			}
-			return "/view/member/join.jsp";
-		}
+//		if (reqMethod != null && !reqMethod.isEmpty()) {
+//			try {
+//				boolean rst = MemberDAO.checkDuplicate(JdbcUtil.getConnection(), mid);
+//				request.setAttribute("duplicatedId", rst);
+//			} catch (SQLException e) {
+//			}
+//			return "/view/member/join.jsp";
+//		}
 		System.out.println("여기까지옴");
-		MemberRequest memberReq = new MemberRequest();
+		Member member = new Member();
 		
-		memberReq.setMid(request.getParameter("mid"));
-		memberReq.setMname(request.getParameter("mname"));
-		memberReq.setMpwd(request.getParameter("mpwd"));
-		memberReq.setMpwd2(request.getParameter("mpwd2"));
-		memberReq.setMemail(request.getParameter("memail"));
-		memberReq.setMhp(request.getParameter("mhp"));
-		memberReq.setMbd(request.getParameter("mbd"));
+		member.setMid(request.getParameter("mid"));
+		member.setMname(request.getParameter("mname"));
+		member.setMpwd(request.getParameter("mpwd"));
+		member.setMpwd2(request.getParameter("mpwd2"));
+		member.setMemail(request.getParameter("memail")+"@"+request.getParameter("memail2"));
+		member.setMhp(request.getParameter("mhp")+"-"+request.getParameter("mhp1")+"-"+request.getParameter("mhp2"));
+		member.setMbd(request.getParameter("mbd"));
 		
-		System.out.println("mid: "+memberReq.getMid());
-		System.out.println("mname: "+memberReq.getMname());
-		System.out.println("mpwd: "+memberReq.getMpwd());
-		System.out.println("mpwd2: "+memberReq.getMpwd2());
-		System.out.println("memail: "+memberReq.getMemail());
-		System.out.println("mhp: "+memberReq.getMhp());
-		System.out.println("mbd: "+memberReq.getMbd());
+//		System.out.println("mid: "+memberReq.getMid());
+//		System.out.println("mname: "+memberReq.getMname());
+//		System.out.println("mpwd: "+memberReq.getMpwd());
+//		System.out.println("mpwd2: "+memberReq.getMpwd2());
+//		System.out.println("memail: "+memberReq.getMemail());
+//		System.out.println("mhp: "+memberReq.getMhp());
+//		System.out.println("mbd: "+memberReq.getMbd());
 		
-		//p.598 line 42~49까지 다 쓰기
 		//2.비즈니스로직수행(<->Service<->DAO<->DB)
-		joinService.join(memberReq);
+		joinService.join(member);
 		
 		//3.Model
 		//4.View지정
