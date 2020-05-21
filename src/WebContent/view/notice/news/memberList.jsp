@@ -28,11 +28,11 @@
 <script>
 $(document).ready(function(){
 	
-	$("#delete").click(function(){
+	/* $("#delete").click(function(){
 			if(!$("#xmember").val()==true)
 			alert("탈퇴여부가 변경되지 않았습니다.")
 			return false; 
-	});
+	}); */
 	
 	
 });

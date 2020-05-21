@@ -62,7 +62,7 @@ public class FaqWriteController implements CommandHandler {
 		//회원 비지니스로직 수행 작성
 		FaqRequest writeFaq = createWriteRequest(mid,category,title,contents);
 		writeFaq.validate(errors);
-	
+		System.out.println("category="+category+"/title="+title+"/contents="+contents);
 		
 		
 		if(!errors.isEmpty()) {
