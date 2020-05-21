@@ -29,9 +29,11 @@
 $(document).ready(function(){
 	
 	$("#delete").click(function(){
-		 alert("정말 삭제하시겠습니까?")
-	});	
-
+			if(!$("#xmember").val()==true)
+			alert("탈퇴여부가 변경되지 않았습니다.")
+			return false; 
+	});
+	
 	
 });
 </script>
@@ -39,14 +41,11 @@ $(document).ready(function(){
 <t:body>
       <br/>
       <h2>회원관리</h2>
-      <form name="memberM" id="memberM"  method="get">
-      <!-- <input type=text id="idResearch" placeholder="아이디를 검색하세요" />
-      <input type="button" id="research" value="검색" onclick=""/> -->
-       		<a href ="${pageContext.request.contextPath}/memberdelete.do?mid=${member.mid}">
-					<input type="button" id="delete"value="삭제"></a>  
-         <hr>
-         <br/>
-            <table border="1" id="memberM"  width="80%">
+      <form method="post" action="memberdelete.do">
+			<input type="submit" id="delete"value="삭제">
+      <hr>
+      <br/>
+            <table border="1" id="memberM" >
          		
                <tr>
                		<th width="5%">선택</th>
@@ -66,17 +65,18 @@ $(document).ready(function(){
 							 </c:if> 
                <c:forEach  var="member" items="${listmemberPAGE.content}">
                <tr>
-               		<th><input type="checkbox" name="id" value="${member.mid}"/></th>
+               		<th><input type="checkbox" name="mid" value="${member.mid}"size="20" /></th>
                   <th>${member.mid}</th>
                   <th>${member.mname}</th>
                   <th>${member.memail}</th>
                   <th>${member.mhp}</th>
                   <th>${member.mbd}</th>
                   <th>${member.mlevel}</th>
-                  <th>${member.xmember}</th>
+                  <th id="xmember">${member.xmember}</th>
                   <th>${member.xreason}</th>
                </tr>
-               </c:forEach> 
+               </c:forEach>
+               <!--페이지처리  -->
             	 <c:if test="${listmemberPAGE.hasMember()}">
 					<tr>
 						<th  colspan="9" >

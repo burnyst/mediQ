@@ -10,7 +10,7 @@ public class Member {
 	private String	mhp;
 	private String	mbd;
 	private int		mlevel;
-	private char	xmember;
+	private char	xmember;//get때는 string
 	private String	xreason;
 	
 	//생성자

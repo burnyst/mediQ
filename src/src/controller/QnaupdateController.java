@@ -58,7 +58,7 @@ public class QnaupdateController implements CommandHandler {
         // 파일이 업로드될 실제 tomcat 폴더의 경로 (WebContent 기준)
         @SuppressWarnings("deprecation")
 		String savePath = request.getSession().getServletContext().getRealPath("/upload");
-
+        System.out.println(savePath);
         // 
         try{
             multi=new MultipartRequest(
@@ -74,6 +74,7 @@ public class QnaupdateController implements CommandHandler {
          
         //파일 이름 저장
         String image= multi.getFilesystemName("image");
+        System.out.println(image);
 
 		//1.요청파라미터 받기
 		String title = multi.getParameter("title");

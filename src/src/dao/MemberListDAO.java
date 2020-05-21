@@ -60,13 +60,14 @@ public static List<Memberlist> select (Connection conn,int startRow, int size) t
 			while(rs.next()) {
 				result.add(convertNews(rs));					
 			}
+			System.out.println("result 나오기 전,"+result);
 			return result;
 		}finally {
 		JdbcUtil.close(rs);
 		JdbcUtil.close(pstmt);
 		}
 		}
-//select한 쿼리문 결과를 받아서 News클래스타입으로 묶어주는 함수 p647	36
+//select한 쿼리문 결과를 받아서 클래스타입으로 묶어주는 함수 p647	36
 	private static Memberlist convertNews(ResultSet rs)
 			throws SQLException {
 			System.out.println("MemberListDao convertNews()");
