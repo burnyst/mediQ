@@ -5,6 +5,7 @@
 <%@ page import="model.User" %>
 <%@ page import="controller.Controller" %>
 <%@ page import="controller.NotLoginException" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <t:head title="뉴스게시판 메인페이지">
@@ -52,11 +53,11 @@
 			<table class="table table-striped" border="1" >
 			<tr>
 						<th width="10%">번호</th>
-						<th width="30%">제목</th>
-						<th width="30%">기사요약정보</th>
+						<th width="25%">제목</th>
+						<th width="25%">기사요약정보</th>
 						<th width="10%">언론사명</th>
-						<th width="10%">아이디</th>
-						<th width="10%">등록일자</th>
+						<th width="15%">아이디</th>
+						<th width="15%">등록일자</th>
 			</tr>
 			<c:if test="${newsPAGE.hasNoNews()}">
 				<tr>
@@ -72,7 +73,7 @@
 						${news.summary }</th>
 						<th>${news.press }</th>
 						<th>${news.mid }</th>
-						<th>${news.rdate }</th>
+						<th><fmt:formatDate value="${news.rdate}" pattern="yyyy-MM-dd"/></th>
 				</tr>
 			</c:forEach> 
 			<c:if test="${newsPAGE.hasNews()}">

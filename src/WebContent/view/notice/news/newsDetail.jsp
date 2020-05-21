@@ -4,7 +4,8 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page import="model.User" %>
 <%@ page import="controller.Controller" %>
-<%@ page import="controller.NotLoginException" %>       
+<%@ page import="controller.NotLoginException" %>      
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <t:head title="뉴스게시판 상세페이지">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css" />
     <script src="${pageContext.request.contextPath}/js/search.js"></script>
@@ -61,7 +62,7 @@
          		<td>아이디</td>
          		<td>${newsd.mid}</td>
          		<td>등록일자</td>
-         		<td>${newsd.rdate}</td>
+         		<td><fmt:formatDate value="${newsd.rdate}" pattern="yyyy-MM-dd"/></td>
          </tr>
 				 </table>	
 				 
