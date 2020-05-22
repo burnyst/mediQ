@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="text" class="form-control" name="mpwd" maxlength="20" required></td>
+				<td><input type="password" class="form-control" name="mpwd" maxlength="20" required></td>
 			</tr>
 			<tr class="center">
 				<td colspan="2">
