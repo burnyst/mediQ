@@ -99,9 +99,7 @@
 				 
          <table border="1" id="contents" >
          <tr>
-          <td><textarea name="summary" rows="20" cols="100"  >
-           ${newsd.summary}
-          </textarea></td>
+          <td><textarea name="summary" rows="20" cols="100">${newsd.summary}</textarea></td>
          </tr>
          </table>
          <a href="./newslist.do"><input type=button  value="목록으로" /></a>
