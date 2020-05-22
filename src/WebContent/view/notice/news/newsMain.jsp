@@ -112,7 +112,7 @@
 								${news.summary}</td>
 						<td>${news.press }</td>
 						<td>${news.mid }</td>
-						<td>${news.rdate }</td>
+						<td><fmt:formatDate value="${news.rdate}" pattern="yyyy-MM-dd"/></td>
 				</tr>
 			</c:forEach> 
 		</table>
