@@ -3,8 +3,6 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
-<t:head title="회원가입">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css" />
 	<script src="${pageContext.request.contextPath}/js/join.js"></script>
 	<script>
 	var authCode2 = "";
@@ -16,7 +14,7 @@
 			return false;
 		}
 		
-		location.href="./searchId.do?mid="+midObj.value;
+		location.href="${pageContext.request.contextPath}/searchId.do?mid="+midObj.value;
 		
 		console.log('~~');
 		return;
@@ -72,6 +70,8 @@
 		}
 	}
 	</script>
+<t:head title="회원가입">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/find.css" />
 </t:head>
 <t:body>
 	<iframe id="joinFrm" style="position:absolute; z-index:1;visibility : hidden;"></iframe>
@@ -142,7 +142,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" class="center">
-						<input type="reset" value="취소" onclick="history.back()"/>&nbsp;	
+						<input type="reset" value="취소" onclick="location.href='${pageContext.request.contextPath}/index.jsp'"/>&nbsp;	
 						<a href="#" onclick="frmChk('this.form');return false;">
 						<input type="submit" value="가입"/></a>
 					</td>
