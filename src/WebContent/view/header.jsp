@@ -33,7 +33,7 @@
 	</div>
 	<a href="${pageContext.request.contextPath}/qnalist.do">Q&A</a>
 	<c:if test="${authUser == null}">
-		<a class="small" href="${pageContext.request.contextPath}/join.do">회원가입</a>
+		<a class="small" href="${pageContext.request.contextPath}/view/member/agreement.jsp">회원가입</a>
 		<a class="small" href="${pageContext.request.contextPath}/login.do">로그인</a>
 	</c:if>
 	<c:if test="${authUser != null}">
@@ -51,3 +51,14 @@
 </div>
 <br />
 <br />
+
+
+
+
+
+
+
+
+
+
+
