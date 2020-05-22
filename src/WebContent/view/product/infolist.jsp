@@ -61,7 +61,7 @@
 			        	<tbody>
 		<c:forEach var="i" items="${page.content}">
 			<tr >
-			<td colspan="2"><a href="inforead.do?itemName=${i.itemName}">${i.itemName}</a></td>
+			<td colspan="2"><a style="text-decoration: none; color:black;"  href="inforead.do?itemName=${i.itemName}">${i.itemName}</a></td>
 			<td>${i.entpName}</td>
 			<td>${i.etcOtcCode}</td>
 			<td>${i.chart}</td>
