@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
@@ -34,7 +34,7 @@
 				<td colspan="2">
 					<a href="${pageContext.request.contextPath}/findId.do">아이디 찾기</a>&nbsp;
 					<a href="${pageContext.request.contextPath}/findPw.do">비밀번호 찾기</a>&nbsp;
-					<a href="${pageContext.request.contextPath}/join.do">회원가입</a>
+					<a href="${pageContext.request.contextPath}/view/member/agreement.jsp">회원가입</a>
 				</td>
 			</tr>
 		</table>
