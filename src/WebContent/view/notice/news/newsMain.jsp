@@ -71,7 +71,7 @@
 				<tr>
 						<%-- ${news.sn} 은 News클래스의 get sn()메소드를 호출 --%>
 						<td>${news.sn }</td>
-						<td><a href="${pageContext.request.contextPath}/newsdetail.do?title=${news.title}&pageNo=${newsPAGE.currentPage}&sn=${news.sn}">${news.title}</a></td>
+						<td><a style="text-decoration: none; color: black;" href="${pageContext.request.contextPath}/newsdetail.do?title=${news.title}&pageNo=${newsPAGE.currentPage}&sn=${news.sn}">${news.title}</a></td>
 						<td style="border: 1px solid black; max-width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 						${news.summary }</td>
 						<td>${news.press }</td>
